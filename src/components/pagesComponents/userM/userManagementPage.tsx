@@ -20,6 +20,7 @@ const UserManagementPage = () => {
   const [showRow, setShowRow] = useState<UserModel | undefined>();
   const [maxCount, setMaxCount] = useState<number>(1);
   const [userId, setUserId] = useState<number>(1);
+  const [listType, setListType] = useState<string>("pending");
 
   const changePagination = useCallback(async (state: PaginationState) => {
     const { maxCount, payload } = await userApi.getUsers(state);
@@ -73,6 +74,7 @@ const UserManagementPage = () => {
           filterHeaderName="email"
           changePagination={changePagination}
           maxCount={maxCount}
+          listType={listType}
         />
       </div>
       <CustomModal

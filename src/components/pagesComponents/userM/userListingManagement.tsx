@@ -18,6 +18,7 @@ const UserListingManagement = ({ userId }: Props) => {
   const [isCentered, setIsCentered] = useState<boolean>(false);
   const [showRow, setShowRow] = useState<AdModel | undefined>();
   const [maxCount, setMaxCount] = useState<number>(1);
+  const [listType, setListType] = useState<string>("pending");
 
   const changePagination = useCallback(async (state: PaginationState) => {
     const { maxCount, payload } = await adApi.getListingByUser(state, userId);
@@ -51,9 +52,11 @@ const UserListingManagement = ({ userId }: Props) => {
           changePagination={changePagination}
           maxCount={maxCount}
           onRowDoubleClick={handleRowDoubleClick}
+          listType={listType}
         />
       </div>
       <CustomModal
+        title=""
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         onTogglePosition={handleTogglePosition}

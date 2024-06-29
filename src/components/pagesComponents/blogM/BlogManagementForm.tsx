@@ -1,12 +1,12 @@
 "use client";
-
 import React, { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
-import ReactQuill from "react-quill";
+import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 type BlogPost = {
   url: string;
@@ -53,7 +53,6 @@ const BlogManagementForm = ({
   const handleSubmit = (e: any) => {
     e.preventDefault();
     console.log("e:", e);
-
     console.log("blogPost", blogPost);
   };
 

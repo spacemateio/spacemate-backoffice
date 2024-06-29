@@ -1,6 +1,5 @@
 "use client";
-
-import React, { useState } from "react";
+import { useState } from "react";
 import BlogManagementForm from "./BlogManagementForm";
 import BlogManagementPreview from "./BlogManagementPreview";
 
@@ -32,6 +31,7 @@ const BlogManagementPage = () => {
       <div className="w-2/5 p-6 border-r border-gray-200">
         Add New Blog
         <BlogManagementForm setBlogPost={setBlogPost} blogPost={blogPost} />
+        asd
       </div>
       <div className="w-3/5 p-6">
         Preview
