@@ -52,8 +52,7 @@ const BlogManagementForm = ({
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log("e:", e);
-    console.log("blogPost", blogPost);
+    console.log("blogPost: ", blogPost, " e: ", e);
   };
 
   const changeBlogPost = (e: any) => {

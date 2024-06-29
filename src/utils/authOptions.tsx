@@ -22,7 +22,7 @@ export const authOptions: AuthOptions = {
           const response = await axiosInstance.get(
             `/login?credentials=${encodedCredentials}`
           );
-          console.log("sertac", response.data);
+
           return response.data;
         } catch (err: any) {
           throw new Error(err);
