@@ -9,4 +9,14 @@ export const userApi = {
     );
     return response.data;
   },
+
+  async enableUsers(userId: number): Promise<void> {
+    const response: any = await axiosInstance.get(`/enable/${userId}`);
+    return response.data;
+  },
+
+  async disableUsers(userId: number): Promise<void> {
+    const response: any = await axiosInstance.get(`/disable/${userId}`);
+    return response.data;
+  },
 };

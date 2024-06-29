@@ -6,7 +6,7 @@ import { createColumns } from "./listingColumns";
 import { DataTable } from "@/components/customTable/data-table";
 import { adApi } from "../../../lib/features/apis/AdM/adApi";
 import CustomModal from "@/components/customModals/CustomModal";
-import AdManagementForm from "../adM/adManagementForm";
+import ListingManagementForm from "../listingM/listingManagementForm";
 import { AdModel } from "@/lib/features/apis/AdM/types/AdModel";
 
 interface Props {
@@ -59,7 +59,7 @@ const UserListingManagement = ({ userId }: Props) => {
         onTogglePosition={handleTogglePosition}
         isCentered={isCentered}
       >
-        <AdManagementForm isShow={true} initialData={showRow} />
+        <ListingManagementForm isShow={true} initialData={showRow} />
       </CustomModal>
     </div>
   );

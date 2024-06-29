@@ -3,10 +3,7 @@ import { PaginationState } from "@tanstack/react-table";
 import { responseType } from "./types/ResponseType";
 
 export const adApi = {
-  async getNewAd(
-    state: PaginationState,
-    listType: string
-  ): Promise<responseType> {
+  async getNewListings(state: PaginationState): Promise<responseType> {
     const response: any = await axiosInstance.get(
       `/listing/new?limit=${state.pageSize}&offset=${state.pageIndex + 1}`
     );
@@ -18,7 +15,17 @@ export const adApi = {
     userId: number
   ): Promise<responseType> {
     const response: any = await axiosInstance.get(
-      `/listing/new?limit=${state.pageSize}&offset=${state.pageIndex + 1}`
+      `/listing/user?limit=${state.pageSize}&offset=${state.pageIndex + 1}`
+    );
+    return response.data;
+  },
+
+  async getListingByStatus(
+    state: PaginationState,
+    status: string
+  ): Promise<responseType> {
+    const response: any = await axiosInstance.get(
+      `/listing/all/${status === "approved" ? 1 : 0}?limit=${state.pageSize}&offset=${state.pageIndex + 1}`
     );
     return response.data;
   },

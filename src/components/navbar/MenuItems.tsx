@@ -13,13 +13,24 @@ export const menuItems = [
   },
   {
     id: "3",
+    url: "/listingManagement",
+    name: "Listing Management",
+    icon: "LineChart",
+  },
+  {
+    id: "4",
+    url: "/blogManagement",
+    name: "Blog Management",
+    icon: "LineChart",
+  },
+  {
+    id: "5",
     url: "/campaigns",
     name: "Campaign Management",
     icon: "ShoppingCart",
   },
-  { id: "4", url: "/adManagement", name: "List Management", icon: "LineChart" },
   {
-    id: "5",
+    id: "6",
     url: "/reservationTracking",
     name: "Reservation Tracking",
     icon: "Package2",

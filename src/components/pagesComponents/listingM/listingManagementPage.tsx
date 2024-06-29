@@ -1,16 +1,16 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { PaginationState } from "@tanstack/react-table";
 import { createColumns } from "./columns";
 import { DataTable } from "@/components/customTable/data-table";
 import { adApi } from "../../../lib/features/apis/AdM/adApi";
 import CustomModal from "@/components/customModals/CustomModal";
-import AdManagementForm from "./adManagementForm";
+import ListingManagementForm from "./listingManagementForm";
 import { AdModel } from "@/lib/features/apis/AdM/types/AdModel";
 import ListTypeComponent from "./listTypeComponent";
 
-const AdManagementPage = () => {
+const ListingManagementPage = () => {
   const [tableData, setTableData] = useState<AdModel[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isCentered, setIsCentered] = useState<boolean>(false);
@@ -19,11 +19,25 @@ const AdManagementPage = () => {
   const [maxCount, setMaxCount] = useState<number>(1);
   const [listType, setListType] = useState<string>("pending");
 
-  const changePagination = useCallback(async (state: PaginationState) => {
-    const { maxCount, payload } = await adApi.getNewAd(state, listType);
-    setMaxCount(maxCount);
-    setTableData(payload);
-  }, []);
+  const changePagination = useCallback(
+    async (state: PaginationState, currentListType: string) => {
+      const { maxCount, payload } =
+        currentListType === "pending"
+          ? await adApi.getNewListings(state)
+          : await adApi.getListingByStatus(state, currentListType);
+      setMaxCount(maxCount);
+      setTableData(payload);
+    },
+    []
+  );
+
+  useEffect(() => {
+    const state = {
+      pageSize: 10,
+      pageIndex: 0,
+    };
+    changePagination(state, listType);
+  }, [listType]);
 
   const handleShow = (id: number) => {
     setIsShow(true);
@@ -63,6 +77,7 @@ const AdManagementPage = () => {
           filterHeaderName="title"
           changePagination={changePagination}
           maxCount={maxCount}
+          listType={listType}
         />
       </div>
       <CustomModal
@@ -72,9 +87,9 @@ const AdManagementPage = () => {
         isCentered={isCentered}
         title="Listing Detail"
       >
-        <AdManagementForm isShow={isShow} initialData={showRow} />
+        <ListingManagementForm isShow={isShow} initialData={showRow} />
       </CustomModal>
     </div>
   );
 };
-export default AdManagementPage;
+export default ListingManagementPage;

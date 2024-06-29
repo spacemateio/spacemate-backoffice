@@ -7,15 +7,15 @@ import { LabeledInput } from "@/components/labeledInput/LabeledInput";
 import { AdModel } from "@/lib/features/apis/AdM/types/AdModel";
 import { adApi } from "@/lib/features/apis/AdM/adApi";
 
-interface AdManagementFormProps {
+interface ListingManagementFormProps {
   isShow: boolean;
   initialData?: AdModel;
 }
 
-export default function AdManagementForm({
+export default function ListingManagementForm({
   isShow,
   initialData,
-}: AdManagementFormProps) {
+}: ListingManagementFormProps) {
   const [formData, setFormData] = useState<AdModel>({
     id: 0,
     email: "",
