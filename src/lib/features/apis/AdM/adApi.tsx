@@ -1,6 +1,6 @@
 import axiosInstance from "../../../../utils/axiosInstance";
 import { PaginationState } from "@tanstack/react-table";
-import { responseType } from "./types/ResponseType";
+import { responseType } from "../../models/AdM/ResponseType";
 
 export const adApi = {
   async getNewListings(state: PaginationState): Promise<responseType> {

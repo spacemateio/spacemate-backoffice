@@ -1,6 +1,6 @@
 import axiosInstance from "../../../../utils/axiosInstance";
 import { PaginationState } from "@tanstack/react-table";
-import { responseType } from "./types/ResponseType";
+import { responseType } from "../../models/UserM/ResponseType";
 
 export const userApi = {
   async getUsers(state: PaginationState): Promise<responseType> {

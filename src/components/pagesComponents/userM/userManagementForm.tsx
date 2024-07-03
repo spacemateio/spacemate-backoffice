@@ -1,12 +1,12 @@
 "use client";
 
 import { ChangeEvent, useEffect, useState } from "react";
-import { UserModel } from "@/lib/features/apis/UserM/types/UserModel";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import Image from "next/image";
 import { LabeledInput } from "@/components/labeledInput/LabeledInput";
+import { UserModel } from "@/lib/features/models/UserM/UserModel";
 
 interface UserManagementFormProps {
   isShow: boolean;

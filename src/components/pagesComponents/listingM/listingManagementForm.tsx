@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { LabeledInput } from "@/components/labeledInput/LabeledInput";
-import { AdModel } from "@/lib/features/apis/AdM/types/AdModel";
 import { adApi } from "@/lib/features/apis/AdM/adApi";
+import { AdModel } from "@/lib/features/models/AdM/AdModel";
 
 interface ListingManagementFormProps {
   isShow: boolean;

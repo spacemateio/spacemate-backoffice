@@ -1,7 +1,6 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import axiosInstance from "@/utils/axiosInstance";
-import { AuthLoginResponse } from "@/lib/features/apis/Auth/types/AuthLoginResponseModel";
-import { User, Session, AuthOptions } from "next-auth";
+import { Session, AuthOptions } from "next-auth";
 
 export const authOptions: AuthOptions = {
   providers: [

@@ -5,11 +5,11 @@ import { PaginationState } from "@tanstack/react-table";
 import { createColumns } from "./columns";
 import { DataTable } from "@/components/customTable/data-table";
 import { userApi } from "@/lib/features/apis/UserM/userApi";
-import { UserModel } from "@/lib/features/apis/UserM/types/UserModel";
 import CustomModal from "@/components/customModals/CustomModal";
 import UserManagementForm from "./userManagementForm";
 import MiddleModal from "@/components/customModals/MiddleModal";
 import UserListingManagement from "./userListingManagement";
+import { UserModel } from "@/lib/features/models/UserM/UserModel";
 
 const UserManagementPage = () => {
   const [tableData, setTableData] = useState<UserModel[]>([]);

@@ -7,8 +7,8 @@ import { DataTable } from "@/components/customTable/data-table";
 import { adApi } from "../../../lib/features/apis/AdM/adApi";
 import CustomModal from "@/components/customModals/CustomModal";
 import ListingManagementForm from "./listingManagementForm";
-import { AdModel } from "@/lib/features/apis/AdM/types/AdModel";
-import ListTypeComponent from "./listTypeComponent";
+import ListTypeComponent from "../../listTypeComponent";
+import { AdModel } from "@/lib/features/models/AdM/AdModel";
 
 const ListingManagementPage = () => {
   const [tableData, setTableData] = useState<AdModel[]>([]);

@@ -25,21 +25,8 @@ export const menuItems = [
   },
   {
     id: "5",
-    url: "/campaigns",
-    name: "Campaign Management",
-    icon: "ShoppingCart",
-  },
-  {
-    id: "6",
-    url: "/reservationTracking",
-    name: "Reservation Tracking",
+    url: "/contactUs",
+    name: "Contact Us",
     icon: "Package2",
   },
 ];
-
-interface menuType {
-  id: string;
-  url: string;
-  name: string;
-  icon: string;
-}

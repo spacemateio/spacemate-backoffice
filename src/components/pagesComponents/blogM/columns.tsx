@@ -1,11 +1,16 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
-import { AdModel } from "@/lib/features/models/AdM/AdModel";
+import { BlogModel } from "@/lib/features/models/BlogM/BlogModel";
 
 export const createColumns = (
-  handleShow: (id: number) => void
-): ColumnDef<AdModel>[] => [
+  handleShow: (id: number) => void,
+  handleActive: (id: number) => void,
+  handlePassive: (id: number) => void,
+  handleDelete: (id: number) => void
+): ColumnDef<BlogModel>[] => [
   {
     id: "select",
     header: ({ table }) => (
@@ -33,10 +38,6 @@ export const createColumns = (
     header: "Id",
   },
   {
-    accessorKey: "email",
-    header: "Email",
-  },
-  {
     accessorKey: "title",
     header: "Title",
     cell: ({ row }) => {
@@ -48,20 +49,28 @@ export const createColumns = (
     },
   },
   {
-    accessorKey: "price",
-    header: "Price",
+    accessorKey: "subtitle",
+    header: "Subtitle",
   },
   {
-    accessorKey: "country",
-    header: "Country",
+    accessorKey: "image",
+    header: "Image",
   },
   {
-    accessorKey: "city",
-    header: "City",
+    accessorKey: "imageExtId",
+    header: "ImageExtId",
   },
   {
-    accessorKey: "state",
-    header: "State",
+    accessorKey: "htmlContent",
+    header: "HtmlContent",
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+  },
+  {
+    accessorKey: "createdDate",
+    header: "CreatedDate",
   },
   {
     id: "actions",
@@ -69,7 +78,7 @@ export const createColumns = (
     cell: ({ row }) => {
       const id = row.original.id;
       return (
-        <div>
+        <div className="flex gap-2">
           <Button
             variant="default"
             size="sxm"
@@ -77,6 +86,34 @@ export const createColumns = (
             onClick={() => handleShow(id)}
           >
             Show
+          </Button>
+          {row.original.status !== 1 && (
+            <Button
+              variant="approve"
+              size="sxm"
+              style={{ fontSize: "12px" }}
+              onClick={() => handleActive(id)}
+            >
+              Active
+            </Button>
+          )}
+          {row.original.status !== 0 && (
+            <Button
+              variant="destructive"
+              size="sxm"
+              style={{ fontSize: "12px" }}
+              onClick={() => handlePassive(id)}
+            >
+              Passive
+            </Button>
+          )}{" "}
+          <Button
+            variant="sea"
+            size="sxm"
+            style={{ fontSize: "12px" }}
+            onClick={() => handleDelete(id)}
+          >
+            Delete
           </Button>
         </div>
       );

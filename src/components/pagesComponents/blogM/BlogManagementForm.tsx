@@ -6,25 +6,17 @@ import { Label } from "@/components/ui/label";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
+import { BlogModel } from "@/lib/features/models/BlogM/BlogModel";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-
-type BlogPost = {
-  url: string;
-  title: string;
-  tags: string[];
-  categories: string[];
-  image: any;
-  content: string;
-  excerpt: string;
-  date: string;
-};
 
 const BlogManagementForm = ({
   blogPost,
   setBlogPost,
+  setAddNewBlog,
 }: {
-  blogPost: BlogPost;
+  blogPost: BlogModel;
   setBlogPost: any;
+  setAddNewBlog: (state: boolean) => void;
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [imageName, setImageName] = useState<string>("");
@@ -63,6 +55,10 @@ const BlogManagementForm = ({
     }));
   };
 
+  const handleCancel = () => {
+    setAddNewBlog(false);
+  };
+
   return (
     <>
       <form onSubmit={handleSubmit} className="p-6 max-w-4xl mx-auto space-y-4">
@@ -93,7 +89,7 @@ const BlogManagementForm = ({
           <Input
             type="text"
             name="excerpt"
-            value={blogPost.excerpt}
+            value={blogPost.subtitle}
             onChange={changeBlogPost}
             placeholder="Title 2"
             className="w-full"
@@ -135,7 +131,7 @@ const BlogManagementForm = ({
         <div>
           <Label className="block text-lg font-medium mb-2">Content</Label>
           <ReactQuill
-            value={blogPost.content}
+            value={blogPost.htmlContent}
             onChange={(value) =>
               setBlogPost((prev: any) => ({
                 ...prev,
@@ -175,9 +171,18 @@ const BlogManagementForm = ({
             className="bg-white"
           />
         </div>
-        <Button type="submit" className="w-full">
-          Save
-        </Button>
+        <div className="flex gap-5">
+          <Button type="submit" className="w-full bg-green-400">
+            Save
+          </Button>
+          <Button
+            type="submit"
+            className="w-full bg-red-500"
+            onClick={handleCancel}
+          >
+            Cancel
+          </Button>
+        </div>
       </form>
     </>
   );

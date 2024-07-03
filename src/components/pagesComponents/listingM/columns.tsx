@@ -2,10 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { AdModel } from "@/lib/features/apis/AdM/types/AdModel";
-import Image from "next/image";
+import { AdModel } from "@/lib/features/models/AdM/AdModel";
 
 export const createColumns = (
   handleShow: (id: number) => void,
