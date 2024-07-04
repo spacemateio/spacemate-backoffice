@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { UserModel } from "@/lib/features/apis/UserM/types/UserModel";
+import { UserModel } from "@/lib/features/models/UserM/UserModel";
 
 export const createColumns = (
   handleShow: (id: number) => void,
@@ -64,7 +64,7 @@ export const createColumns = (
   },
   {
     accessorKey: "isVerified",
-    header: "IsVerified",
+    header: "ID verified",
   },
   {
     accessorKey: "isHost",

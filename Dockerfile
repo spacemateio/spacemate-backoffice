@@ -1,21 +1,27 @@
-# Use the official Node.js runtime as the base image
-FROM node:20
-
-# Set the working directory inside the container
+# Stage 1: Build
+FROM node:18-alpine AS builder
 WORKDIR /app
 
-# Copy the package.json and package-lock.json files and install the dependencies
-COPY package*.json ./
+# Copy package files and install dependencies
+COPY package.json package-lock.json ./
 RUN npm install
 
-# Copy the rest of the application source code
+# Copy application code
 COPY . .
 
-# Build the Next.js application
+# Copy environment variables file
+COPY .env .env
+
+# Build the project
 RUN npm run build
 
-# Expose the port that the application will run on
+# Stage 2: Run
+FROM node:18-alpine
+WORKDIR /app
+
+# Copy build output from builder stage
+COPY --from=builder /app ./
+
 EXPOSE 3000
 
-# Set the command to run the application
-CMD [ "npm", "start" ]
+CMD ["npm", "start"]

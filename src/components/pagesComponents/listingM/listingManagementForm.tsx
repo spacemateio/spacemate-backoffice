@@ -4,18 +4,18 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { LabeledInput } from "@/components/labeledInput/LabeledInput";
-import { AdModel } from "@/lib/features/apis/AdM/types/AdModel";
 import { adApi } from "@/lib/features/apis/AdM/adApi";
+import { AdModel } from "@/lib/features/models/AdM/AdModel";
 
-interface AdManagementFormProps {
+interface ListingManagementFormProps {
   isShow: boolean;
   initialData?: AdModel;
 }
 
-export default function AdManagementForm({
+export default function ListingManagementForm({
   isShow,
   initialData,
-}: AdManagementFormProps) {
+}: ListingManagementFormProps) {
   const [formData, setFormData] = useState<AdModel>({
     id: 0,
     email: "",
