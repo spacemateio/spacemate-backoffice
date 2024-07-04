@@ -4,13 +4,13 @@
   "private": true,
   "engines": {
     "node": "20.0"
-  }
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:digitalocean": "pnpm install --production=false && pnpm run build && rm -rf node_modules && pnpm install --production --frozen-lockfile",
+    "build:digitalocean": "pnpm install --production=false && pnpm run build && rm -rf node_modules && pnpm install --production --frozen-lockfile"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.0.4",
