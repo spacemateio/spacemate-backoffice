@@ -5,11 +5,11 @@ import { PaginationState } from "@tanstack/react-table";
 import { createColumns } from "./columns";
 import { DataTable } from "@/components/customTable/data-table";
 import { userApi } from "@/lib/features/apis/UserM/userApi";
-import { UserModel } from "@/lib/features/apis/UserM/types/UserModel";
 import CustomModal from "@/components/customModals/CustomModal";
 import UserManagementForm from "./userManagementForm";
 import MiddleModal from "@/components/customModals/MiddleModal";
 import UserListingManagement from "./userListingManagement";
+import { UserModel } from "@/lib/features/models/UserM/UserModel";
 
 const UserManagementPage = () => {
   const [tableData, setTableData] = useState<UserModel[]>([]);
@@ -20,6 +20,7 @@ const UserManagementPage = () => {
   const [showRow, setShowRow] = useState<UserModel | undefined>();
   const [maxCount, setMaxCount] = useState<number>(1);
   const [userId, setUserId] = useState<number>(1);
+  const [listType, setListType] = useState<string>("pending");
 
   const changePagination = useCallback(async (state: PaginationState) => {
     const { maxCount, payload } = await userApi.getUsers(state);
@@ -73,6 +74,7 @@ const UserManagementPage = () => {
           filterHeaderName="email"
           changePagination={changePagination}
           maxCount={maxCount}
+          listType={listType}
         />
       </div>
       <CustomModal

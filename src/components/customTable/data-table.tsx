@@ -37,10 +37,11 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   filterPlaceholderName: string;
   filterHeaderName: string;
-  changePagination: (states: PaginationState) => void;
+  changePagination: (states: PaginationState, listType: string) => void;
   maxCount: number;
   onRowDoubleClick?: (row: TData) => void;
   textFilter?: boolean;
+  listType: string;
 }
 
 export function DataTable<TData, TValue>({
@@ -52,6 +53,7 @@ export function DataTable<TData, TValue>({
   maxCount,
   onRowDoubleClick,
   textFilter = false,
+  listType,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -89,7 +91,7 @@ export function DataTable<TData, TValue>({
   });
 
   React.useEffect(() => {
-    changePagination(table.getState().pagination);
+    changePagination(table.getState().pagination, listType);
   }, [
     table.getState().pagination.pageIndex,
     table.getState().pagination.pageSize,

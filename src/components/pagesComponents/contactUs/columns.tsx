@@ -1,11 +1,13 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
-import { AdModel } from "@/lib/features/models/AdM/AdModel";
+import { ContactUsModel } from "@/lib/features/models/ContactUs/ContactUsModel";
 
 export const createColumns = (
   handleShow: (id: number) => void
-): ColumnDef<AdModel>[] => [
+): ColumnDef<ContactUsModel>[] => [
   {
     id: "select",
     header: ({ table }) => (
@@ -33,8 +35,24 @@ export const createColumns = (
     header: "Id",
   },
   {
+    accessorKey: "userId",
+    header: "userId",
+  },
+  {
+    accessorKey: "name",
+    header: "Name",
+  },
+  {
+    accessorKey: "surname",
+    header: "Surname",
+  },
+  {
     accessorKey: "email",
     header: "Email",
+  },
+  {
+    accessorKey: "mobile",
+    header: "Mobile",
   },
   {
     accessorKey: "title",
@@ -48,20 +66,20 @@ export const createColumns = (
     },
   },
   {
-    accessorKey: "price",
-    header: "Price",
+    accessorKey: "message",
+    header: "Message",
   },
   {
-    accessorKey: "country",
-    header: "Country",
+    accessorKey: "location",
+    header: "Location",
   },
   {
-    accessorKey: "city",
-    header: "City",
+    accessorKey: "status",
+    header: "Status",
   },
   {
-    accessorKey: "state",
-    header: "State",
+    accessorKey: "createdDate",
+    header: "CreatedDate",
   },
   {
     id: "actions",

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { UserRole } from "@/models/UserRole";
+import { UserRole } from "@/lib/features/models/UserRole";
 
 export async function middleware(request: NextRequest) {
   const sessionToken = request.cookies.get("next-auth.session-token");

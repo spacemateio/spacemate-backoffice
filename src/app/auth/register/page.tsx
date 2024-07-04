@@ -50,7 +50,7 @@ const Register = () => {
       }
     } catch (error) {
       setError("Error, try again");
-      console.log(error);
+      console.log("register: ", error);
     }
   };
 

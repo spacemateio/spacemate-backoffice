@@ -2,17 +2,15 @@
 
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { AdModel } from "@/lib/features/apis/AdM/types/AdModel";
-import Image from "next/image";
+import { BlogModel } from "@/lib/features/models/BlogM/BlogModel";
 
 export const createColumns = (
   handleShow: (id: number) => void,
-  handleApprove: (id: number) => void,
-  handleReject: (id: number) => void,
-  listType: string
-): ColumnDef<AdModel>[] => [
+  handleActive: (id: number) => void,
+  handlePassive: (id: number) => void,
+  handleDelete: (id: number) => void
+): ColumnDef<BlogModel>[] => [
   {
     id: "select",
     header: ({ table }) => (
@@ -40,10 +38,6 @@ export const createColumns = (
     header: "Id",
   },
   {
-    accessorKey: "email",
-    header: "Email",
-  },
-  {
     accessorKey: "title",
     header: "Title",
     cell: ({ row }) => {
@@ -55,20 +49,28 @@ export const createColumns = (
     },
   },
   {
-    accessorKey: "price",
-    header: "Price",
+    accessorKey: "subtitle",
+    header: "Subtitle",
   },
   {
-    accessorKey: "country",
-    header: "Country",
+    accessorKey: "image",
+    header: "Image",
   },
   {
-    accessorKey: "city",
-    header: "City",
+    accessorKey: "imageExtId",
+    header: "ImageExtId",
   },
   {
-    accessorKey: "state",
-    header: "State",
+    accessorKey: "htmlContent",
+    header: "HtmlContent",
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+  },
+  {
+    accessorKey: "createdDate",
+    header: "CreatedDate",
   },
   {
     id: "actions",
@@ -76,7 +78,7 @@ export const createColumns = (
     cell: ({ row }) => {
       const id = row.original.id;
       return (
-        <div>
+        <div className="flex gap-2">
           <Button
             variant="default"
             size="sxm"
@@ -84,27 +86,35 @@ export const createColumns = (
             onClick={() => handleShow(id)}
           >
             Show
-          </Button>{" "}
-          {listType !== "approved" && (
+          </Button>
+          {row.original.status !== 1 && (
             <Button
               variant="approve"
               size="sxm"
               style={{ fontSize: "12px" }}
-              onClick={() => handleApprove(id)}
+              onClick={() => handleActive(id)}
             >
-              Approve
+              Active
             </Button>
-          )}{" "}
-          {listType !== "rejected" && (
+          )}
+          {row.original.status !== 0 && (
             <Button
               variant="destructive"
               size="sxm"
               style={{ fontSize: "12px" }}
-              onClick={() => handleReject(id)}
+              onClick={() => handlePassive(id)}
             >
-              Reject
+              Passive
             </Button>
-          )}
+          )}{" "}
+          <Button
+            variant="sea"
+            size="sxm"
+            style={{ fontSize: "12px" }}
+            onClick={() => handleDelete(id)}
+          >
+            Delete
+          </Button>
         </div>
       );
     },

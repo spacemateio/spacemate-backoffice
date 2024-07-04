@@ -13,22 +13,20 @@ export const menuItems = [
   },
   {
     id: "3",
-    url: "/campaigns",
-    name: "Campaign Management",
-    icon: "ShoppingCart",
+    url: "/listingManagement",
+    name: "Listing Management",
+    icon: "LineChart",
   },
-  { id: "4", url: "/adManagement", name: "List Management", icon: "LineChart" },
+  {
+    id: "4",
+    url: "/blogManagement",
+    name: "Blog Management",
+    icon: "LineChart",
+  },
   {
     id: "5",
-    url: "/reservationTracking",
-    name: "Reservation Tracking",
+    url: "/contactUs",
+    name: "Contact Us",
     icon: "Package2",
   },
 ];
-
-interface menuType {
-  id: string;
-  url: string;
-  name: string;
-  icon: string;
-}
