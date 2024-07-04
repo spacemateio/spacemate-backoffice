@@ -18,9 +18,10 @@ const ContactUsPage = () => {
   const [maxCount, setMaxCount] = useState<number>(1);
 
   const changePagination = useCallback(async (state: PaginationState) => {
-    const { maxCount, payload } = await contactUsApi.getAllContactus(state);
-    setMaxCount(maxCount);
-    setTableData(payload);
+    const data: ContactUsModel[] = await contactUsApi.getAllContactus(state);
+
+    setMaxCount(data.length);
+    setTableData(data);
   }, []);
 
   const handleShow = (id: number) => {
