@@ -1,31 +1,32 @@
-import axiosInstance from "../../../../utils/axiosInstance";
 import { PaginationState } from "@tanstack/react-table";
 import { responseType } from "../../models/AdM/ResponseType";
+import axiosInstance from "../../axios/axiosInstance";
 
 export const adApi = {
   async getNewListings(state: PaginationState): Promise<responseType> {
     const response: any = await axiosInstance.get(
-      `/listing/new?limit=${state.pageSize}&offset=${state.pageIndex + 1}`
+      `/listing/new?limit=${state.pageSize}&offset=${state.pageIndex + 1}`,
     );
     return response.data;
   },
 
   async getListingByUser(
     state: PaginationState,
-    userId: number
+    // @ts-ignore
+    userId: number,
   ): Promise<responseType> {
     const response: any = await axiosInstance.get(
-      `/listing/user?limit=${state.pageSize}&offset=${state.pageIndex + 1}`
+      `/listing/user?limit=${state.pageSize}&offset=${state.pageIndex + 1}`,
     );
     return response.data;
   },
 
   async getListingByStatus(
     state: PaginationState,
-    status: string
+    status: string,
   ): Promise<responseType> {
     const response: any = await axiosInstance.get(
-      `/listing/all/${status === "approved" ? 1 : 0}?limit=${state.pageSize}&offset=${state.pageIndex + 1}`
+      `/listing/all/${status === "approved" ? 1 : 0}?limit=${state.pageSize}&offset=${state.pageIndex + 1}`,
     );
     return response.data;
   },

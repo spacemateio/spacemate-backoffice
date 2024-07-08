@@ -1,12 +1,10 @@
-"use client";
-
-import { Button } from "@/components/ui/button";
+import { ContactUsModel } from "../../../lib/features/models/ContactUs/ContactUsModel.tsx";
+import { Button } from "../../ui/button.tsx";
 import { ColumnDef } from "@tanstack/react-table";
-import { Checkbox } from "@/components/ui/checkbox";
-import { ContactUsModel } from "@/lib/features/models/ContactUs/ContactUsModel";
+import { Checkbox } from "../../ui/checkbox.tsx";
 
 export const createColumns = (
-  handleShow: (id: number) => void
+  handleShow: (id: number) => void,
 ): ColumnDef<ContactUsModel>[] => [
   {
     id: "select",

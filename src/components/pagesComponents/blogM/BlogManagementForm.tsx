@@ -1,13 +1,11 @@
-"use client";
-import React, { useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import Image from "next/image";
-import dynamic from "next/dynamic";
+import { useRef, useState } from "react";
 import "react-quill/dist/quill.snow.css";
-import { BlogModel } from "@/lib/features/models/BlogM/BlogModel";
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+import { Label } from "../../ui/label";
+import { Input } from "../../ui/input";
+import { Button } from "../../ui/button";
+import Image from "../../image/Image.tsx";
+import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel.tsx";
+import ReactQuill from "react-quill";
 
 const BlogManagementForm = ({
   blogPost,

@@ -1,15 +1,13 @@
-"use client";
-
-import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
-import { Checkbox } from "@/components/ui/checkbox";
-import { BlogModel } from "@/lib/features/models/BlogM/BlogModel";
+import { Checkbox } from "../../ui/checkbox.tsx";
+import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel.tsx";
+import { Button } from "../../ui/button.tsx";
 
 export const createColumns = (
   handleShow: (id: number) => void,
   handleActive: (id: number) => void,
   handlePassive: (id: number) => void,
-  handleDelete: (id: number) => void
+  handleDelete: (id: number) => void,
 ): ColumnDef<BlogModel>[] => [
   {
     id: "select",

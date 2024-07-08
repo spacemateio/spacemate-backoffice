@@ -1,15 +1,13 @@
-"use client";
-
 import { useCallback, useState } from "react";
 import { PaginationState } from "@tanstack/react-table";
 import { createColumns } from "./columns";
-import { DataTable } from "@/components/customTable/data-table";
-import { userApi } from "@/lib/features/apis/UserM/userApi";
-import CustomModal from "@/components/customModals/CustomModal";
 import UserManagementForm from "./userManagementForm";
-import MiddleModal from "@/components/customModals/MiddleModal";
 import UserListingManagement from "./userListingManagement";
-import { UserModel } from "@/lib/features/models/UserM/UserModel";
+import { UserModel } from "../../../lib/features/models/UserM/UserModel.tsx";
+import { userApi } from "../../../lib/features/apis/UserM/userApi.tsx";
+import { DataTable } from "../../customTable/data-table.tsx";
+import CustomModal from "../../customModals/CustomModal.tsx";
+import MiddleModal from "../../customModals/MiddleModal.tsx";
 
 const UserManagementPage = () => {
   const [tableData, setTableData] = useState<UserModel[]>([]);
@@ -20,7 +18,7 @@ const UserManagementPage = () => {
   const [showRow, setShowRow] = useState<UserModel | undefined>();
   const [maxCount, setMaxCount] = useState<number>(1);
   const [userId, setUserId] = useState<number>(1);
-  const [listType, setListType] = useState<string>("pending");
+  const [listType] = useState<string>("pending");
 
   const changePagination = useCallback(async (state: PaginationState) => {
     const { maxCount, payload } = await userApi.getUsers(state);
@@ -58,7 +56,7 @@ const UserManagementPage = () => {
     handleShow,
     handleActive,
     handlePassive,
-    handleListing
+    handleListing,
   );
 
   return (

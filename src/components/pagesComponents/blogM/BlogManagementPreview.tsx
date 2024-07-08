@@ -1,8 +1,6 @@
-"use client";
-import React from "react";
-import { Input } from "@/components/ui/input";
-import Image from "next/image";
-import { BlogModel } from "@/lib/features/models/BlogM/BlogModel";
+import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel";
+import { Input } from "../../ui/input";
+import Image from "../../image/Image.tsx";
 
 const BlogManagementPreview = ({ blogPost }: { blogPost: BlogModel }) => {
   return (

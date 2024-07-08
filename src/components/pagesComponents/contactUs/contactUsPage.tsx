@@ -1,13 +1,11 @@
-"use client";
-
 import { useCallback, useState } from "react";
 import { PaginationState } from "@tanstack/react-table";
 import { createColumns } from "./columns";
-import { DataTable } from "@/components/customTable/data-table";
-import { contactUsApi } from "@/lib/features/apis/ContactUs/contactApi";
-import { ContactUsModel } from "@/lib/features/models/ContactUs/ContactUsModel";
-import CustomModal from "@/components/customModals/CustomModal";
 import ContactUsForm from "./contactUsForm";
+import { ContactUsModel } from "../../../lib/features/models/ContactUs/ContactUsModel.tsx";
+import { contactUsApi } from "../../../lib/features/apis/ContactUs/contactApi.tsx";
+import { DataTable } from "../../customTable/data-table.tsx";
+import CustomModal from "../../customModals/CustomModal.tsx";
 
 const ContactUsPage = () => {
   const [tableData, setTableData] = useState<ContactUsModel[]>([]);

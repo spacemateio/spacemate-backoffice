@@ -1,15 +1,13 @@
-"use client";
-
-import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
-import { Checkbox } from "@/components/ui/checkbox";
-import { AdModel } from "@/lib/features/models/AdM/AdModel";
+import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
+import { Checkbox } from "../../ui/checkbox.tsx";
+import { Button } from "../../ui/button.tsx";
 
 export const createColumns = (
   handleShow: (id: number) => void,
   handleApprove: (id: number) => void,
   handleReject: (id: number) => void,
-  listType: string
+  listType: string,
 ): ColumnDef<AdModel>[] => [
   {
     id: "select",

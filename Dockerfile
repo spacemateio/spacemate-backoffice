@@ -3,14 +3,23 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 
 # Copy package files and install dependencies
-COPY package.json package-lock.json ./
-RUN npm install
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install
 
 # Copy application code
 COPY . .
 
+# Remove the unncessary .env files
+RUN rm -rf .env.local
+RUN rm -rf .env.local.example
+RUN rm -rf .env.development
+RUN rm -rf .env.test
+RUN rm -rf .env.production
+
+ARG VITE_API_URL
+
 # Copy environment variables file
-COPY .env .env
+RUN sh -c 'echo "VITE_API_URL=VITE_API_URL" > .env.production'
 
 # Build the project
 RUN npm run build

@@ -1,14 +1,12 @@
-"use client";
-
 import { useCallback, useEffect, useState } from "react";
 import { PaginationState } from "@tanstack/react-table";
 import { createColumns } from "./columns";
-import { DataTable } from "@/components/customTable/data-table";
 import { adApi } from "../../../lib/features/apis/AdM/adApi";
-import CustomModal from "@/components/customModals/CustomModal";
 import ListingManagementForm from "./listingManagementForm";
 import ListTypeComponent from "../../listTypeComponent";
-import { AdModel } from "@/lib/features/models/AdM/AdModel";
+import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
+import { DataTable } from "../../customTable/data-table.tsx";
+import CustomModal from "../../customModals/CustomModal.tsx";
 
 const ListingManagementPage = () => {
   const [tableData, setTableData] = useState<AdModel[]>([]);
@@ -28,7 +26,7 @@ const ListingManagementPage = () => {
       setMaxCount(maxCount);
       setTableData(payload);
     },
-    []
+    [],
   );
 
   useEffect(() => {
@@ -46,11 +44,11 @@ const ListingManagementPage = () => {
   };
 
   const handleApprove = async (id: number) => {
-    const response = await adApi.approveAd(id);
+    await adApi.approveAd(id);
   };
 
   const handleReject = async (id: number) => {
-    const response = await adApi.rejectAd(id);
+    await adApi.rejectAd(id);
   };
 
   const handleOpenModal = () => setIsModalOpen(true);
@@ -60,7 +58,7 @@ const ListingManagementPage = () => {
     handleShow,
     handleApprove,
     handleReject,
-    listType
+    listType,
   );
 
   return (
