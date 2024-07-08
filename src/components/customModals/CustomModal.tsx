@@ -1,8 +1,6 @@
-"use client";
-
-import { Button } from "@/components/ui/button"; // ShadCN Button
 import { X } from "lucide-react"; // Icon for close button
 import { ReactNode } from "react";
+import { Button } from "../ui/button";
 
 interface ModalProps {
   isOpen: boolean;

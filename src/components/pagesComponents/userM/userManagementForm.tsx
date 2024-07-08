@@ -1,12 +1,10 @@
-"use client";
-
 import { ChangeEvent, useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
-import Image from "next/image";
-import { LabeledInput } from "@/components/labeledInput/LabeledInput";
-import { UserModel } from "@/lib/features/models/UserM/UserModel";
+import { UserModel } from "../../../lib/features/models/UserM/UserModel.tsx";
+import { LabeledInput } from "../../labeledInput/LabeledInput.tsx";
+import { Checkbox } from "../../ui/checkbox.tsx";
+import { Textarea } from "../../ui/textarea.tsx";
+import { Button } from "../../ui/button.tsx";
+import Image from "../../image/Image.tsx";
 
 interface UserManagementFormProps {
   isShow: boolean;
@@ -51,7 +49,7 @@ export default function UserManagementForm({
   }, [isShow, initialData]);
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
     setFormData({
@@ -69,13 +67,14 @@ export default function UserManagementForm({
     });
   };
 
+  /*
   const handleDateChange = (name: keyof UserModel, date: Date) => {
     setFormData({
       ...formData,
       [name]: date,
     });
   };
-
+   */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("81 UserManagementForm: ", formData);

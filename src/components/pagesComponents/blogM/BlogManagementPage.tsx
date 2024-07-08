@@ -1,21 +1,20 @@
-"use client";
-
 import { useCallback, useState } from "react";
 import { PaginationState } from "@tanstack/react-table";
 import { createColumns } from "./columns";
-import { Button } from "@/components/ui/button";
-import { BlogModel } from "@/lib/features/models/BlogM/BlogModel";
-import { blogApi } from "@/lib/features/apis/BlogM/blogApi";
-import { DataTable } from "@/components/customTable/data-table";
-import CustomModal from "@/components/customModals/CustomModal";
+
 import BlogManagementPreview from "./BlogManagementPreview";
 import BlogManagementAdd from "./BlogManagementAdd";
+import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel.tsx";
+import { blogApi } from "../../../lib/features/apis/BlogM/blogApi.tsx";
+import { Button } from "../../ui/button.tsx";
+import { DataTable } from "../../customTable/data-table.tsx";
+import CustomModal from "../../customModals/CustomModal.tsx";
 
 const BlogManagementPage = () => {
   const [tableData, setTableData] = useState<BlogModel[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isCentered, setIsCentered] = useState<boolean>(true);
-  const [isShow, setIsShow] = useState<boolean>(false);
+  const [_, setIsShow] = useState<boolean>(false);
   const [showRow, setShowRow] = useState<BlogModel>({
     id: 0,
     url: "",
@@ -58,7 +57,7 @@ const BlogManagementPage = () => {
     }
   };
 
-  const handleActive = async (id: number) => {
+  const handleActive = async () => {
     console.log("active api yok");
   };
 
@@ -79,7 +78,7 @@ const BlogManagementPage = () => {
     handleShow,
     handleActive,
     handlePassive,
-    handleDelete
+    handleDelete,
   );
 
   const handleAddNewBlog = () => {

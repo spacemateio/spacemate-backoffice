@@ -1,9 +1,7 @@
-"use client";
-
 import { useEffect, useState } from "react";
-import { LabeledInput } from "@/components/labeledInput/LabeledInput";
-import { ContactUsModel } from "@/lib/features/models/ContactUs/ContactUsModel";
-import { Textarea } from "@/components/ui/textarea";
+import { ContactUsModel } from "../../../lib/features/models/ContactUs/ContactUsModel";
+import { LabeledInput } from "../../labeledInput/LabeledInput";
+import { Textarea } from "../../ui/textarea";
 
 interface ContactUsFormProps {
   isShow: boolean;

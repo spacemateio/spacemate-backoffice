@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
-import { Checkbox } from "@/components/ui/checkbox";
-import { AdModel } from "@/lib/features/models/AdM/AdModel";
+import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
+import { Checkbox } from "../../ui/checkbox.tsx";
+import { Button } from "../../ui/button.tsx";
 
 export const createColumns = (
-  handleShow: (id: number) => void
+  handleShow: (id: number) => void,
 ): ColumnDef<AdModel>[] => [
   {
     id: "select",

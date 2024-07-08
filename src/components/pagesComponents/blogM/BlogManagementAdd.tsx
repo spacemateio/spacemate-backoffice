@@ -1,9 +1,7 @@
-"use client";
-
 import { useState } from "react";
 import BlogManagementForm from "./BlogManagementForm";
 import BlogManagementPreview from "./BlogManagementPreview";
-import { BlogModel } from "@/lib/features/models/BlogM/BlogModel";
+import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel";
 
 const BlogManagementAdd = ({
   setAddNewBlog,

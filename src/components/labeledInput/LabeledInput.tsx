@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { Input } from "@/components/ui/input";
+import { Input } from "../ui/input";
 
 interface LabeledInputProps {
   label: string;
@@ -8,7 +8,7 @@ interface LabeledInputProps {
   placeholder?: string;
   value: string | number | undefined;
   onChange: (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => void;
   disabled?: boolean;
 }

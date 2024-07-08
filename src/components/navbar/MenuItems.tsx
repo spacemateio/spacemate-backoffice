@@ -1,31 +1,31 @@
 export const menuItems = [
   {
     id: "1",
-    url: "/dashboard",
+    url: "/admin/dashboard",
     name: "Dashboard",
     icon: "Home",
   },
   {
     id: "2",
-    url: "/userManagement",
+    url: "/admin/userManagement",
     name: "User Management",
     icon: "Users",
   },
   {
     id: "3",
-    url: "/listingManagement",
+    url: "/admin/listingManagement",
     name: "Listing Management",
     icon: "LineChart",
   },
   {
     id: "4",
-    url: "/blogManagement",
+    url: "/admin/blogManagement",
     name: "Blog Management",
     icon: "LineChart",
   },
   {
     id: "5",
-    url: "/contactUs",
+    url: "/admin/contactUs",
     name: "Contact Us",
     icon: "Package2",
   },

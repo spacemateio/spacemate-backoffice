@@ -1,11 +1,9 @@
-"use client";
-
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { LabeledInput } from "@/components/labeledInput/LabeledInput";
-import { adApi } from "@/lib/features/apis/AdM/adApi";
-import { AdModel } from "@/lib/features/models/AdM/AdModel";
+import { LabeledInput } from "../../labeledInput/LabeledInput.tsx";
+import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
+import { adApi } from "../../../lib/features/apis/AdM/adApi.tsx";
+import { Button } from "../../ui/button.tsx";
+import Image from "../../image/Image.tsx";
 
 interface ListingManagementFormProps {
   isShow: boolean;
