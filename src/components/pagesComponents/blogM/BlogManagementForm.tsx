@@ -1,11 +1,11 @@
 import { useRef, useState } from "react";
-import "react-quill/dist/quill.snow.css";
 import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
-import Image from "../../image/Image.tsx";
 import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel.tsx";
+import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
+import Image from "../../image/Image.tsx";
 
 const BlogManagementForm = ({
   blogPost,
@@ -78,7 +78,7 @@ const BlogManagementForm = ({
             name="title"
             value={blogPost.title}
             onChange={changeBlogPost}
-            placeholder="Title 1"
+            placeholder="Title"
             className="w-full"
           />
         </div>
@@ -87,9 +87,9 @@ const BlogManagementForm = ({
           <Input
             type="text"
             name="excerpt"
-            value={blogPost.subtitle}
+            value={blogPost.excerpt}
             onChange={changeBlogPost}
-            placeholder="Title 2"
+            placeholder="Excerpt"
             className="w-full"
           />
         </div>
@@ -127,9 +127,33 @@ const BlogManagementForm = ({
           )}
         </div>
         <div>
+          <Label className="block text-lg font-medium mb-2">Image Alt</Label>
+          <Input
+            type="text"
+            name="imageAlt"
+            value={blogPost.imageAlt}
+            onChange={changeBlogPost}
+            placeholder="Image Alt"
+            className="w-full"
+          />
+        </div>
+        <div>
+          <Label className="block text-lg font-medium mb-2">
+            Meta Description
+          </Label>
+          <Input
+            type="text"
+            name="metaDescription"
+            value={blogPost.metaDescription}
+            onChange={changeBlogPost}
+            placeholder="Meta Description"
+            className="w-full"
+          />
+        </div>
+        <div>
           <Label className="block text-lg font-medium mb-2">Content</Label>
           <ReactQuill
-            value={blogPost.htmlContent}
+            value={blogPost.content}
             onChange={(value) =>
               setBlogPost((prev: any) => ({
                 ...prev,

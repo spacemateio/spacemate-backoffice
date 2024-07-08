@@ -3,9 +3,12 @@ export interface BlogModel {
   url: string;
   title: string;
   subtitle: string;
+  excerpt: string;
   image: string;
+  imageAlt?: string; // new
   imageExtId: string;
-  htmlContent: string;
+  content: string;
   status: number;
-  createdDate: string;
+  date: string;
+  metaDescription?: string; // new
 }
