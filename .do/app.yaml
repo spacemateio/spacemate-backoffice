@@ -1,0 +1,9 @@
+name: spacemate-bo-spa-test
+services:
+  - build_command: pnpm run build
+    environment_slug: node-js
+    github:
+      branch: main
+      deploy_on_push: false
+      repo: spacemateio/spacemate-bo-spa-test
+    name: spacemate-bo-spa-test
