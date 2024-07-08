@@ -4,7 +4,8 @@ WORKDIR /app
 
 # Copy package files and install dependencies
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install
+RUN corepack enable pnpm && pnpm i --frozen-lockfile
+
 
 # Copy application code
 COPY . .
@@ -22,7 +23,7 @@ ARG VITE_API_URL
 RUN sh -c 'echo "VITE_API_URL=VITE_API_URL" > .env.production'
 
 # Build the project
-RUN npm run build
+RUN corepack enable pnpm && pnpm run build
 
 # Stage 2: Run
 FROM node:18-alpine
