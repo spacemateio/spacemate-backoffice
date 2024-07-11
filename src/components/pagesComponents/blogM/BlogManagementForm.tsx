@@ -6,6 +6,7 @@ import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel.tsx";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import Image from "../../image/Image.tsx";
+import { blogApi } from "../../../lib/features/apis/BlogM/blogApi.tsx";
 
 const BlogManagementForm = ({
   blogPost,
@@ -43,6 +44,13 @@ const BlogManagementForm = ({
   const handleSubmit = (e: any) => {
     e.preventDefault();
     console.log("blogPost: ", blogPost, " e: ", e);
+    setBlogPost((prev: any) => ({
+      ...prev,
+      ["createdDate"]: new Date().toISOString(),
+      ["status"]: "",
+      ["imageExtId"]: "",
+    }));
+    blogApi.addBlog(blogPost);
   };
 
   const changeBlogPost = (e: any) => {

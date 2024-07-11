@@ -32,9 +32,13 @@ const BlogManagementPage = () => {
   });
 
   const changePagination = useCallback(async (state: PaginationState) => {
-    const { maxCount, payload } = await blogApi.getBlogAll(state);
+    /*const { maxCount, payload } = await blogApi.getBlogAll(state);
     setMaxCount(maxCount);
-    setTableData(payload);
+    setTableData(payload);*/
+    setMaxCount(1);
+    const response = await blogApi.getBlogAll(state);
+    setTableData(response);
+    console.log(response);
   }, []);
 
   const handleShow = (id: number) => {

@@ -2,12 +2,13 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "../../ui/checkbox.tsx";
 import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel.tsx";
 import { Button } from "../../ui/button.tsx";
+import * as Tooltip from "@radix-ui/react-tooltip";
 
 export const createColumns = (
   handleShow: (id: number) => void,
   handleActive: (id: number) => void,
   handlePassive: (id: number) => void,
-  handleDelete: (id: number) => void,
+  handleDelete: (id: number) => void
 ): ColumnDef<BlogModel>[] => [
   {
     id: "select",
@@ -43,12 +44,45 @@ export const createColumns = (
         row.original.title.length > 30
           ? row.original.title.slice(0, 30) + "..."
           : row.original.title;
-      return <>{truncatedText}</>;
+      return (
+        <Tooltip.Provider>
+          <Tooltip.Root>
+            <Tooltip.Trigger asChild>
+              <span>{truncatedText}</span>
+            </Tooltip.Trigger>
+            <Tooltip.Content side="top" align="center">
+              <div className="bg-white p-2 border border-gray-300 rounded shadow-lg max-w-xs">
+                {row.original.title}
+              </div>
+            </Tooltip.Content>
+          </Tooltip.Root>
+        </Tooltip.Provider>
+      );
     },
   },
   {
-    accessorKey: "subtitle",
-    header: "Subtitle",
+    accessorKey: "excerpt",
+    header: "Excerpt",
+    cell: ({ row }) => {
+      const truncatedText =
+        row.original.excerpt.length > 30
+          ? row.original.excerpt.slice(0, 30) + "..."
+          : row.original.excerpt;
+      return (
+        <Tooltip.Provider>
+          <Tooltip.Root>
+            <Tooltip.Trigger asChild>
+              <span>{truncatedText}</span>
+            </Tooltip.Trigger>
+            <Tooltip.Content side="top" align="center">
+              <div className="bg-white p-2 border border-gray-300 rounded shadow-lg max-w-xs">
+                {row.original.excerpt}
+              </div>
+            </Tooltip.Content>
+          </Tooltip.Root>
+        </Tooltip.Provider>
+      );
+    },
   },
   {
     accessorKey: "image",
@@ -59,8 +93,28 @@ export const createColumns = (
     header: "ImageExtId",
   },
   {
-    accessorKey: "htmlContent",
-    header: "HtmlContent",
+    accessorKey: "content",
+    header: "Content",
+    cell: ({ row }) => {
+      const truncatedText =
+        row.original.content.length > 30
+          ? row.original.content.slice(0, 30) + "..."
+          : row.original.content;
+      return (
+        <Tooltip.Provider>
+          <Tooltip.Root>
+            <Tooltip.Trigger asChild>
+              <span>{truncatedText}</span>
+            </Tooltip.Trigger>
+            <Tooltip.Content side="top" align="center">
+              <div className="bg-white p-2 border border-gray-300 rounded shadow-lg max-w-xs">
+                {row.original.content}
+              </div>
+            </Tooltip.Content>
+          </Tooltip.Root>
+        </Tooltip.Provider>
+      );
+    },
   },
   {
     accessorKey: "status",
