@@ -97,7 +97,7 @@ const BlogManagementForm = ({
             name="excerpt"
             value={blogPost.excerpt}
             onChange={changeBlogPost}
-            placeholder="Excerpt"
+            placeholder="Blurb"
             className="w-full"
           />
         </div>

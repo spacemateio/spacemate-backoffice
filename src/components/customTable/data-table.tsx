@@ -37,10 +37,12 @@ interface DataTableProps<TData, TValue> {
   filterPlaceholderName: string;
   filterHeaderName: string;
   changePagination: (states: PaginationState, listType: string) => void;
+  handleDelete: (selectedRows: any[]) => void;
   maxCount: number;
   onRowDoubleClick?: (row: TData) => void;
   textFilter?: boolean;
   listType: string;
+  allowHandleDelete?: boolean;
 }
 
 export function DataTable<TData, TValue>({
@@ -49,14 +51,16 @@ export function DataTable<TData, TValue>({
   filterPlaceholderName,
   filterHeaderName,
   changePagination,
+  handleDelete,
   maxCount,
   onRowDoubleClick,
   textFilter = false,
   listType,
+  allowHandleDelete = false,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    [],
+    []
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -88,6 +92,10 @@ export function DataTable<TData, TValue>({
     },
     manualPagination: true, // Manual pagination
   });
+
+  const handleDeleteForSelectedRows = () => {
+    handleDelete(table.getFilteredSelectedRowModel().rows);
+  };
 
   React.useEffect(() => {
     changePagination(table.getState().pagination, listType);
@@ -153,7 +161,7 @@ export function DataTable<TData, TValue>({
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext(),
+                            header.getContext()
                           )}
                     </TableHead>
                   );
@@ -177,7 +185,7 @@ export function DataTable<TData, TValue>({
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext(),
+                        cell.getContext()
                       )}
                     </TableCell>
                   ))}
@@ -198,7 +206,16 @@ export function DataTable<TData, TValue>({
       </div>
       <div className="flex flex-col gap-2.5 mt-3">
         <DataTablePagination table={table} />
-        {table.getFilteredSelectedRowModel().rows.length > 0}
+        {allowHandleDelete &&
+          table.getFilteredSelectedRowModel().rows.length > 0 && (
+            <Button
+              className="w-[250px]"
+              variant="destructive"
+              onClick={handleDeleteForSelectedRows}
+            >
+              Delete Selected Rows
+            </Button>
+          )}
       </div>
     </div>
   );

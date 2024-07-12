@@ -49,7 +49,7 @@ export default function UserManagementForm({
   }, [isShow, initialData]);
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData({
@@ -343,7 +343,7 @@ export default function UserManagementForm({
         onChange={handleChange}
         disabled={isShow}
       />
-      <div className="flex space-x-2">
+      <div className="flex space-x-2 sticky bottom-0 bg-white p-4">
         <Button type="submit" disabled={isShow}>
           Kaydet
         </Button>

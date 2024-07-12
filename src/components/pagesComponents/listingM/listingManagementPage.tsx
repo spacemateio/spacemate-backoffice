@@ -26,7 +26,7 @@ const ListingManagementPage = () => {
       setMaxCount(maxCount);
       setTableData(payload);
     },
-    [],
+    []
   );
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const ListingManagementPage = () => {
     handleShow,
     handleApprove,
     handleReject,
-    listType,
+    listType
   );
 
   return (
@@ -76,6 +76,7 @@ const ListingManagementPage = () => {
           changePagination={changePagination}
           maxCount={maxCount}
           listType={listType}
+          textFilter={true}
         />
       </div>
       <CustomModal

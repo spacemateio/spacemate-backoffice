@@ -21,7 +21,7 @@ export const menuItems = [
     id: "4",
     url: "/admin/blogManagement",
     name: "Blog Management",
-    icon: "LineChart",
+    icon: "FileText",
   },
   {
     id: "5",

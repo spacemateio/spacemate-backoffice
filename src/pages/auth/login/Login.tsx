@@ -94,8 +94,10 @@ const Login = () => {
                 />
               </div>
               <Button type="submit">Sign in</Button>
-              <p className="text-red-600 text-[16px] mb-4">{error && error}</p>
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+              {error && (
+                <p className="text-red-600 text-[16px] mb-4"> {error}</p>
+              )}
+              {/*<p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don’t have an account yet?{" "}
                 <Link
                   to="/auth/register"
@@ -103,7 +105,7 @@ const Login = () => {
                 >
                   Sign up
                 </Link>
-              </p>
+              </p>*/}
             </form>
           </div>
         </div>

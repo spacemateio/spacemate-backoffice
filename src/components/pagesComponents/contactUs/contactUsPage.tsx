@@ -6,6 +6,7 @@ import { ContactUsModel } from "../../../lib/features/models/ContactUs/ContactUs
 import { contactUsApi } from "../../../lib/features/apis/ContactUs/contactApi.tsx";
 import { DataTable } from "../../customTable/data-table.tsx";
 import CustomModal from "../../customModals/CustomModal.tsx";
+import ConfirmDialog from "../../ui/ConfirmDialog.tsx";
 
 const ContactUsPage = () => {
   const [tableData, setTableData] = useState<ContactUsModel[]>([]);
@@ -14,6 +15,8 @@ const ContactUsPage = () => {
   const [isShow, setIsShow] = useState<boolean>(false);
   const [showRow, setShowRow] = useState<ContactUsModel | undefined>();
   const [maxCount, setMaxCount] = useState<number>(1);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedRows, setSelectedRows] = useState<any[]>([]);
 
   const changePagination = useCallback(async (state: PaginationState) => {
     const data: ContactUsModel[] = await contactUsApi.getAllContactus(state);
@@ -21,6 +24,16 @@ const ContactUsPage = () => {
     setMaxCount(data.length);
     setTableData(data);
   }, []);
+
+  const handleDelete = useCallback(async (selectedRows: any[]) => {
+    setSelectedRows(selectedRows);
+    setIsDialogOpen(true);
+  }, []);
+
+  const handleConfirmDelete = () => {
+    console.log("Siliyoruz: ", selectedRows);
+    setIsDialogOpen(false);
+  };
 
   const handleShow = (id: number) => {
     setIsShow(true);
@@ -45,10 +58,17 @@ const ContactUsPage = () => {
           filterPlaceholderName="Filter titles..."
           filterHeaderName="title"
           changePagination={changePagination}
+          handleDelete={handleDelete}
           maxCount={maxCount}
           listType=""
+          allowHandleDelete={true}
         />
       </div>
+      <ConfirmDialog
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+        onConfirm={handleConfirmDelete}
+      />
       <CustomModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
