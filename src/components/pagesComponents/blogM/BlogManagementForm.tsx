@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Label } from "../../ui/label";
+//import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
 import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel.tsx";
@@ -69,7 +69,7 @@ const BlogManagementForm = ({
     <>
       <form onSubmit={handleSubmit} className="p-6 max-w-4xl mx-auto space-y-4">
         <div>
-          <Label className="block text-lg font-medium mb-2">URL</Label>
+          {/* <Label className="block text-lg font-medium mb-2">URL</Label> */}
           <Input
             type="text"
             name="url"
@@ -80,7 +80,7 @@ const BlogManagementForm = ({
           />
         </div>
         <div>
-          <Label className="block text-lg font-medium mb-2">Title</Label>
+          {/* <Label className="block text-lg font-medium mb-2">Title</Label> */}
           <Input
             type="text"
             name="title"
@@ -91,7 +91,7 @@ const BlogManagementForm = ({
           />
         </div>
         <div>
-          <Label className="block text-lg font-medium mb-2">Blurb</Label>
+          {/* <Label className="block text-lg font-medium mb-2">Blurb</Label> */}
           <Input
             type="text"
             name="excerpt"
@@ -102,9 +102,9 @@ const BlogManagementForm = ({
           />
         </div>
         <div>
-          <Label className="block text-lg font-medium mb-2">
+          {/* <Label className="block text-lg font-medium mb-2">
             First Image Upload
-          </Label>
+          </Label> */}
           <Input
             type="file"
             name="image"
@@ -135,7 +135,7 @@ const BlogManagementForm = ({
           )}
         </div>
         <div>
-          <Label className="block text-lg font-medium mb-2">Image Alt</Label>
+          {/* <Label className="block text-lg font-medium mb-2">Image Alt</Label> */}
           <Input
             type="text"
             name="imageAlt"
@@ -146,9 +146,9 @@ const BlogManagementForm = ({
           />
         </div>
         <div>
-          <Label className="block text-lg font-medium mb-2">
+          {/* <Label className="block text-lg font-medium mb-2">
             Meta Description
-          </Label>
+          </Label> */}
           <Input
             type="text"
             name="metaDescription"
@@ -159,7 +159,7 @@ const BlogManagementForm = ({
           />
         </div>
         <div>
-          <Label className="block text-lg font-medium mb-2">Content</Label>
+          {/* <Label className="block text-lg font-medium mb-2">Content</Label> */}
           <ReactQuill
             value={blogPost.content}
             onChange={(value) =>
