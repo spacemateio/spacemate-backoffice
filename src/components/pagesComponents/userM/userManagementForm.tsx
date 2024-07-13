@@ -345,7 +345,7 @@ export default function UserManagementForm({
       />
       <div className="flex space-x-2 sticky bottom-0 bg-white p-4">
         <Button type="submit" disabled={isShow}>
-          Kaydet
+          Save
         </Button>
         <Button
           type="button"
@@ -353,7 +353,7 @@ export default function UserManagementForm({
           onClick={handleCancel}
           disabled={isShow}
         >
-          İptal
+          Cancel
         </Button>
       </div>
     </form>
