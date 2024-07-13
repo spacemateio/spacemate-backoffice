@@ -91,7 +91,7 @@ const BlogManagementForm = ({
           />
         </div>
         <div>
-          <Label className="block text-lg font-medium mb-2">Excerpt</Label>
+          <Label className="block text-lg font-medium mb-2">Blurb</Label>
           <Input
             type="text"
             name="excerpt"
