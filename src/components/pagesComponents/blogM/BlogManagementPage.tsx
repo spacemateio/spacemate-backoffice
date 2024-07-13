@@ -113,6 +113,7 @@ const BlogManagementPage = () => {
               filterPlaceholderName="Filter titles..."
               filterHeaderName="title"
               changePagination={changePagination}
+              handleDelete={() => {}}
               maxCount={maxCount}
               listType=""
             />

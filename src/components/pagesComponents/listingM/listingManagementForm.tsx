@@ -194,13 +194,6 @@ export default function ListingManagementForm({
         disabled={isShow}
       />
       <LabeledInput
-        label="Vote"
-        name="vote"
-        value={formData.vote}
-        onChange={() => {}}
-        disabled={isShow}
-      />
-      <LabeledInput
         label="Review Count"
         name="reviewCount"
         value={formData.reviewCount}
