@@ -13,11 +13,14 @@ const BlogManagementAdd = ({
     url: "",
     title: "",
     subtitle: "",
+    excerpt: "",
     image: "",
+    imageAlt: "",
     imageExtId: "",
-    htmlContent: "",
+    content: "",
     status: 0,
-    createdDate: "",
+    date: "",
+    metaDescription: "",
   });
 
   return (

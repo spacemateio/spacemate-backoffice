@@ -2,12 +2,13 @@ import { ColumnDef } from "@tanstack/react-table";
 import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
 import { Checkbox } from "../../ui/checkbox.tsx";
 import { Button } from "../../ui/button.tsx";
+import { ArrowUpDown } from "lucide-react";
 
 export const createColumns = (
   handleShow: (id: number) => void,
   handleApprove: (id: number) => void,
   handleReject: (id: number) => void,
-  listType: string,
+  listType: string
 ): ColumnDef<AdModel>[] => [
   {
     id: "select",
@@ -37,11 +38,31 @@ export const createColumns = (
   },
   {
     accessorKey: "email",
-    header: "Email",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Email
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "title",
-    header: "Title",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Title
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const truncatedText =
         row.original.title.length > 30
@@ -52,19 +73,62 @@ export const createColumns = (
   },
   {
     accessorKey: "price",
-    header: "Price",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Price
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      return <>{`$${row.original.price}`}</>;
+    },
   },
   {
     accessorKey: "country",
-    header: "Country",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Country
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "city",
-    header: "City",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          City
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "state",
-    header: "State",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          State
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     id: "actions",

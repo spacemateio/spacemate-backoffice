@@ -2,9 +2,11 @@ import { ContactUsModel } from "../../../lib/features/models/ContactUs/ContactUs
 import { Button } from "../../ui/button.tsx";
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "../../ui/checkbox.tsx";
+import { ArrowUpDown } from "lucide-react";
+import * as Tooltip from "@radix-ui/react-tooltip";
 
 export const createColumns = (
-  handleShow: (id: number) => void,
+  handleShow: (id: number) => void
 ): ColumnDef<ContactUsModel>[] => [
   {
     id: "select",
@@ -30,23 +32,65 @@ export const createColumns = (
   },
   {
     accessorKey: "id",
-    header: "Id",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Id
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "userId",
-    header: "userId",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          userId
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
-    accessorKey: "name",
-    header: "Name",
-  },
-  {
-    accessorKey: "surname",
-    header: "Surname",
+    accessorFn: (row) => `${row.name} ${row.surname}`,
+    id: "fullName",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Full Name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    sortingFn: (a, b) => {
+      const fullNameA = `${a.original.name} ${a.original.surname}`;
+      const fullNameB = `${b.original.name} ${b.original.surname}`;
+      return fullNameA.localeCompare(fullNameB);
+    },
   },
   {
     accessorKey: "email",
-    header: "Email",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Email
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "mobile",
@@ -54,7 +98,17 @@ export const createColumns = (
   },
   {
     accessorKey: "title",
-    header: "Title",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Title
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const truncatedText =
         row.original.title.length > 30
@@ -65,19 +119,94 @@ export const createColumns = (
   },
   {
     accessorKey: "message",
-    header: "Message",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Message
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const truncatedText =
+        row.original.message.length > 30
+          ? row.original.message.slice(0, 30) + "..."
+          : row.original.message;
+      return (
+        <Tooltip.Provider>
+          <Tooltip.Root>
+            <Tooltip.Trigger asChild>
+              <span>{truncatedText}</span>
+            </Tooltip.Trigger>
+            <Tooltip.Content side="top" align="center">
+              <div className="bg-white p-2 border border-gray-300 rounded shadow-lg max-w-xs">
+                {row.original.message}
+              </div>
+            </Tooltip.Content>
+          </Tooltip.Root>
+        </Tooltip.Provider>
+      );
+    },
   },
   {
     accessorKey: "location",
-    header: "Location",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Location
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Status
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "createdDate",
-    header: "CreatedDate",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          CreatedDate
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const options: Intl.DateTimeFormatOptions = {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true, // 12 saatlik sistemi kullanmak için
+      };
+      return new Date(row.original.createdDate).toLocaleString(
+        "en-US",
+        options
+      );
+      return;
+    },
   },
   {
     id: "actions",

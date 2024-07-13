@@ -11,6 +11,10 @@ export const blogApi = {
 
   async addBlog(data: BlogModel): Promise<any> {
     const response: any = await axiosInstance.post(`/blog`, data);
+    /*const responseForImage: any = await axiosInstance.post(
+      `/blog/image/${response.data.id}`,
+      data.image
+    );*/
     return response.data;
   },
 
@@ -34,9 +38,16 @@ export const blogApi = {
     return response.data;
   },
 
-  async getBlogAll(state: PaginationState): Promise<responseType> {
+  async getBlogAllOLD(state: PaginationState): Promise<responseType> {
     const response: any = await axiosInstance.get(
-      `/blog/all?limit=${state.pageSize}&offset=${state.pageIndex + 1}`,
+      `/blog/all?limit=${state.pageSize}&offset=${state.pageIndex + 1}`
+    );
+    return response.data;
+  },
+
+  async getBlogAll(state: PaginationState): Promise<BlogModel[]> {
+    const response: any = await axiosInstance.get(
+      `/blog/all?limit=${state.pageSize}&offset=${state.pageIndex + 1}`
     );
     return response.data;
   },

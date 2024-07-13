@@ -56,7 +56,7 @@ const UserManagementPage = () => {
     handleShow,
     handleActive,
     handlePassive,
-    handleListing,
+    handleListing
   );
 
   return (
@@ -71,8 +71,10 @@ const UserManagementPage = () => {
           filterPlaceholderName="Filter emails..."
           filterHeaderName="email"
           changePagination={changePagination}
+          handleDelete={() => {}}
           maxCount={maxCount}
           listType={listType}
+          textFilter={true}
         />
       </div>
       <CustomModal

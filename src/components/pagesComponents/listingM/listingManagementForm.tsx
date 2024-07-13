@@ -236,7 +236,7 @@ export default function ListingManagementForm({
         disabled={isShow}
       />
 
-      <div className="flex space-x-2">
+      <div className="flex space-x-2 sticky bottom-0 bg-white p-4">
         <Button
           type="submit"
           variant="approve"

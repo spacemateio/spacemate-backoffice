@@ -1,13 +1,12 @@
 import { useCallback, useState } from "react";
 import { PaginationState } from "@tanstack/react-table";
 import { createColumns } from "./columns";
-
-import BlogManagementPreview from "./BlogManagementPreview";
-import BlogManagementAdd from "./BlogManagementAdd";
 import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel.tsx";
 import { blogApi } from "../../../lib/features/apis/BlogM/blogApi.tsx";
 import { Button } from "../../ui/button.tsx";
 import { DataTable } from "../../customTable/data-table.tsx";
+import BlogManagementPreview from "./BlogManagementPreview";
+import BlogManagementAdd from "./BlogManagementAdd";
 import CustomModal from "../../customModals/CustomModal.tsx";
 
 const BlogManagementPage = () => {
@@ -15,24 +14,31 @@ const BlogManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isCentered, setIsCentered] = useState<boolean>(true);
   const [_, setIsShow] = useState<boolean>(false);
+  const [maxCount, setMaxCount] = useState<number>(1);
+  const [addNewBlog, setAddNewBlog] = useState<boolean>(false);
   const [showRow, setShowRow] = useState<BlogModel>({
     id: 0,
     url: "",
     title: "",
     subtitle: "",
+    excerpt: "",
     image: "",
+    imageAlt: "",
     imageExtId: "",
-    htmlContent: "",
+    content: "",
     status: 0,
-    createdDate: "",
+    date: "",
+    metaDescription: "",
   });
-  const [maxCount, setMaxCount] = useState<number>(1);
-  const [addNewBlog, setAddNewBlog] = useState<boolean>(false);
 
   const changePagination = useCallback(async (state: PaginationState) => {
-    const { maxCount, payload } = await blogApi.getBlogAll(state);
+    /*const { maxCount, payload } = await blogApi.getBlogAll(state);
     setMaxCount(maxCount);
-    setTableData(payload);
+    setTableData(payload);*/
+    setMaxCount(1);
+    const response = await blogApi.getBlogAll(state);
+    setTableData(response);
+    console.log(response);
   }, []);
 
   const handleShow = (id: number) => {
@@ -48,11 +54,14 @@ const BlogManagementPage = () => {
         url: "",
         title: "",
         subtitle: "",
+        excerpt: "",
         image: "",
+        imageAlt: "",
         imageExtId: "",
-        htmlContent: "",
+        content: "",
         status: 0,
-        createdDate: "",
+        date: "",
+        metaDescription: "",
       });
     }
   };
@@ -78,7 +87,7 @@ const BlogManagementPage = () => {
     handleShow,
     handleActive,
     handlePassive,
-    handleDelete,
+    handleDelete
   );
 
   const handleAddNewBlog = () => {
@@ -92,7 +101,7 @@ const BlogManagementPage = () => {
       ) : (
         <div className="w-full">
           <div className="py-5">
-            <p>Contact Us</p>
+            <p>Blog Management</p>
           </div>
           <Button className="bg-red-600" onClick={handleAddNewBlog}>
             Add New Blog
