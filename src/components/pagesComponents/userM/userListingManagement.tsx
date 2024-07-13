@@ -48,6 +48,7 @@ const UserListingManagement = ({ userId }: Props) => {
           filterPlaceholderName="Filter titles..."
           filterHeaderName="title"
           changePagination={changePagination}
+          handleDelete={() => {}}
           maxCount={maxCount}
           onRowDoubleClick={handleRowDoubleClick}
           listType={listType}

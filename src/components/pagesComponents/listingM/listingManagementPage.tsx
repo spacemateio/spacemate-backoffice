@@ -74,6 +74,7 @@ const ListingManagementPage = () => {
           filterPlaceholderName="Filter titles..."
           filterHeaderName="title"
           changePagination={changePagination}
+          handleDelete={() => {}}
           maxCount={maxCount}
           listType={listType}
           textFilter={true}
