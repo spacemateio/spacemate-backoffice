@@ -87,10 +87,26 @@ export const createColumns = (
   {
     accessorKey: "image",
     header: "Image",
-  },
-  {
-    accessorKey: "imageExtId",
-    header: "ImageExtId",
+    cell: ({ row }) => {
+      const truncatedText =
+        row.original.image.length > 30
+          ? row.original.image.slice(0, 30) + "..."
+          : row.original.image;
+      return (
+        <Tooltip.Provider>
+          <Tooltip.Root>
+            <Tooltip.Trigger asChild>
+              <span>{truncatedText}</span>
+            </Tooltip.Trigger>
+            <Tooltip.Content side="top" align="center">
+              <div className="bg-white p-2 border border-gray-300 rounded shadow-lg max-w-xs">
+                {row.original.image}
+              </div>
+            </Tooltip.Content>
+          </Tooltip.Root>
+        </Tooltip.Provider>
+      );
+    },
   },
   {
     accessorKey: "content",
