@@ -4,11 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview --port 8080 --host",
-    "start": "vite preview --port 8080 --host"
+    "start": "vite preview --port 3000 --host"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.0.4",
@@ -51,5 +51,9 @@
     "tailwindcss": "^3.4.4",
     "typescript": "^5.2.2",
     "vite": "^5.3.1"
-  }
+  },
+  "engines": {
+    "pnpm": ">=8.6.2"
+  },
+  "packageManager": "pnpm@9.4.0"
 }
