@@ -1,4 +1,4 @@
-import { PaginationState } from "@tanstack/react-table";
+import { PaginationState, SortingState } from "@tanstack/react-table";
 import { responseType } from "../../models/UserM/ResponseType";
 import axiosInstance from "../../axios/axiosInstance";
 
@@ -20,9 +20,13 @@ export const userApi = {
     return response.data;
   },
 
-  async orderBy(columnName: string, state: PaginationState): Promise<void> {
+  async getUsersOrderBy(
+    state: PaginationState,
+    sorting: SortingState
+  ): Promise<responseType> {
+    // NAME, EMAIL, REGISTER_DATE, EMAIL_VERIFICATION, ACCOUNT_TYPE, ID_VERIFIED, REF_CODE
     const response: any = await axiosInstance.get(
-      `/users/all/order?limit=${state.pageSize}&offset=${state.pageIndex + 1}&orderBy=${columnName}&sortBy=ASC`
+      `/users/all/order?limit=${state.pageSize}&offset=${state.pageIndex + 1}&orderBy=${sorting[0].id === "email" ? "EMAIL" : sorting[0].id}&sortBy=${sorting[0].desc === true ? "DESC" : "ASC"}`
     );
     return response.data;
   },
