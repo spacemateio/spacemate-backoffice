@@ -139,6 +139,21 @@ export const createColumns = (
   {
     accessorKey: "createdDate",
     header: "CreatedDate",
+    cell: ({ row }) => {
+      const options: Intl.DateTimeFormatOptions = {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true, // 12 saatlik sistemi kullanmak için
+      };
+      return new Date(row.original.createdDate).toLocaleString(
+        "en-US",
+        options
+      );
+      return;
+    },
   },
   {
     id: "actions",
@@ -155,7 +170,7 @@ export const createColumns = (
           >
             Show
           </Button>
-          {row.original.status !== 1 && (
+          {row.original.status !== 0 && (
             <Button
               variant="approve"
               size="sxm"
@@ -165,7 +180,7 @@ export const createColumns = (
               Active
             </Button>
           )}
-          {row.original.status !== 0 && (
+          {row.original.status !== 1 && (
             <Button
               variant="destructive"
               size="sxm"

@@ -1,17 +1,13 @@
 import { useCallback, useState } from "react";
-import {
-  ColumnFiltersState,
-  PaginationState,
-  SortingState,
-} from "@tanstack/react-table";
+import { PaginationState, SortingState } from "@tanstack/react-table";
 import { createColumns } from "./columns";
 import UserManagementForm from "./userManagementForm";
 import UserListingManagement from "./userListingManagement";
 import { UserModel } from "../../../lib/features/models/UserM/UserModel.tsx";
-import { userApi } from "../../../lib/features/apis/UserM/userApi.tsx";
 import { DataTable } from "../../customTable/data-table.tsx";
 import CustomModal from "../../customModals/CustomModal.tsx";
 import MiddleModal from "../../customModals/MiddleModal.tsx";
+import { userApiHelper } from "../../../lib/features/apis/UserM/userApiHelper.tsx";
 
 const UserManagementPage = () => {
   const [tableData, setTableData] = useState<UserModel[]>([]);
@@ -27,14 +23,14 @@ const UserManagementPage = () => {
   const changePagination = useCallback(
     async (state: PaginationState, listType: string, sorting: SortingState) => {
       if (sorting[0]) {
-        const { maxCount, payload } = await userApi.getUsersOrderBy(
+        const { maxCount, payload } = await userApiHelper.getUsersOrderBy(
           state,
           sorting
         );
         setMaxCount(maxCount);
         setTableData(payload);
       } else {
-        const { maxCount, payload } = await userApi.getUsers(state);
+        const { maxCount, payload } = await userApiHelper.getUsers(state);
         setMaxCount(maxCount);
         setTableData(payload);
       }
@@ -49,14 +45,6 @@ const UserManagementPage = () => {
     handleOpenModal();
   };
 
-  const handleActive = (id: number) => {
-    console.log("User Active:", id);
-  };
-
-  const handlePassive = (id: number) => {
-    console.log("User Passive:", id);
-  };
-
   const handleListing = (id: number) => {
     setUserId(id);
     console.log("Listing:", id);
@@ -68,12 +56,7 @@ const UserManagementPage = () => {
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
   const handleTogglePosition = () => setIsCentered(!isCentered);
-  const columns = createColumns(
-    handleShow,
-    handleActive,
-    handlePassive,
-    handleListing
-  );
+  const columns = createColumns(handleShow, handleListing);
 
   return (
     <div className="w-full">

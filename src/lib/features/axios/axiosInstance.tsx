@@ -12,13 +12,15 @@ axiosInstance.interceptors.request.use(
     if (token) {
       config.headers.Authorization = token;
     }
-
+    if (config.data && config.data instanceof FormData) {
+      delete config.headers["Content-Type"];
+    }
     return config;
   },
   (error) => {
     console.error("Request error:", error);
     return Promise.reject(error);
-  },
+  }
 );
 
 axiosInstance.interceptors.response.use(
@@ -26,11 +28,11 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (error?.response?.status === 401) {
       authLocalStorageService.removeUser();
-      window.location.reload()
+      window.location.reload();
     }
 
     throw error;
-  },
+  }
 );
 
 export default axiosInstance;

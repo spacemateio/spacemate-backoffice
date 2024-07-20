@@ -6,20 +6,31 @@ import axiosInstance from "../../axios/axiosInstance";
 export const blogApi = {
   async updateBlog(id: number, data: BlogModel): Promise<any> {
     const response: any = await axiosInstance.put(`/blog/update/${id}`, data);
+
     return response.data;
   },
 
   async addBlog(data: BlogModel): Promise<any> {
+    data.createdDate = new Date().toISOString();
     const response: any = await axiosInstance.post(`/blog`, data);
-    /*const responseForImage: any = await axiosInstance.post(
+    const formData = new FormData();
+    formData.append("image", data.image);
+    const imageResponse: any = await axiosInstance.post(
       `/blog/image/${response.data.id}`,
-      data.image
-    );*/
+      formData
+    );
+    console.log("imageResponse: ", imageResponse);
+
     return response.data;
   },
 
-  async addImageById(id: number, Image: string): Promise<any> {
-    const response: any = await axiosInstance.post(`/blog/image/${id}`, Image);
+  async addImageById(id: number, image: string): Promise<any> {
+    const formData = new FormData();
+    formData.append("image", image);
+    const response: any = await axiosInstance.post(
+      `/blog/image/${id}`,
+      formData
+    );
     return response.data;
   },
 
