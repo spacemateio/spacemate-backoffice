@@ -36,7 +36,11 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   filterPlaceholderName: string;
   filterHeaderName: string;
-  changePagination: (states: PaginationState, listType: string) => void;
+  changePagination: (
+    states: PaginationState,
+    listType: string,
+    sort: SortingState
+  ) => void;
   handleDelete: (selectedRows: any[]) => void;
   maxCount: number;
   onRowDoubleClick?: (row: TData) => void;
@@ -76,7 +80,9 @@ export function DataTable<TData, TValue>({
     pageCount: Math.ceil(maxCount / pagination.pageSize),
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    onSortingChange: setSorting,
+    onSortingChange: (newSorting) => {
+      setSorting(newSorting);
+    },
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
@@ -98,10 +104,15 @@ export function DataTable<TData, TValue>({
   };
 
   React.useEffect(() => {
-    changePagination(table.getState().pagination, listType);
+    changePagination(
+      table.getState().pagination,
+      listType,
+      table.getState().sorting
+    );
   }, [
     table.getState().pagination.pageIndex,
     table.getState().pagination.pageSize,
+    table.getState().sorting,
   ]);
 
   return (

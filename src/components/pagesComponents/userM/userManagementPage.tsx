@@ -1,5 +1,9 @@
 import { useCallback, useState } from "react";
-import { PaginationState } from "@tanstack/react-table";
+import {
+  ColumnFiltersState,
+  PaginationState,
+  SortingState,
+} from "@tanstack/react-table";
 import { createColumns } from "./columns";
 import UserManagementForm from "./userManagementForm";
 import UserListingManagement from "./userListingManagement";
@@ -20,11 +24,23 @@ const UserManagementPage = () => {
   const [userId, setUserId] = useState<number>(1);
   const [listType] = useState<string>("pending");
 
-  const changePagination = useCallback(async (state: PaginationState) => {
-    const { maxCount, payload } = await userApi.getUsers(state);
-    setMaxCount(maxCount);
-    setTableData(payload);
-  }, []);
+  const changePagination = useCallback(
+    async (state: PaginationState, listType: string, sorting: SortingState) => {
+      if (sorting[0]) {
+        const { maxCount, payload } = await userApi.getUsersOrderBy(
+          state,
+          sorting
+        );
+        setMaxCount(maxCount);
+        setTableData(payload);
+      } else {
+        const { maxCount, payload } = await userApi.getUsers(state);
+        setMaxCount(maxCount);
+        setTableData(payload);
+      }
+    },
+    []
+  );
 
   const handleShow = (id: number) => {
     setIsShow(true);

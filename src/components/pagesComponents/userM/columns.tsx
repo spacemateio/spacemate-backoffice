@@ -36,7 +36,7 @@ export const createColumns = (
   },
   {
     accessorFn: (row) => `${row.name} ${row.lastname}`,
-    id: "fullName",
+    id: "NAME",
     header: ({ column }) => {
       return (
         <Button
@@ -92,8 +92,9 @@ export const createColumns = (
     },
   },
   {
+    id: "ACCOUNT_TYPE",
     accessorKey: "accountType",
-    header: "AccountType",
+    header: "Account Type",
     cell: ({ row }) => {
       return (
         <>
@@ -114,6 +115,7 @@ export const createColumns = (
     },
   },
   {
+    id: "ID_VERIFIED",
     accessorKey: "isVerified",
     header: "ID Verified",
     cell: ({ row }) => {
@@ -137,6 +139,7 @@ export const createColumns = (
     },
   },
   {
+    id: "REGISTER_DATE",
     accessorKey: "createDate",
     header: ({ column }) => {
       return (
@@ -163,6 +166,7 @@ export const createColumns = (
     },
   },
   {
+    id: "EMAIL_VERIFICATION",
     accessorKey: "status",
     header: "Email Verification",
     cell: ({ row }) => {
@@ -186,6 +190,7 @@ export const createColumns = (
     },
   },
   {
+    id: "REF_CODE",
     accessorKey: "refCode",
     header: ({ column }) => {
       return (
@@ -193,7 +198,7 @@ export const createColumns = (
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          REFCode
+          REF Code
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );

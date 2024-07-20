@@ -117,6 +117,32 @@ export const createColumns = (
     },
   },
   {
+    accessorKey: "created",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Created Date
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const options: Intl.DateTimeFormatOptions = {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true, // 12 saatlik sistemi kullanmak için
+      };
+      return new Date(row.original.created).toLocaleString("en-US", options);
+      return;
+    },
+  },
+  {
     accessorKey: "state",
     header: ({ column }) => {
       return (

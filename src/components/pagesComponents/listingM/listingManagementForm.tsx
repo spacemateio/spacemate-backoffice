@@ -49,6 +49,7 @@ export default function ListingManagementForm({
     length: 0,
     width: 0,
     currency: "",
+    created: "",
   });
 
   useEffect(() => {
