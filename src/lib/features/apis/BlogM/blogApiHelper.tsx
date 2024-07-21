@@ -33,10 +33,7 @@ export const blogApiHelper = {
       if (response.data.id && data.image) {
         const formData = new FormData();
         formData.append("image", data.image);
-        const imageResponse: any = await axiosInstance.post(
-          `/blog/image/${response.data.id}`,
-          formData
-        );
+        await axiosInstance.post(`/blog/image/${response.data.id}`, formData);
       }
       if (toastManager) {
         toastManager.addToast("Blog added successfully", "success");
@@ -117,7 +114,7 @@ export const blogApiHelper = {
   async activateBlog(id: number): Promise<any> {
     try {
       if (toastManager) {
-        toastManager.addToast("Failed to activate blog", "error");
+        toastManager.addToast(`Failed to activate blog ${id}`, "error");
       }
     } catch (error) {
       if (toastManager) {

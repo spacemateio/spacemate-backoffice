@@ -4,14 +4,12 @@ import { createColumns } from "./columns";
 import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel.tsx";
 import { Button } from "../../ui/button.tsx";
 import { DataTable } from "../../customTable/data-table.tsx";
-import { useToast } from "../../Toast/ToastProvider.tsx";
 import { blogApiHelper } from "../../../lib/features/apis/BlogM/blogApiHelper.tsx";
 import BlogManagementPreview from "./BlogManagementPreview";
 import BlogManagementAdd from "./BlogManagementAdd";
 import CustomModal from "../../customModals/CustomModal.tsx";
 
 const BlogManagementPage = () => {
-  const toastManager = useToast();
   const [tableData, setTableData] = useState<BlogModel[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isCentered, setIsCentered] = useState<boolean>(true);
@@ -71,11 +69,11 @@ const BlogManagementPage = () => {
   };
 
   const handleActive = async (id: number) => {
-    const response = await blogApiHelper.activateBlog(id);
+    await blogApiHelper.activateBlog(id);
   };
 
   const handlePassive = async (id: number) => {
-    const response = await blogApiHelper.deactivateBlog(id);
+    await blogApiHelper.deactivateBlog(id);
   };
 
   const handleDelete = async (id: number) => {

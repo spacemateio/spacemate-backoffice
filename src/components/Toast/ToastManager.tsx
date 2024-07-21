@@ -16,15 +16,16 @@ const ToastManager = forwardRef<ToastManagerRef>((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     addToast(message, type) {
-      console.log("Sertac guler", message, type);
-
+      if (message === null) {
+        console.log(props);
+      }
       const id = Date.now();
       setToasts((prevToasts) => [...prevToasts, { id, message, type }]);
       setTimeout(() => {
         setToasts((prevToasts) =>
           prevToasts.filter((toast) => toast.id !== id)
         );
-      }, 3000); // 3 saniye sonra toast'ı kaldır
+      }, 3000);
     },
   }));
 
