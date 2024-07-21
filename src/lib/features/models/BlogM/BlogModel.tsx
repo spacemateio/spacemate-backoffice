@@ -7,8 +7,9 @@ export interface BlogModel {
   image: string;
   imageAlt?: string; // new
   imageExtId: string;
+  imageAltExtId: string;
   content: string;
   status: number;
-  date: string;
+  createdDate: string;
   metaDescription?: string; // new
 }

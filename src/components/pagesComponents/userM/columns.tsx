@@ -8,8 +8,6 @@ import Image from "../../image/Image.tsx";
 
 export const createColumns = (
   handleShow: (id: number) => void,
-  handleActive: (id: number) => void,
-  handlePassive: (id: number) => void,
   handleListing: (id: number) => void
 ): ColumnDef<UserModel>[] => [
   {
@@ -226,22 +224,6 @@ export const createColumns = (
             onClick={() => handleListing(id)}
           >
             Listing
-          </Button>{" "}
-          <Button
-            variant="outline"
-            size="sxm"
-            style={{ fontSize: "12px" }}
-            onClick={() => handleActive(id)}
-          >
-            Active
-          </Button>{" "}
-          <Button
-            variant="outline"
-            size="sxm"
-            style={{ fontSize: "12px" }}
-            onClick={() => handlePassive(id)}
-          >
-            Passive
           </Button>
         </div>
       );

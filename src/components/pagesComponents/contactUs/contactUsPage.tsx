@@ -1,10 +1,10 @@
 import { useCallback, useState } from "react";
 import { PaginationState } from "@tanstack/react-table";
 import { createColumns } from "./columns";
-import ContactUsForm from "./contactUsForm";
+import { contactUsApiHelper } from "../../../lib/features/apis/ContactUs/contactUsApiHelper.tsx";
 import { ContactUsModel } from "../../../lib/features/models/ContactUs/ContactUsModel.tsx";
-import { contactUsApi } from "../../../lib/features/apis/ContactUs/contactApi.tsx";
 import { DataTable } from "../../customTable/data-table.tsx";
+import ContactUsForm from "./contactUsForm";
 import CustomModal from "../../customModals/CustomModal.tsx";
 import ConfirmDialog from "../../ui/ConfirmDialog.tsx";
 
@@ -19,10 +19,10 @@ const ContactUsPage = () => {
   const [selectedRows, setSelectedRows] = useState<any[]>([]);
 
   const changePagination = useCallback(async (state: PaginationState) => {
-    const data: ContactUsModel[] = await contactUsApi.getAllContactus(state);
-
-    setMaxCount(data.length);
-    setTableData(data);
+    const { maxCount, payload } =
+      await contactUsApiHelper.getAllContactus(state);
+    setMaxCount(maxCount);
+    setTableData(payload);
   }, []);
 
   const handleDelete = useCallback(async (selectedRows: any[]) => {

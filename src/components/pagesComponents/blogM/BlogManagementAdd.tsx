@@ -17,9 +17,10 @@ const BlogManagementAdd = ({
     image: "",
     imageAlt: "",
     imageExtId: "",
+    imageAltExtId: "",
     content: "",
     status: 0,
-    date: "",
+    createdDate: "",
     metaDescription: "",
   });
 

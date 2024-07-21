@@ -5,6 +5,7 @@ import { Checkbox } from "../../ui/checkbox.tsx";
 import { Textarea } from "../../ui/textarea.tsx";
 import { Button } from "../../ui/button.tsx";
 import Image from "../../image/Image.tsx";
+import { userApiHelper } from "../../../lib/features/apis/UserM/userApiHelper.tsx";
 
 interface UserManagementFormProps {
   isShow: boolean;
@@ -83,6 +84,20 @@ export default function UserManagementForm({
 
   const handleCancel = () => {
     // reset form or handle cancel action
+  };
+
+  const handleActive = (id?: number) => {
+    if (id) {
+      console.log("User Active:", id);
+      userApiHelper.enableUsers(id);
+    }
+  };
+
+  const handlePassive = (id?: number) => {
+    if (id) {
+      console.log("User Passive:", id);
+      userApiHelper.disableUsers(id);
+    }
   };
 
   return (
@@ -343,18 +358,41 @@ export default function UserManagementForm({
         onChange={handleChange}
         disabled={isShow}
       />
-      <div className="flex space-x-2 sticky bottom-0 bg-white p-4">
-        <Button type="submit" disabled={isShow}>
-          Save
-        </Button>
-        <Button
-          type="button"
-          variant="secondary"
-          onClick={handleCancel}
-          disabled={isShow}
-        >
-          Cancel
-        </Button>
+      <div className="flex space-x-2 sticky bottom-0 bg-white p-4 justify-between">
+        <div>
+          <Button type="submit" className="mr-2" disabled={isShow}>
+            Save
+          </Button>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={handleCancel}
+            disabled={isShow}
+          >
+            Cancel
+          </Button>
+        </div>
+        <div>
+          <Button
+            variant="outline"
+            size="sxm"
+            style={{ fontSize: "12px" }}
+            onClick={() => handleActive(initialData?.id)}
+            disabled={!(initialData !== undefined)}
+            className="mr-2"
+          >
+            Active
+          </Button>
+          <Button
+            variant="outline"
+            size="sxm"
+            style={{ fontSize: "12px" }}
+            onClick={() => handlePassive(initialData?.id)}
+            disabled={!(initialData !== undefined)}
+          >
+            Passive
+          </Button>
+        </div>
       </div>
     </form>
   );

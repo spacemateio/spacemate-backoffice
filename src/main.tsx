@@ -15,6 +15,7 @@ import Campaigns from "./pages/campaigns/Campaigns.tsx";
 import ContactUs from "./pages/contactUs/ContactUs.tsx";
 import ReservationTracking from "./pages/reservationTracking/ReservationTracking.tsx";
 import UserManagement from "./pages/userManagement/UserManagement.tsx";
+import { ToastProvider } from "./components/Toast/ToastProvider.tsx";
 
 const router = createBrowserRouter([
   {
@@ -87,8 +88,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>,
+    <ToastProvider>
+      <RouterProvider router={router} />{" "}
+    </ToastProvider>
+  </React.StrictMode>
 );
 
 // trigger2

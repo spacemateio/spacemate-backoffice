@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { PaginationState } from "@tanstack/react-table";
 import { createColumns } from "./columns";
-import { adApi } from "../../../lib/features/apis/AdM/adApi";
 import ListingManagementForm from "./listingManagementForm";
 import ListTypeComponent from "../../listTypeComponent";
 import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
 import { DataTable } from "../../customTable/data-table.tsx";
 import CustomModal from "../../customModals/CustomModal.tsx";
+import { adApiHelper } from "../../../lib/features/apis/AdM/adApiHelper.tsx";
 
 const ListingManagementPage = () => {
   const [tableData, setTableData] = useState<AdModel[]>([]);
@@ -21,8 +21,8 @@ const ListingManagementPage = () => {
     async (state: PaginationState, currentListType: string) => {
       const { maxCount, payload } =
         currentListType === "pending"
-          ? await adApi.getNewListings(state)
-          : await adApi.getListingByStatus(state, currentListType);
+          ? await adApiHelper.getNewListings(state)
+          : await adApiHelper.getListingByStatus(state, currentListType);
       setMaxCount(maxCount);
       setTableData(payload);
     },
@@ -44,11 +44,11 @@ const ListingManagementPage = () => {
   };
 
   const handleApprove = async (id: number) => {
-    await adApi.approveAd(id);
+    await adApiHelper.approveAd(id);
   };
 
   const handleReject = async (id: number) => {
-    await adApi.rejectAd(id);
+    await adApiHelper.rejectAd(id);
   };
 
   const handleOpenModal = () => setIsModalOpen(true);
