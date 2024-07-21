@@ -51,7 +51,7 @@ const BlogManagementForm = ({
       ["status"]: "",
       ["imageExtId"]: "",
     }));
-    const response = await blogApiHelper.addBlog(blogPost);
+    await blogApiHelper.addBlog(blogPost);
   };
 
   const changeBlogPost = (e: any) => {

@@ -22,6 +22,10 @@ const UserManagementPage = () => {
 
   const changePagination = useCallback(
     async (state: PaginationState, listType: string, sorting: SortingState) => {
+      if (listType) {
+        console.log(listType);
+      }
+
       if (sorting[0]) {
         const { maxCount, payload } = await userApiHelper.getUsersOrderBy(
           state,

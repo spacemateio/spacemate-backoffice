@@ -26,6 +26,7 @@ export const adApiHelper = {
 
   async getListingByUser(
     state: PaginationState,
+    // @ts-ignore
     userId: number
   ): Promise<responseType> {
     try {
