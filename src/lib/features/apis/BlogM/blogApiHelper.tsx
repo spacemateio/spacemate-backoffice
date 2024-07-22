@@ -32,8 +32,12 @@ export const blogApiHelper = {
       const response: any = await axiosInstance.post(`/blog`, data);
       if (response.data.id && data.image) {
         const formData = new FormData();
-        formData.append("image", data.image);
-        await axiosInstance.post(`/blog/image/${response.data.id}`, formData);
+        formData.append("file", data.image);
+        await axiosInstance.post(`/blog/image/${response.data.id}`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data", // Ensure this is set
+          },
+        });
       }
       if (toastManager) {
         toastManager.addToast("Blog added successfully", "success");

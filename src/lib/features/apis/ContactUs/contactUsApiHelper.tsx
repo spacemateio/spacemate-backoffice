@@ -31,6 +31,12 @@ export const contactUsApiHelper = {
         const response: any = await axiosInstance.delete(
           `/contactus/${ids[0].original.id}`
         );
+        if (toastManager) {
+          toastManager.addToast(
+            "Contact us entry deleted successfully",
+            "success"
+          );
+        }
         return response.data;
       } else {
         let idArray: number[] = await ids.map((obj: any) => obj?.original?.id);
@@ -38,11 +44,17 @@ export const contactUsApiHelper = {
           `/contactus/multiple`,
           { data: idArray }
         );
+        if (toastManager) {
+          toastManager.addToast(
+            "Contact us entries deleted successfully",
+            "success"
+          );
+        }
         return response.data;
       }
     } catch (error) {
       if (toastManager) {
-        toastManager.addToast("Failed to fetch contact us entries", "error");
+        toastManager.addToast("Failed to deleted contact us entries", "error");
       }
       throw error;
     }
