@@ -40,3 +40,5 @@ next-env.d.ts
 # OS generated files
 .DS_Store
 *.swp
+
+todo.txt

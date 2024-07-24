@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-//import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
 import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel.tsx";
@@ -19,15 +18,18 @@ const BlogManagementForm = ({
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [imageName, setImageName] = useState<string>("");
+  const [image, setImage] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
 
   const handleImageChange = (e: any) => {
-    if (e.target.files && e.target.files[0]) {
-      setImageName(e.target.files[0].name);
-      setBlogPost((prev: any) => ({
-        ...prev,
-        ["image"]: URL.createObjectURL(e.target.files[0]),
-      }));
-      console.log("hello: ", URL.createObjectURL(e.target.files[0]));
+    const file = e.target.files?.[0] || null;
+    setImage(file);
+
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setImageUrl(url);
+    } else {
+      setImageUrl(undefined);
     }
   };
 
@@ -51,7 +53,7 @@ const BlogManagementForm = ({
       ["status"]: "",
       ["imageExtId"]: "",
     }));
-    await blogApiHelper.addBlog(blogPost);
+    await blogApiHelper.addBlog(blogPost, image);
   };
 
   const changeBlogPost = (e: any) => {
@@ -126,7 +128,7 @@ const BlogManagementForm = ({
                 <span>{imageName}</span>
               </div>
               <Image
-                src={blogPost.image}
+                src={imageUrl}
                 alt="Selected Image"
                 width={75}
                 height={75}

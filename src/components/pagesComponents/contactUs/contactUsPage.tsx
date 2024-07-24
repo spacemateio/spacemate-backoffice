@@ -30,8 +30,8 @@ const ContactUsPage = () => {
     setIsDialogOpen(true);
   }, []);
 
-  const handleConfirmDelete = () => {
-    console.log("Siliyoruz: ", selectedRows);
+  const handleConfirmDelete = async () => {
+    await contactUsApiHelper.getDeleteContactus(selectedRows);
     setIsDialogOpen(false);
   };
 

@@ -23,4 +23,40 @@ export const contactUsApiHelper = {
       throw error;
     }
   },
+  async getDeleteContactus(ids: any[]): Promise<void> {
+    try {
+      console.log(ids);
+
+      if (ids.length === 1) {
+        const response: any = await axiosInstance.delete(
+          `/contactus/${ids[0].original.id}`
+        );
+        if (toastManager) {
+          toastManager.addToast(
+            "Contact us entry deleted successfully",
+            "success"
+          );
+        }
+        return response.data;
+      } else {
+        let idArray: number[] = await ids.map((obj: any) => obj?.original?.id);
+        const response: any = await axiosInstance.delete(
+          `/contactus/multiple`,
+          { data: idArray }
+        );
+        if (toastManager) {
+          toastManager.addToast(
+            "Contact us entries deleted successfully",
+            "success"
+          );
+        }
+        return response.data;
+      }
+    } catch (error) {
+      if (toastManager) {
+        toastManager.addToast("Failed to deleted contact us entries", "error");
+      }
+      throw error;
+    }
+  },
 };

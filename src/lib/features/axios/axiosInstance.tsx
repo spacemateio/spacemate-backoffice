@@ -28,7 +28,8 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (error?.response?.status === 401) {
       authLocalStorageService.removeUser();
-      window.location.reload();
+      //window.location.reload();
+      window.location.href = "/auth/login";
     }
 
     throw error;
