@@ -26,13 +26,13 @@ export const blogApiHelper = {
     }
   },
 
-  async addBlog(data: BlogModel): Promise<any> {
+  async addBlog(data: BlogModel, image?: File | null): Promise<any> {
     try {
       data.createdDate = new Date().toISOString();
       const response: any = await axiosInstance.post(`/blog`, data);
-      if (response.data.id && data.image) {
+      if (response.data.id && image) {
         const formData = new FormData();
-        formData.append("file", data.image);
+        formData.append("file", image);
         await axiosInstance.post(`/blog/image/${response.data.id}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data", // Ensure this is set
