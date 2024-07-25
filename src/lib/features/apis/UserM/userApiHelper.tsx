@@ -1,13 +1,6 @@
 import { PaginationState, SortingState } from "@tanstack/react-table";
-import { ToastManagerRef } from "../../../../components/Toast/ToastManager";
 import { responseType } from "../../models/UserM/ResponseType";
 import axiosInstance from "../../axios/axiosInstance";
-
-let toastManager: ToastManagerRef | null = null;
-
-export const setToastManager = (manager: ToastManagerRef) => {
-  toastManager = manager;
-};
 
 export const userApiHelper = {
   async getUsers(state: PaginationState): Promise<responseType> {
@@ -17,9 +10,6 @@ export const userApiHelper = {
       );
       return response.data;
     } catch (error) {
-      if (toastManager) {
-        toastManager.addToast("Failed to fetch users", "error");
-      }
       throw error;
     }
   },
@@ -29,9 +19,6 @@ export const userApiHelper = {
       const response: any = await axiosInstance.get(`/enable/${userId}`);
       return response.data;
     } catch (error) {
-      if (toastManager) {
-        toastManager.addToast("Failed to enable user", "error");
-      }
       throw error;
     }
   },
@@ -41,9 +28,6 @@ export const userApiHelper = {
       const response: any = await axiosInstance.get(`/disable/${userId}`);
       return response.data;
     } catch (error) {
-      if (toastManager) {
-        toastManager.addToast("Failed to disable user", "error");
-      }
       throw error;
     }
   },
@@ -58,9 +42,6 @@ export const userApiHelper = {
       );
       return response.data;
     } catch (error) {
-      if (toastManager) {
-        toastManager.addToast("Failed to fetch users with sorting", "error");
-      }
       throw error;
     }
   },

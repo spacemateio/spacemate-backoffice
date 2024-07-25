@@ -14,7 +14,8 @@ import Campaigns from "./pages/campaigns/Campaigns.tsx";
 import ContactUs from "./pages/contactUs/ContactUs.tsx";
 import ReservationTracking from "./pages/reservationTracking/ReservationTracking.tsx";
 import UserManagement from "./pages/userManagement/UserManagement.tsx";
-import { ToastProvider } from "./components/Toast/ToastProvider.tsx";
+import { ToastProvider } from "./components/Toast/ToastContext.tsx";
+import ToastManager from "./components/Toast/ToastManager.tsx";
 
 const router = createBrowserRouter([
   {
@@ -87,6 +88,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <ToastProvider>
-    <RouterProvider router={router} />{" "}
+    <RouterProvider router={router} /> <ToastManager />
   </ToastProvider>
 );

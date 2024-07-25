@@ -7,8 +7,10 @@ import { adApiHelper } from "../../../lib/features/apis/AdM/adApiHelper.tsx";
 import ListingManagementForm from "./listingManagementForm";
 import ListTypeComponent from "../../listTypeComponent";
 import CustomModal from "../../customModals/CustomModal.tsx";
+import { useToast } from "../../Toast/ToastContext.tsx";
 
 const ListingManagementPage = () => {
+  const { addToast } = useToast();
   const [tableData, setTableData] = useState<AdModel[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isCentered, setIsCentered] = useState<boolean>(false);
@@ -19,12 +21,18 @@ const ListingManagementPage = () => {
 
   const changePagination = useCallback(
     async (state: PaginationState, currentListType: string) => {
-      const { maxCount, payload } =
-        currentListType === "pending"
-          ? await adApiHelper.getNewListings(state)
-          : await adApiHelper.getListingByStatus(state, currentListType);
-      setMaxCount(maxCount);
-      setTableData(payload);
+      try {
+        addToast("Fetching listings...", "info");
+        const { maxCount, payload } =
+          currentListType === "pending"
+            ? await adApiHelper.getNewListings(state)
+            : await adApiHelper.getListingByStatus(state, currentListType);
+        setMaxCount(maxCount);
+        setTableData(payload);
+        addToast("Get All Listings successfully", "success");
+      } catch (error) {
+        addToast("Failed to reject listing", "error");
+      }
     },
     []
   );
@@ -44,11 +52,21 @@ const ListingManagementPage = () => {
   };
 
   const handleApprove = async (id: number) => {
-    await adApiHelper.approveAd(id);
+    try {
+      await adApiHelper.approveAd(id);
+      addToast("Listing approved successfully", "success");
+    } catch (error) {
+      addToast("Failed to approve listing", "error");
+    }
   };
 
   const handleReject = async (id: number) => {
-    await adApiHelper.rejectAd(id);
+    try {
+      await adApiHelper.rejectAd(id);
+      addToast("Listing rejected successfully", "success");
+    } catch (error) {
+      addToast("Failed to reject listing", "error");
+    }
   };
 
   const handleOpenModal = () => setIsModalOpen(true);

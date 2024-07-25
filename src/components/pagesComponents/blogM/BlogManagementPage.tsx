@@ -8,8 +8,10 @@ import { blogApiHelper } from "../../../lib/features/apis/BlogM/blogApiHelper.ts
 import BlogManagementPreview from "./BlogManagementPreview";
 import BlogManagementAdd from "./BlogManagementAdd";
 import CustomModal from "../../customModals/CustomModal.tsx";
+import { useToast } from "../../Toast/ToastContext.tsx";
 
 const BlogManagementPage = () => {
+  const { addToast } = useToast();
   const [tableData, setTableData] = useState<BlogModel[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isCentered, setIsCentered] = useState<boolean>(true);
@@ -37,9 +39,14 @@ const BlogManagementPage = () => {
     /*const { maxCount, payload } = await blogApi.getBlogAll(state);
     setMaxCount(maxCount);
     setTableData(payload);*/
-    setMaxCount(1);
-    const response = await blogApiHelper.getBlogAll(state);
-    setTableData(response);
+    try {
+      setMaxCount(1);
+      const response = await blogApiHelper.getBlogAll(state);
+      setTableData(response);
+      //addToast("Get all blogs successfully", "success");
+    } catch (error) {
+      addToast("Failed to get all blogs", "error");
+    }
   }, []);
 
   const handleShow = (id: number) => {
@@ -70,16 +77,31 @@ const BlogManagementPage = () => {
   };
 
   const handleActive = async (id: number) => {
-    await blogApiHelper.activateBlog(id);
+    try {
+      await blogApiHelper.activateBlog(id);
+      addToast("Blog activated successfully", "success");
+    } catch (error) {
+      addToast("Failed to activate blog", "error");
+    }
   };
 
   const handlePassive = async (id: number) => {
-    await blogApiHelper.deactivateBlog(id);
+    try {
+      await blogApiHelper.deactivateBlog(id);
+      addToast("Blog passived successfully", "success");
+    } catch (error) {
+      addToast("Failed to Passive blog", "error");
+    }
   };
 
   const handleDelete = async (id: number) => {
-    await blogApiHelper.deleteBlog(id);
-    setTableData(tableData.filter((blog) => blog.id !== id));
+    try {
+      await blogApiHelper.deleteBlog(id);
+      setTableData(tableData.filter((blog) => blog.id !== id));
+      addToast("Blog deleted successfully", "success");
+    } catch (error) {
+      addToast("Failed to delete blog", "error");
+    }
   };
 
   const handleOpenModal = () => setIsModalOpen(true);

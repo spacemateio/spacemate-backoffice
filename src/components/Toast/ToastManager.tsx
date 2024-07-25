@@ -1,31 +1,8 @@
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { useToast } from "./ToastContext";
 import "./toast.css";
 
-interface Toast {
-  id: number;
-  message: string;
-  type: "success" | "error" | "info";
-}
-
-export interface ToastManagerRef {
-  addToast: (message: string, type: Toast["type"]) => void;
-}
-
-const ToastManager = forwardRef<ToastManagerRef>((props, ref) => {
-  const [toasts, setToasts] = useState<Toast[]>([]);
-  console.log(props);
-
-  useImperativeHandle(ref, () => ({
-    addToast(message, type) {
-      const id = Date.now();
-      setToasts((prevToasts) => [...prevToasts, { id, message, type }]);
-      setTimeout(() => {
-        setToasts((prevToasts) =>
-          prevToasts.filter((toast) => toast.id !== id)
-        );
-      }, 8000);
-    },
-  }));
+const ToastManager = () => {
+  const { toasts } = useToast();
 
   return (
     <div className="toast-container">
@@ -36,6 +13,6 @@ const ToastManager = forwardRef<ToastManagerRef>((props, ref) => {
       ))}
     </div>
   );
-});
+};
 
 export default ToastManager;

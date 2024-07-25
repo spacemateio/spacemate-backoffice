@@ -7,8 +7,10 @@ import { DataTable } from "../../customTable/data-table.tsx";
 import ContactUsForm from "./contactUsForm";
 import CustomModal from "../../customModals/CustomModal.tsx";
 import ConfirmDialog from "../../ui/ConfirmDialog.tsx";
+import { useToast } from "../../Toast/ToastContext.tsx";
 
 const ContactUsPage = () => {
+  const { addToast } = useToast();
   const [tableData, setTableData] = useState<ContactUsModel[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isCentered, setIsCentered] = useState<boolean>(false);
@@ -19,10 +21,15 @@ const ContactUsPage = () => {
   const [selectedRows, setSelectedRows] = useState<any[]>([]);
 
   const changePagination = useCallback(async (state: PaginationState) => {
-    const { maxCount, payload } =
-      await contactUsApiHelper.getAllContactus(state);
-    setMaxCount(maxCount);
-    setTableData(payload);
+    try {
+      const { maxCount, payload } =
+        await contactUsApiHelper.getAllContactus(state);
+      setMaxCount(maxCount);
+      setTableData(payload);
+      addToast("Contact us entry deleted successfully", "success");
+    } catch (error) {
+      addToast("Failed to fetch contact us entries", "error");
+    }
   }, []);
 
   const handleDelete = useCallback(async (selectedRows: any[]) => {
@@ -31,8 +38,13 @@ const ContactUsPage = () => {
   }, []);
 
   const handleConfirmDelete = async () => {
-    await contactUsApiHelper.getDeleteContactus(selectedRows);
-    setIsDialogOpen(false);
+    try {
+      await contactUsApiHelper.getDeleteContactus(selectedRows);
+      setIsDialogOpen(false);
+      addToast("Contact us entry deleted successfully", "success");
+    } catch (error) {
+      addToast("Failed to delete blog", "error");
+    }
   };
 
   const handleShow = (id: number) => {

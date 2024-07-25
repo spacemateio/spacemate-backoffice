@@ -8,8 +8,10 @@ import { DataTable } from "../../customTable/data-table.tsx";
 import CustomModal from "../../customModals/CustomModal.tsx";
 import MiddleModal from "../../customModals/MiddleModal.tsx";
 import { userApiHelper } from "../../../lib/features/apis/UserM/userApiHelper.tsx";
+import { useToast } from "../../Toast/ToastContext.tsx";
 
 const UserManagementPage = () => {
+  const { addToast } = useToast();
   const [tableData, setTableData] = useState<UserModel[]>([]);
   const [isListingModalOpen, setIsListingModalOpen] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -25,18 +27,23 @@ const UserManagementPage = () => {
       if (listType) {
         console.log(listType);
       }
-
-      if (sorting[0]) {
-        const { maxCount, payload } = await userApiHelper.getUsersOrderBy(
-          state,
-          sorting
-        );
-        setMaxCount(maxCount);
-        setTableData(payload);
-      } else {
-        const { maxCount, payload } = await userApiHelper.getUsers(state);
-        setMaxCount(maxCount);
-        setTableData(payload);
+      try {
+        if (sorting[0]) {
+          const { maxCount, payload } = await userApiHelper.getUsersOrderBy(
+            state,
+            sorting
+          );
+          setMaxCount(maxCount);
+          setTableData(payload);
+          addToast("Fetch all users successfully", "success");
+        } else {
+          const { maxCount, payload } = await userApiHelper.getUsers(state);
+          setMaxCount(maxCount);
+          setTableData(payload);
+          addToast("Fetch all users successfully", "success");
+        }
+      } catch (error) {
+        addToast("Failed to fetch users", "error");
       }
     },
     []

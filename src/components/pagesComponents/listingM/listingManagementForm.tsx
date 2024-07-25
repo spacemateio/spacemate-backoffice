@@ -4,6 +4,7 @@ import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
 import { Button } from "../../ui/button.tsx";
 import Image from "../../image/Image.tsx";
 import { adApiHelper } from "../../../lib/features/apis/AdM/adApiHelper.tsx";
+import { useToast } from "../../Toast/ToastContext.tsx";
 
 interface ListingManagementFormProps {
   isShow: boolean;
@@ -14,6 +15,8 @@ export default function ListingManagementForm({
   isShow,
   initialData,
 }: ListingManagementFormProps) {
+  const { addToast } = useToast();
+
   const [formData, setFormData] = useState<AdModel>({
     id: 0,
     email: "",
@@ -60,11 +63,21 @@ export default function ListingManagementForm({
   }, [isShow, initialData]);
 
   const handleApprove = async (id: number) => {
-    await adApiHelper.approveAd(id);
+    try {
+      await adApiHelper.approveAd(id);
+      addToast("Listing approved successfully", "success");
+    } catch (error) {
+      addToast("Failed to approve listing", "error");
+    }
   };
 
   const handleReject = async (id: number) => {
-    await adApiHelper.rejectAd(id);
+    try {
+      await adApiHelper.rejectAd(id);
+      addToast("Listing rejected successfully", "success");
+    } catch (error) {
+      addToast("Failed to reject listing", "error");
+    }
   };
 
   const handleCancel = () => {

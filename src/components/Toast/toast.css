@@ -14,7 +14,7 @@
     background-color: #333; /* Default background color for the toast */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     opacity: 0;
-    animation: fadeInOut 8s forwards; /* Animation for fade in and fade out */
+    animation: fadeInOut 4s forwards; /* Animation for fade in and fade out */
     font-size: 20px; /* Font size for the toast */
     font-weight: bold; /* Make the text bold */
   }
