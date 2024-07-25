@@ -1,35 +1,20 @@
 import { PaginationState } from "@tanstack/react-table";
-import { ToastManagerRef } from "../../../../components/Toast/ToastManager";
 import axiosInstance from "../../axios/axiosInstance";
 import { BlogModel } from "../../models/BlogM/BlogModel";
 import { responseType } from "../../models/BlogM/ResponseType";
-
-let toastManager: ToastManagerRef | null = null;
-
-export const setToastManager = (manager: ToastManagerRef) => {
-  toastManager = manager;
-};
 
 export const blogApiHelper = {
   async updateBlog(id: number, data: BlogModel): Promise<any> {
     try {
       const response: any = await axiosInstance.put(`/blog/update/${id}`, data);
-      if (toastManager) {
-        toastManager.addToast("Blog updated successfully", "success");
-      }
+
       return response.data;
     } catch (error) {
-      if (toastManager) {
-        toastManager.addToast("Failed to update blog", "error");
-      }
       throw error;
     }
   },
 
   async addBlog(data: BlogModel, image?: File | null): Promise<any> {
-    if (toastManager) {
-      toastManager.addToast("Blog add process is working", "info");
-    }
     try {
       data.createdDate = new Date().toISOString();
       const response: any = await axiosInstance.post(`/blog`, data);
@@ -42,14 +27,9 @@ export const blogApiHelper = {
           },
         });
       }
-      if (toastManager) {
-        toastManager.addToast("Blog added successfully", "success");
-      }
+
       return response.data;
     } catch (error) {
-      if (toastManager) {
-        toastManager.addToast("Failed to add blog", "error");
-      }
       throw error;
     }
   },
@@ -59,9 +39,6 @@ export const blogApiHelper = {
       const response: any = await axiosInstance.get(`/blog/image/${blogId}`);
       return response.data.imageUrl;
     } catch (error) {
-      if (toastManager) {
-        toastManager.addToast("Failed to add image", "error");
-      }
       throw error;
     }
   },
@@ -71,9 +48,6 @@ export const blogApiHelper = {
       const response: any = await axiosInstance.get(`/blog/${id}`);
       return response.data;
     } catch (error) {
-      if (toastManager) {
-        toastManager.addToast("Failed to fetch blog", "error");
-      }
       throw error;
     }
   },
@@ -81,14 +55,9 @@ export const blogApiHelper = {
   async deleteBlog(id: number): Promise<any> {
     try {
       const response: any = await axiosInstance.delete(`/blog/${id}`);
-      if (toastManager) {
-        toastManager.addToast("Blog deleted successfully", "success");
-      }
+
       return response.data;
     } catch (error) {
-      if (toastManager) {
-        toastManager.addToast("Failed to delete blog", "error");
-      }
       throw error;
     }
   },
@@ -96,27 +65,17 @@ export const blogApiHelper = {
   async deactivateBlog(id: number): Promise<any> {
     try {
       const response: any = await axiosInstance.get(`/blog/deactivate/${id}`);
-      if (toastManager) {
-        toastManager.addToast("Blog deactivated successfully", "success");
-      }
+
       return response.data;
     } catch (error) {
-      if (toastManager) {
-        toastManager.addToast("Failed to deactivate blog", "error");
-      }
       throw error;
     }
   },
 
   async activateBlog(id: number): Promise<any> {
     try {
-      if (toastManager) {
-        toastManager.addToast(`Failed to activate blog ${id}`, "error");
-      }
+      console.log(id);
     } catch (error) {
-      if (toastManager) {
-        toastManager.addToast("Failed to activate blog", "error");
-      }
       throw error;
     }
   },
@@ -128,9 +87,6 @@ export const blogApiHelper = {
       );
       return response.data;
     } catch (error) {
-      if (toastManager) {
-        toastManager.addToast("Failed to fetch blogs", "error");
-      }
       throw error;
     }
   },
@@ -142,9 +98,6 @@ export const blogApiHelper = {
       );
       return response.data;
     } catch (error) {
-      if (toastManager) {
-        toastManager.addToast("Failed to fetch blogs", "error");
-      }
       throw error;
     }
   },

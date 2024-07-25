@@ -6,6 +6,7 @@ import { Textarea } from "../../ui/textarea.tsx";
 import { Button } from "../../ui/button.tsx";
 import Image from "../../image/Image.tsx";
 import { userApiHelper } from "../../../lib/features/apis/UserM/userApiHelper.tsx";
+import { useToast } from "../../Toast/ToastContext.tsx";
 
 interface UserManagementFormProps {
   isShow: boolean;
@@ -16,6 +17,7 @@ export default function UserManagementForm({
   isShow,
   initialData,
 }: UserManagementFormProps) {
+  const { addToast } = useToast();
   const [formData, setFormData] = useState<UserModel>({
     id: 0,
     name: "",
@@ -87,14 +89,24 @@ export default function UserManagementForm({
   };
 
   const handleActive = (id?: number) => {
-    if (id) {
-      userApiHelper.enableUsers(id);
+    try {
+      if (id) {
+        userApiHelper.enableUsers(id);
+        addToast("Enabled user", "success");
+      }
+    } catch (error) {
+      addToast("Failed to enable user", "error");
     }
   };
 
   const handlePassive = (id?: number) => {
-    if (id) {
-      userApiHelper.disableUsers(id);
+    try {
+      if (id) {
+        userApiHelper.disableUsers(id);
+        addToast("Passived user", "success");
+      }
+    } catch (error) {
+      addToast("Failed to passive user", "error");
     }
   };
 

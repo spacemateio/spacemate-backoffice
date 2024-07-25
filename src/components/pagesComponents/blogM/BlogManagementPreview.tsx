@@ -4,6 +4,7 @@ import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel";
 import { blogApiHelper } from "../../../lib/features/apis/BlogM/blogApiHelper.tsx";
 import Image from "../../image/Image.tsx";
 import "./quill-custom.css";
+import { useToast } from "../../Toast/ToastContext.tsx";
 
 const BlogManagementPreview = ({
   blogPost,
@@ -12,6 +13,7 @@ const BlogManagementPreview = ({
   blogPost: BlogModel;
   imageUrl?: string | undefined;
 }) => {
+  const { addToast } = useToast();
   const [image, setImage] = useState<any>("");
 
   useEffect(() => {
@@ -19,8 +21,13 @@ const BlogManagementPreview = ({
   }, []);
 
   const getImageFromService = async () => {
-    const response = await blogApiHelper.getImageByBlogId(blogPost.id);
-    setImage(response);
+    try {
+      const response = await blogApiHelper.getImageByBlogId(blogPost.id);
+      setImage(response);
+      //addToast("Listing approved successfully", "success");
+    } catch (error) {
+      addToast("Failed to get image", "error");
+    }
   };
   return (
     <>

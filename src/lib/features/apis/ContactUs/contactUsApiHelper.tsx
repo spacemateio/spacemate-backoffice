@@ -1,13 +1,6 @@
 import { PaginationState } from "@tanstack/react-table";
-import { ToastManagerRef } from "../../../../components/Toast/ToastManager";
 import { responseType } from "../../models/ContactUs/ResponseType";
 import axiosInstance from "../../axios/axiosInstance";
-
-let toastManager: ToastManagerRef | null = null;
-
-export const setToastManager = (manager: ToastManagerRef) => {
-  toastManager = manager;
-};
 
 export const contactUsApiHelper = {
   async getAllContactus(state: PaginationState): Promise<responseType> {
@@ -17,9 +10,6 @@ export const contactUsApiHelper = {
       );
       return response.data;
     } catch (error) {
-      if (toastManager) {
-        toastManager.addToast("Failed to fetch contact us entries", "error");
-      }
       throw error;
     }
   },
@@ -29,12 +19,6 @@ export const contactUsApiHelper = {
         const response: any = await axiosInstance.delete(
           `/contactus/${ids[0].original.id}`
         );
-        if (toastManager) {
-          toastManager.addToast(
-            "Contact us entry deleted successfully",
-            "success"
-          );
-        }
         return response.data;
       } else {
         let idArray: number[] = await ids.map((obj: any) => obj?.original?.id);
@@ -42,18 +26,9 @@ export const contactUsApiHelper = {
           `/contactus/multiple`,
           { data: idArray }
         );
-        if (toastManager) {
-          toastManager.addToast(
-            "Contact us entries deleted successfully",
-            "success"
-          );
-        }
         return response.data;
       }
     } catch (error) {
-      if (toastManager) {
-        toastManager.addToast("Failed to deleted contact us entries", "error");
-      }
       throw error;
     }
   },

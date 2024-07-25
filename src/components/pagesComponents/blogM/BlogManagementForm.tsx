@@ -7,6 +7,7 @@ import ReactQuill from "react-quill";
 import Image from "../../image/Image.tsx";
 import { blogApiHelper } from "../../../lib/features/apis/BlogM/blogApiHelper.tsx";
 import "./quill-custom.css"; // Özel stilleri içe aktarın
+import { useToast } from "../../Toast/ToastContext.tsx";
 
 const BlogManagementForm = ({
   blogPost,
@@ -21,6 +22,7 @@ const BlogManagementForm = ({
   setImageUrl: (url: string | undefined) => void;
   setAddNewBlog: (state: boolean) => void;
 }) => {
+  const { addToast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [imageName, setImageName] = useState<string>("");
   const [image, setImage] = useState<File | null>(null);
@@ -56,7 +58,12 @@ const BlogManagementForm = ({
       ["status"]: "",
       ["imageExtId"]: "",
     }));
-    await blogApiHelper.addBlog(blogPost, image);
+    try {
+      await blogApiHelper.addBlog(blogPost, image);
+      addToast("Blog added successfully", "success");
+    } catch (error) {
+      addToast("Failed to add blog", "error");
+    }
   };
 
   const changeBlogPost = (e: any) => {
