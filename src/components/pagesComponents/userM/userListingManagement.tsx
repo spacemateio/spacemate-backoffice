@@ -1,11 +1,11 @@
 import { useCallback, useState } from "react";
 import { PaginationState } from "@tanstack/react-table";
 import { createColumns } from "./listingColumns";
-import { adApi } from "../../../lib/features/apis/AdM/adApi";
 import ListingManagementForm from "../listingM/listingManagementForm";
 import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
 import { DataTable } from "../../customTable/data-table.tsx";
 import CustomModal from "../../customModals/CustomModal.tsx";
+import { adApiHelper } from "../../../lib/features/apis/AdM/adApiHelper.tsx";
 
 interface Props {
   userId: number;
@@ -19,7 +19,10 @@ const UserListingManagement = ({ userId }: Props) => {
   const [listType] = useState<string>("pending");
 
   const changePagination = useCallback(async (state: PaginationState) => {
-    const { maxCount, payload } = await adApi.getListingByUser(state, userId);
+    const { maxCount, payload } = await adApiHelper.getListingByUser(
+      state,
+      userId
+    );
     setMaxCount(maxCount);
     setTableData(payload);
   }, []);

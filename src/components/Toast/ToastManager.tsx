@@ -13,6 +13,7 @@ export interface ToastManagerRef {
 
 const ToastManager = forwardRef<ToastManagerRef>((props, ref) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
+  console.log(props);
 
   useImperativeHandle(ref, () => ({
     addToast(message, type) {

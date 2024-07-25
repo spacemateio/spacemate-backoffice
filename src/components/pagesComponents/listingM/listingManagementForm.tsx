@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { LabeledInput } from "../../labeledInput/LabeledInput.tsx";
 import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
-import { adApi } from "../../../lib/features/apis/AdM/adApi.tsx";
 import { Button } from "../../ui/button.tsx";
 import Image from "../../image/Image.tsx";
+import { adApiHelper } from "../../../lib/features/apis/AdM/adApiHelper.tsx";
 
 interface ListingManagementFormProps {
   isShow: boolean;
@@ -50,6 +50,7 @@ export default function ListingManagementForm({
     width: 0,
     currency: "",
     created: "",
+    status: 0,
   });
 
   useEffect(() => {
@@ -59,11 +60,11 @@ export default function ListingManagementForm({
   }, [isShow, initialData]);
 
   const handleApprove = async (id: number) => {
-    await adApi.approveAd(id);
+    await adApiHelper.approveAd(id);
   };
 
   const handleReject = async (id: number) => {
-    await adApi.rejectAd(id);
+    await adApiHelper.rejectAd(id);
   };
 
   const handleCancel = () => {
@@ -229,20 +230,24 @@ export default function ListingManagementForm({
       />
 
       <div className="flex space-x-2 sticky bottom-0 bg-white p-4">
-        <Button
-          type="submit"
-          variant="approve"
-          onChange={() => handleApprove(formData.id)}
-        >
-          Approve
-        </Button>
-        <Button
-          type="button"
-          variant="destructive"
-          onClick={() => handleReject(formData.id)}
-        >
-          Reject
-        </Button>
+        {formData?.status !== 1 && (
+          <Button
+            type="submit"
+            variant="approve"
+            onChange={() => handleApprove(formData.id)}
+          >
+            Approve
+          </Button>
+        )}
+        {formData?.status !== 3 && (
+          <Button
+            type="button"
+            variant="destructive"
+            onClick={() => handleReject(formData.id)}
+          >
+            Reject
+          </Button>
+        )}
         <Button type="button" variant="default" onClick={handleCancel}>
           Cancel
         </Button>

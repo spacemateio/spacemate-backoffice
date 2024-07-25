@@ -15,6 +15,7 @@ const BlogManagementAdd = ({
     title: "",
     subtitle: "",
     excerpt: "",
+    imageUrl: "",
     image: "",
     imageAlt: "",
     imageExtId: "",

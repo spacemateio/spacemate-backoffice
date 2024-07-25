@@ -34,6 +34,7 @@ export interface AdModel {
   width: number;
   currency: string;
   created: string;
+  status: number;
 }
 
 export interface imagesModalForAd {
