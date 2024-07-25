@@ -76,7 +76,7 @@ const UserManagementPage = () => {
         <DataTable
           columns={columns}
           data={tableData}
-          filterPlaceholderName="Filter emails..."
+          filterPlaceholderName="Search..."
           filterHeaderName="email"
           changePagination={changePagination}
           handleDelete={() => {}}
