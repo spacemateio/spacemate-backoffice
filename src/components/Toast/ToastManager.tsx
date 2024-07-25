@@ -25,7 +25,7 @@ const ToastManager = forwardRef<ToastManagerRef>((props, ref) => {
         setToasts((prevToasts) =>
           prevToasts.filter((toast) => toast.id !== id)
         );
-      }, 3000);
+      }, 8000);
     },
   }));
 

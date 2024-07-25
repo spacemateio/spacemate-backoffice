@@ -27,6 +27,9 @@ export const blogApiHelper = {
   },
 
   async addBlog(data: BlogModel, image?: File | null): Promise<any> {
+    if (toastManager) {
+      toastManager.addToast("Blog add process is working", "info");
+    }
     try {
       data.createdDate = new Date().toISOString();
       const response: any = await axiosInstance.post(`/blog`, data);
@@ -49,6 +52,25 @@ export const blogApiHelper = {
       }
       throw error;
     }
+  },
+
+  async getImageByBlogId(/*blogId?: string*/): Promise<any> {
+    console.log("here");
+
+    toastManager?.addToast("Get Image Service is not ready yet", "info");
+
+    /*try {
+      const response: any = await axiosInstance.get(`/blog/image/${blogId}`);
+      if (toastManager) {
+        toastManager.addToast("Image added successfully", "success");
+      }
+      return response.data;
+    } catch (error) {
+      if (toastManager) {
+        toastManager.addToast("Failed to add image", "error");
+      }
+      throw error;
+    }*/
   },
 
   async addImageById(id: number, image: string): Promise<any> {

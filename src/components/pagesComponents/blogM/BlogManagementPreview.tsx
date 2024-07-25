@@ -1,8 +1,26 @@
 import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel";
 import { Input } from "../../ui/input";
 import Image from "../../image/Image.tsx";
+import { useEffect, useState } from "react";
+import { blogApiHelper } from "../../../lib/features/apis/BlogM/blogApiHelper.tsx";
 
-const BlogManagementPreview = ({ blogPost }: { blogPost: BlogModel }) => {
+const BlogManagementPreview = ({
+  blogPost,
+  imageUrl,
+}: {
+  blogPost: BlogModel;
+  imageUrl?: string | undefined;
+}) => {
+  const [image, setImage] = useState<any>("");
+
+  useEffect(() => {
+    setImage(getImageFromService());
+  }, []);
+
+  const getImageFromService = async () => {
+    await blogApiHelper.getImageByBlogId(/*blogPost.imageExtId*/);
+  };
+
   return (
     <>
       <Input
@@ -19,14 +37,13 @@ const BlogManagementPreview = ({ blogPost }: { blogPost: BlogModel }) => {
           {blogPost?.excerpt}
         </h3>
       </div>
-      {blogPost?.image && (
+      {imageUrl ? (
         <div className="flex justify-center mb-4">
-          <Image
-            src={blogPost.image}
-            alt={blogPost.imageAlt}
-            width={1000}
-            height={1000}
-          />
+          <Image src={imageUrl} alt="" width={1000} height={1000} />
+        </div>
+      ) : (
+        <div className="flex justify-center mb-4">
+          <Image src={image} alt="" width={1000} height={1000} />
         </div>
       )}
       <div
