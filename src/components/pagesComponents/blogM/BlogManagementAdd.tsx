@@ -8,6 +8,7 @@ const BlogManagementAdd = ({
 }: {
   setAddNewBlog: (state: boolean) => void;
 }) => {
+  const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
   const [blogPost, setBlogPost] = useState<BlogModel>({
     id: 0,
     url: "",
@@ -30,11 +31,13 @@ const BlogManagementAdd = ({
         <BlogManagementForm
           setBlogPost={setBlogPost}
           blogPost={blogPost}
+          setImageUrl={setImageUrl}
+          imageUrl={imageUrl}
           setAddNewBlog={setAddNewBlog}
         />
       </div>
       <div className="w-3/5 p-6">
-        <BlogManagementPreview blogPost={blogPost} />
+        <BlogManagementPreview blogPost={blogPost} imageUrl={imageUrl} />
       </div>
     </div>
   );

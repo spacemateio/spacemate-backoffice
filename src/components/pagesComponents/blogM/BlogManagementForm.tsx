@@ -10,22 +10,25 @@ import { blogApiHelper } from "../../../lib/features/apis/BlogM/blogApiHelper.ts
 const BlogManagementForm = ({
   blogPost,
   setBlogPost,
+  imageUrl,
+  setImageUrl,
   setAddNewBlog,
 }: {
   blogPost: BlogModel;
   setBlogPost: any;
+  imageUrl: string | undefined;
+  setImageUrl: (url: string | undefined) => void;
   setAddNewBlog: (state: boolean) => void;
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [imageName, setImageName] = useState<string>("");
   const [image, setImage] = useState<File | null>(null);
-  const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
 
   const handleImageChange = (e: any) => {
     const file = e.target.files?.[0] || null;
     setImage(file);
 
-    if (file) {
+    if (e.target.files?.[0] || null) {
       const url = URL.createObjectURL(file);
       setImageUrl(url);
     } else {
