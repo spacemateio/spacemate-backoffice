@@ -1,8 +1,8 @@
-import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel";
-import { Input } from "../../ui/input";
-import Image from "../../image/Image.tsx";
 import { useEffect, useState } from "react";
+import { Input } from "../../ui/input";
+import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel";
 import { blogApiHelper } from "../../../lib/features/apis/BlogM/blogApiHelper.tsx";
+import Image from "../../image/Image.tsx";
 import "./quill-custom.css";
 
 const BlogManagementPreview = ({
@@ -15,13 +15,13 @@ const BlogManagementPreview = ({
   const [image, setImage] = useState<any>("");
 
   useEffect(() => {
-    setImage(getImageFromService());
+    getImageFromService();
   }, []);
 
   const getImageFromService = async () => {
-    await blogApiHelper.getImageByBlogId(/*blogPost.imageExtId*/);
+    const response = await blogApiHelper.getImageByBlogId(blogPost.id);
+    setImage(response);
   };
-
   return (
     <>
       <Input

@@ -88,14 +88,12 @@ export default function UserManagementForm({
 
   const handleActive = (id?: number) => {
     if (id) {
-      console.log("User Active:", id);
       userApiHelper.enableUsers(id);
     }
   };
 
   const handlePassive = (id?: number) => {
     if (id) {
-      console.log("User Passive:", id);
       userApiHelper.disableUsers(id);
     }
   };

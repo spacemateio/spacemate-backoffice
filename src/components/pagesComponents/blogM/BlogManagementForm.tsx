@@ -50,7 +50,6 @@ const BlogManagementForm = ({
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log("blogPost: ", blogPost, " e: ", e);
     setBlogPost((prev: any) => ({
       ...prev,
       ["createdDate"]: "",

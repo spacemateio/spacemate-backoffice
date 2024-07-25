@@ -88,4 +88,22 @@ export const adApiHelper = {
       throw error;
     }
   },
+
+  async updateListing(id: number, data: any): Promise<any> {
+    try {
+      const response: any = await axiosInstance.put(
+        `/listing/update/${id}`,
+        data
+      );
+      if (toastManager) {
+        toastManager.addToast("listing updated successfully", "success");
+      }
+      return response.data;
+    } catch (error) {
+      if (toastManager) {
+        toastManager.addToast("Failed to update listing", "error");
+      }
+      throw error;
+    }
+  },
 };

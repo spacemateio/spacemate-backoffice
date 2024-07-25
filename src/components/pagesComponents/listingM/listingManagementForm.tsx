@@ -59,13 +59,11 @@ export default function ListingManagementForm({
   }, [isShow, initialData]);
 
   const handleApprove = async (id: number) => {
-    const response = await adApi.approveAd(id);
-    console.log("Approved", response);
+    await adApi.approveAd(id);
   };
 
   const handleReject = async (id: number) => {
-    const response = await adApi.rejectAd(id);
-    console.log("Rejected", response);
+    await adApi.rejectAd(id);
   };
 
   const handleCancel = () => {

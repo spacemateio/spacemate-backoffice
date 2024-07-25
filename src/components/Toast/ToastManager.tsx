@@ -16,9 +16,6 @@ const ToastManager = forwardRef<ToastManagerRef>((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     addToast(message, type) {
-      if (message === null) {
-        console.log(props);
-      }
       const id = Date.now();
       setToasts((prevToasts) => [...prevToasts, { id, message, type }]);
       setTimeout(() => {

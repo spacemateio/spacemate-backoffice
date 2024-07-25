@@ -39,7 +39,7 @@ const Register = () => {
     }
 
     try {
-      // INFO: there is no register endpoint
+      // TODO: there is no register endpoint
       const res = await axiosInstance.post("/api/register", {
         email,
         password,
@@ -49,7 +49,6 @@ const Register = () => {
       }
     } catch (error) {
       setError("Error, try again");
-      console.log("register: ", error);
     }
   };
 
