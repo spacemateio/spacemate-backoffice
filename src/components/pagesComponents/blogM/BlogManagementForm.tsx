@@ -6,6 +6,7 @@ import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import Image from "../../image/Image.tsx";
 import { blogApiHelper } from "../../../lib/features/apis/BlogM/blogApiHelper.tsx";
+import "./quill-custom.css"; // Özel stilleri içe aktarın
 
 const BlogManagementForm = ({
   blogPost,
@@ -185,6 +186,7 @@ const BlogManagementForm = ({
                   { indent: "-1" },
                   { indent: "+1" },
                 ],
+                [{ color: [] }, { background: [] }], // Renk seçenekleri eklendi
                 ["link", "image"],
                 ["clean"],
               ],
@@ -203,6 +205,8 @@ const BlogManagementForm = ({
               "indent",
               "link",
               "image",
+              "color", // Renk formatı eklendi
+              "background", // Arka plan renk formatı eklendi
             ]}
             className="bg-white"
           />

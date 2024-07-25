@@ -3,6 +3,7 @@ import { Input } from "../../ui/input";
 import Image from "../../image/Image.tsx";
 import { useEffect, useState } from "react";
 import { blogApiHelper } from "../../../lib/features/apis/BlogM/blogApiHelper.tsx";
+import "./quill-custom.css";
 
 const BlogManagementPreview = ({
   blogPost,
@@ -48,7 +49,7 @@ const BlogManagementPreview = ({
       )}
       <div
         dangerouslySetInnerHTML={{ __html: blogPost?.content }}
-        className="text-start"
+        className="saved-content text-start"
         style={{ marginLeft: "100px", marginRight: "100px" }}
       ></div>
     </>
