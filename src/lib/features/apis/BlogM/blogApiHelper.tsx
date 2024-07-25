@@ -38,7 +38,7 @@ export const blogApiHelper = {
         formData.append("file", image);
         await axiosInstance.post(`/blog/image/${response.data.id}`, formData, {
           headers: {
-            "Content-Type": "multipart/form-data", // Ensure this is set
+            "Content-Type": "multipart/form-data",
           },
         });
       }
@@ -54,37 +54,10 @@ export const blogApiHelper = {
     }
   },
 
-  async getImageByBlogId(/*blogId?: string*/): Promise<any> {
-    console.log("here");
-
-    toastManager?.addToast("Get Image Service is not ready yet", "info");
-
-    /*try {
-      const response: any = await axiosInstance.get(`/blog/image/${blogId}`);
-      if (toastManager) {
-        toastManager.addToast("Image added successfully", "success");
-      }
-      return response.data;
-    } catch (error) {
-      if (toastManager) {
-        toastManager.addToast("Failed to add image", "error");
-      }
-      throw error;
-    }*/
-  },
-
-  async addImageById(id: number, image: string): Promise<any> {
+  async getImageByBlogId(blogId?: number): Promise<string> {
     try {
-      const formData = new FormData();
-      formData.append("image", image);
-      const response: any = await axiosInstance.post(
-        `/blog/image/${id}`,
-        formData
-      );
-      if (toastManager) {
-        toastManager.addToast("Image added successfully", "success");
-      }
-      return response.data;
+      const response: any = await axiosInstance.get(`/blog/image/${blogId}`);
+      return response.data.imageUrl;
     } catch (error) {
       if (toastManager) {
         toastManager.addToast("Failed to add image", "error");
@@ -123,9 +96,7 @@ export const blogApiHelper = {
   async deactivateBlog(id: number): Promise<any> {
     try {
       const response: any = await axiosInstance.get(`/blog/deactivate/${id}`);
-
       if (toastManager) {
-        console.log("here", toastManager);
         toastManager.addToast("Blog deactivated successfully", "success");
       }
       return response.data;

@@ -33,6 +33,9 @@ export const adApiHelper = {
       const response: any = await axiosInstance.get(
         `/listing/user?limit=${state.pageSize}&offset=${state.pageIndex + 1}`
       );
+      if (toastManager) {
+        toastManager.addToast("Listing approved successfully", "success");
+      }
       return response.data;
     } catch (error) {
       if (toastManager) {
@@ -48,7 +51,7 @@ export const adApiHelper = {
   ): Promise<responseType> {
     try {
       const response: any = await axiosInstance.get(
-        `/listing/all/${status === "approved" ? 1 : 0}?limit=${state.pageSize}&offset=${state.pageIndex + 1}`
+        `/listing/all/${status === "approved" ? 1 : 3}?limit=${state.pageSize}&offset=${state.pageIndex + 1}`
       );
       return response.data;
     } catch (error) {
@@ -60,30 +63,62 @@ export const adApiHelper = {
   },
 
   async approveAd(id: number): Promise<any> {
+    if (toastManager) {
+      console.log("Toast Manager Available");
+      toastManager.addToast("Listing approved successfully", "success");
+    } else {
+      console.log("Toast Manager Not Available");
+    }
     try {
       const response: any = await axiosInstance.post(`/listing/activate/${id}`);
       if (toastManager) {
-        toastManager.addToast("Ad approved successfully", "success");
+        toastManager.addToast("Listing approved successfully", "success");
       }
       return response.data;
     } catch (error) {
       if (toastManager) {
-        toastManager.addToast("Failed to approve ad", "error");
+        toastManager.addToast("Failed to approve listing", "error");
       }
       throw error;
     }
   },
 
   async rejectAd(id: number): Promise<any> {
+    if (toastManager) {
+      console.log("Toast Manager Available");
+      toastManager.addToast("Listing approved successfully", "success");
+    } else {
+      console.log("Toast Manager Not Available");
+    }
     try {
       const response: any = await axiosInstance.post(`/listing/reject/${id}`);
       if (toastManager) {
-        toastManager.addToast("Ad rejected successfully", "success");
+        console.log("here");
+
+        toastManager.addToast("Listing rejected successfully", "success");
       }
       return response.data;
     } catch (error) {
       if (toastManager) {
-        toastManager.addToast("Failed to reject ad", "error");
+        toastManager.addToast("Failed to reject listing", "error");
+      }
+      throw error;
+    }
+  },
+
+  async updateListing(id: number, data: any): Promise<any> {
+    try {
+      const response: any = await axiosInstance.put(
+        `/listing/update/${id}`,
+        data
+      );
+      if (toastManager) {
+        toastManager.addToast("listing updated successfully", "success");
+      }
+      return response.data;
+    } catch (error) {
+      if (toastManager) {
+        toastManager.addToast("Failed to update listing", "error");
       }
       throw error;
     }

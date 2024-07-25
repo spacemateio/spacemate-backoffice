@@ -22,6 +22,7 @@ const BlogManagementPage = () => {
     title: "",
     subtitle: "",
     excerpt: "",
+    imageUrl: "",
     image: "",
     imageAlt: "",
     imageExtId: "",
@@ -39,7 +40,6 @@ const BlogManagementPage = () => {
     setMaxCount(1);
     const response = await blogApiHelper.getBlogAll(state);
     setTableData(response);
-    console.log(response);
   }, []);
 
   const handleShow = (id: number) => {
@@ -56,6 +56,7 @@ const BlogManagementPage = () => {
         title: "",
         subtitle: "",
         excerpt: "",
+        imageUrl: "",
         image: "",
         imageAlt: "",
         imageExtId: "",

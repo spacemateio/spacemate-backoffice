@@ -5,6 +5,7 @@ export interface BlogModel {
   subtitle: string;
   excerpt: string;
   image: string;
+  imageUrl: string;
   imageAlt?: string; // new
   imageExtId: string;
   imageAltExtId: string;

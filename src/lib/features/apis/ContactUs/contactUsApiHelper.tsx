@@ -25,8 +25,6 @@ export const contactUsApiHelper = {
   },
   async getDeleteContactus(ids: any[]): Promise<void> {
     try {
-      console.log(ids);
-
       if (ids.length === 1) {
         const response: any = await axiosInstance.delete(
           `/contactus/${ids[0].original.id}`

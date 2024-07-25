@@ -13,12 +13,10 @@ export interface ToastManagerRef {
 
 const ToastManager = forwardRef<ToastManagerRef>((props, ref) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
+  console.log(props);
 
   useImperativeHandle(ref, () => ({
     addToast(message, type) {
-      if (message === null) {
-        console.log(props);
-      }
       const id = Date.now();
       setToasts((prevToasts) => [...prevToasts, { id, message, type }]);
       setTimeout(() => {

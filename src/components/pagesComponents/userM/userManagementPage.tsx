@@ -44,14 +44,12 @@ const UserManagementPage = () => {
 
   const handleShow = (id: number) => {
     setIsShow(true);
-    console.log("Show:", id);
     setShowRow(tableData.find((item) => item.id === id));
     handleOpenModal();
   };
 
   const handleListing = (id: number) => {
     setUserId(id);
-    console.log("Listing:", id);
     handleListingOpenModal();
   };
 
