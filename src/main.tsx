@@ -1,21 +1,19 @@
 import * as ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ToastProvider } from "./components/Toast/ToastContext.tsx";
 import "./index.css";
-import Login from "./pages/auth/login/Login";
-import Register from "./pages/auth/register/Register.tsx";
-import Dashboard from "./pages/dashboard/Dashboard.tsx";
 import Root from "./pages/root/Root.tsx";
+import Login from "./pages/auth/login/Login";
+import Dashboard from "./pages/dashboard/Dashboard.tsx";
+import ContactUs from "./pages/contactUs/ContactUs.tsx";
+import Register from "./pages/auth/register/Register.tsx";
 import RootLayout from "./components/layout/RootLayout.tsx";
 import AdminLayout from "./components/layout/AdminLayout.tsx";
-import AnonymousComponent from "./lib/features/auth/AnonymousComponent/AnonymousComponent.tsx";
-import ListingManagement from "./pages/listingManagement/ListingManagement.tsx";
-import BlogManagement from "./pages/blogManagement/BlogManagement.tsx";
-import Campaigns from "./pages/campaigns/Campaigns.tsx";
-import ContactUs from "./pages/contactUs/ContactUs.tsx";
-import ReservationTracking from "./pages/reservationTracking/ReservationTracking.tsx";
-import UserManagement from "./pages/userManagement/UserManagement.tsx";
-import { ToastProvider } from "./components/Toast/ToastContext.tsx";
 import ToastManager from "./components/Toast/ToastManager.tsx";
+import BlogManagement from "./pages/blogManagement/BlogManagement.tsx";
+import UserManagement from "./pages/userManagement/UserManagement.tsx";
+import ListingManagement from "./pages/listingManagement/ListingManagement.tsx";
+import AnonymousComponent from "./lib/features/auth/AnonymousComponent/AnonymousComponent.tsx";
 
 const router = createBrowserRouter([
   {
@@ -44,24 +42,12 @@ const router = createBrowserRouter([
             element: <BlogManagement />,
           },
           {
-            path: "campaigns",
-            element: <Campaigns />,
-          },
-          {
             path: "contactUs",
             element: <ContactUs />,
           },
           {
-            path: "reservationTracking",
-            element: <ReservationTracking />,
-          },
-          {
             path: "userManagement",
             element: <UserManagement />,
-          },
-          {
-            path: "campaigns",
-            element: <Campaigns />,
           },
         ],
       },

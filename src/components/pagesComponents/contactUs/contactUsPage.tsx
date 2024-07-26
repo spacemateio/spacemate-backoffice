@@ -4,10 +4,10 @@ import { createColumns } from "./columns";
 import { contactUsApiHelper } from "../../../lib/features/apis/ContactUs/contactUsApiHelper.tsx";
 import { ContactUsModel } from "../../../lib/features/models/ContactUs/ContactUsModel.tsx";
 import { DataTable } from "../../customTable/data-table.tsx";
+import { useToast } from "../../Toast/ToastContext.tsx";
 import ContactUsForm from "./contactUsForm";
 import CustomModal from "../../customModals/CustomModal.tsx";
 import ConfirmDialog from "../../ui/ConfirmDialog.tsx";
-import { useToast } from "../../Toast/ToastContext.tsx";
 
 const ContactUsPage = () => {
   const { addToast } = useToast();
@@ -18,7 +18,7 @@ const ContactUsPage = () => {
   const [showRow, setShowRow] = useState<ContactUsModel | undefined>();
   const [maxCount, setMaxCount] = useState<number>(1);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [selectedRows, setSelectedRows] = useState<any[]>([]);
+  const [selectedRowIds, setSelectedRowIds] = useState<number[]>([]);
 
   const changePagination = useCallback(async (state: PaginationState) => {
     try {
@@ -32,18 +32,24 @@ const ContactUsPage = () => {
     }
   }, []);
 
-  const handleDelete = useCallback(async (selectedRows: any[]) => {
-    setSelectedRows(selectedRows);
+  const handleDelete = useCallback(async (selectedRows: number[]) => {
+    setSelectedRowIds(selectedRows);
     setIsDialogOpen(true);
   }, []);
 
   const handleConfirmDelete = async () => {
-    try {
-      await contactUsApiHelper.getDeleteContactus(selectedRows);
-      setIsDialogOpen(false);
-      addToast("Contact us entry deleted successfully", "success");
-    } catch (error) {
-      addToast("Failed to delete blog", "error");
+    if (selectedRowIds.length > 0) {
+      addToast("Processing your delete request...", "info");
+      try {
+        await contactUsApiHelper.deleteContactus(selectedRowIds);
+        setTableData(
+          tableData.filter((entry) => !selectedRowIds.includes(entry.id))
+        );
+        setIsDialogOpen(false);
+        addToast("Contact us entry deleted successfully", "success");
+      } catch (error) {
+        addToast("Failed to delete contact us entry", "error");
+      }
     }
   };
 
@@ -80,6 +86,8 @@ const ContactUsPage = () => {
         isOpen={isDialogOpen}
         onClose={() => setIsDialogOpen(false)}
         onConfirm={handleConfirmDelete}
+        title="Confirm Delete"
+        message="Are you sure you want to delete this contact us entry?"
       />
       <CustomModal
         isOpen={isModalOpen}

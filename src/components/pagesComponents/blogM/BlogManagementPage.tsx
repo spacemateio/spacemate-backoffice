@@ -9,6 +9,7 @@ import BlogManagementPreview from "./BlogManagementPreview";
 import BlogManagementAdd from "./BlogManagementAdd";
 import CustomModal from "../../customModals/CustomModal.tsx";
 import { useToast } from "../../Toast/ToastContext.tsx";
+import ConfirmDialog from "../../ui/ConfirmDialog.tsx";
 
 const BlogManagementPage = () => {
   const { addToast } = useToast();
@@ -33,6 +34,13 @@ const BlogManagementPage = () => {
     status: 0,
     createdDate: "",
     metaDescription: "",
+  });
+
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    onConfirm: () => {},
+    title: "",
+    message: "",
   });
 
   const changePagination = useCallback(async (state: PaginationState) => {
@@ -104,6 +112,18 @@ const BlogManagementPage = () => {
     }
   };
 
+  const confirmDelete = (id: number) => {
+    setConfirmDialog({
+      isOpen: true,
+      onConfirm: () => {
+        handleDelete(id);
+        setConfirmDialog({ ...confirmDialog, isOpen: false });
+      },
+      title: "Confirm Delete",
+      message: "Are you sure you want to delete this blog?",
+    });
+  };
+
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
   const handleTogglePosition = () => setIsCentered(!isCentered);
@@ -111,7 +131,7 @@ const BlogManagementPage = () => {
     handleShow,
     handleActive,
     handlePassive,
-    handleDelete
+    confirmDelete
   );
 
   const handleAddNewBlog = () => {
@@ -151,6 +171,15 @@ const BlogManagementPage = () => {
           >
             <BlogManagementPreview blogPost={showRow} />
           </CustomModal>
+          <ConfirmDialog
+            isOpen={confirmDialog.isOpen}
+            onClose={() =>
+              setConfirmDialog({ ...confirmDialog, isOpen: false })
+            }
+            onConfirm={confirmDialog.onConfirm}
+            title={confirmDialog.title}
+            message={confirmDialog.message}
+          />
         </div>
       )}
     </>
