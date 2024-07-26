@@ -1,5 +1,6 @@
 export interface AdModel {
   id: number;
+  userId: number;
   email: string;
   title: string;
   address: string;
@@ -17,6 +18,7 @@ export interface AdModel {
   locked: boolean;
   uid: number;
   avatar: string;
+  avatar_preview: string;
   uname: string;
   userReviewCount: number;
   location: string;
@@ -27,8 +29,8 @@ export interface AdModel {
   isVerified: boolean;
   street_name: string;
   postcode: string;
-  unitNo: string;
-  hostTimezone: string;
+  unit_no: string;
+  timezone: string;
   height: number;
   length: number;
   width: number;

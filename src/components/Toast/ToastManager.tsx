@@ -6,8 +6,8 @@ const ToastManager = () => {
 
   return (
     <div className="toast-container">
-      {toasts.map((toast) => (
-        <div key={toast.id} className={`toast ${toast.type}`}>
+      {toasts.map((toast, index) => (
+        <div key={index} className={`toast ${toast.type}`}>
           {toast.message}
         </div>
       ))}

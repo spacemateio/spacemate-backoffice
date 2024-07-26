@@ -69,6 +69,12 @@ const ListingManagementPage = () => {
     }
   };
 
+  const handleUpdate = async (id: number) => {
+    setIsShow(false);
+    setShowRow(tableData.find((item) => item.id === id));
+    handleOpenModal();
+  };
+
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
   const handleTogglePosition = () => setIsCentered(!isCentered);
@@ -76,6 +82,7 @@ const ListingManagementPage = () => {
     handleShow,
     handleApprove,
     handleReject,
+    handleUpdate,
     listType
   );
 
