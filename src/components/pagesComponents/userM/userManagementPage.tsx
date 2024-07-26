@@ -1,14 +1,15 @@
 import { useCallback, useState } from "react";
-import { PaginationState, SortingState } from "@tanstack/react-table";
 import { createColumns } from "./columns";
+import { Input } from "../../ui/input.tsx";
+import { useToast } from "../../Toast/ToastContext.tsx";
+import { DataTable } from "../../customTable/data-table.tsx";
+import { PaginationState, SortingState } from "@tanstack/react-table";
+import { UserModel } from "../../../lib/features/models/UserM/UserModel.tsx";
+import { userApiHelper } from "../../../lib/features/apis/UserM/userApiHelper.tsx";
 import UserManagementForm from "./userManagementForm";
 import UserListingManagement from "./userListingManagement";
-import { UserModel } from "../../../lib/features/models/UserM/UserModel.tsx";
-import { DataTable } from "../../customTable/data-table.tsx";
 import CustomModal from "../../customModals/CustomModal.tsx";
 import MiddleModal from "../../customModals/MiddleModal.tsx";
-import { userApiHelper } from "../../../lib/features/apis/UserM/userApiHelper.tsx";
-import { useToast } from "../../Toast/ToastContext.tsx";
 
 const UserManagementPage = () => {
   const { addToast } = useToast();
@@ -21,14 +22,25 @@ const UserManagementPage = () => {
   const [maxCount, setMaxCount] = useState<number>(1);
   const [userId, setUserId] = useState<number>(1);
   const [listType] = useState<string>("pending");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [pagination, setPagination] = useState<any>();
 
   const changePagination = useCallback(
     async (state: PaginationState, listType: string, sorting: SortingState) => {
       if (listType) {
         console.log(listType);
       }
+      setPagination(state);
       try {
-        if (sorting[0]) {
+        if (searchTerm !== "") {
+          const { maxCount, payload } = await userApiHelper.searchUsers(
+            state,
+            searchTerm
+          );
+          setMaxCount(maxCount);
+          setTableData(payload);
+          addToast("Fetch all users successfully", "success");
+        } else if (sorting[0]) {
           const { maxCount, payload } = await userApiHelper.getUsersOrderBy(
             state,
             sorting
@@ -60,6 +72,23 @@ const UserManagementPage = () => {
     handleListingOpenModal();
   };
 
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleSearchKeyDown = async (
+    e: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (e.key === "Enter" && searchTerm.length >= 3) {
+      try {
+        await changePagination(pagination, listType, []);
+        addToast("Search user successfully", "success");
+      } catch (error) {
+        addToast("Failed to search user", "error");
+      }
+    }
+  };
+
   const handleListingOpenModal = () => setIsListingModalOpen(true);
   const handleListingCloseModal = () => setIsListingModalOpen(false);
   const handleOpenModal = () => setIsModalOpen(true);
@@ -73,6 +102,14 @@ const UserManagementPage = () => {
         <p>User Management</p>
       </div>
       <div className="py-1">
+        <Input
+          type="text"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={handleSearchChange}
+          onKeyDown={handleSearchKeyDown}
+          className="mb-4 w-1/3"
+        />
         <DataTable
           columns={columns}
           data={tableData}
@@ -82,7 +119,7 @@ const UserManagementPage = () => {
           handleDelete={() => {}}
           maxCount={maxCount}
           listType={listType}
-          textFilter={true}
+          textFilter={false}
         />
       </div>
       <CustomModal

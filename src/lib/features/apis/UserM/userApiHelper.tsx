@@ -45,4 +45,18 @@ export const userApiHelper = {
       throw error;
     }
   },
+
+  async searchUsers(
+    state: PaginationState,
+    searchText: string
+  ): Promise<responseType> {
+    try {
+      const response: any = await axiosInstance.get(
+        `/users/filter?limit=${state.pageSize}&offset=${state.pageIndex + 1}`
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
