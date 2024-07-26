@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
-import { PaginationState } from "@tanstack/react-table";
 import { createColumns } from "./columns";
-import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
+import { useToast } from "../../Toast/ToastContext.tsx";
+import { PaginationState } from "@tanstack/react-table";
 import { DataTable } from "../../customTable/data-table.tsx";
+import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
 import { adApiHelper } from "../../../lib/features/apis/AdM/adApiHelper.tsx";
 import ListingManagementForm from "./listingManagementForm";
 import ListTypeComponent from "../../listTypeComponent";
 import CustomModal from "../../customModals/CustomModal.tsx";
-import { useToast } from "../../Toast/ToastContext.tsx";
 
 const ListingManagementPage = () => {
   const { addToast } = useToast();
@@ -31,7 +31,7 @@ const ListingManagementPage = () => {
         setTableData(payload);
         addToast("Get All Listings successfully", "success");
       } catch (error) {
-        addToast("Failed to reject listing", "error");
+        addToast(`Failed to fetch ${currentListType} listing`, "error");
       }
     },
     []

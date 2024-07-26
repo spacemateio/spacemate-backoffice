@@ -13,7 +13,7 @@ export const contactUsApiHelper = {
       throw error;
     }
   },
-  async getDeleteContactus(ids: any[]): Promise<void> {
+  async deleteContactus(ids: any[]): Promise<void> {
     try {
       if (ids.length === 1) {
         const response: any = await axiosInstance.delete(

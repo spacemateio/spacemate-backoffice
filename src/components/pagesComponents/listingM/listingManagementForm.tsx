@@ -290,27 +290,29 @@ export default function ListingManagementForm({
             Cancel
           </Button>
         </div>
-        <div>
-          {formData?.status !== 1 && (
-            <Button
-              className="mr-2"
-              type="submit"
-              variant="approve"
-              onChange={() => handleApprove(formData.id)}
-            >
-              Approve
-            </Button>
-          )}
-          {formData?.status !== 3 && (
-            <Button
-              type="button"
-              variant="destructive"
-              onClick={() => handleReject(formData.id)}
-            >
-              Reject
-            </Button>
-          )}
-        </div>
+        {!isShow && (
+          <div>
+            {formData?.status !== 1 && (
+              <Button
+                className="mr-2"
+                type="submit"
+                variant="approve"
+                onClick={() => handleApprove(formData.id)}
+              >
+                Approve
+              </Button>
+            )}
+            {formData?.status !== 3 && (
+              <Button
+                type="button"
+                variant="destructive"
+                onClick={() => handleReject(formData.id)}
+              >
+                Reject
+              </Button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
