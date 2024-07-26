@@ -8,6 +8,7 @@ export const createColumns = (
   handleShow: (id: number) => void,
   handleApprove: (id: number) => void,
   handleReject: (id: number) => void,
+  handleUpdate: (id: number) => void,
   listType: string
 ): ColumnDef<AdModel>[] => [
   {
@@ -170,6 +171,14 @@ export const createColumns = (
             onClick={() => handleShow(id)}
           >
             Show
+          </Button>{" "}
+          <Button
+            variant="sea"
+            size="sxm"
+            style={{ fontSize: "12px" }}
+            onClick={() => handleUpdate(id)}
+          >
+            Update
           </Button>{" "}
           {listType !== "approved" && (
             <Button

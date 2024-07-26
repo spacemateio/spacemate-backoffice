@@ -68,9 +68,11 @@ export const adApiHelper = {
         `/listing/update/${id}`,
         data
       );
+
       return response.data;
     } catch (error) {
       throw error;
+      console.log("response: ", error);
     }
   },
 };

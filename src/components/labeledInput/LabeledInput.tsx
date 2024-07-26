@@ -2,18 +2,20 @@ import { ChangeEvent } from "react";
 import { Input } from "../ui/input";
 
 interface LabeledInputProps {
+  addClassName?: string;
   label: string;
   name: string;
   type?: string;
   placeholder?: string;
   value: string | number | undefined;
   onChange: (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => void;
   disabled?: boolean;
 }
 
 export function LabeledInput({
+  addClassName,
   label,
   name,
   type = "text",
@@ -23,8 +25,11 @@ export function LabeledInput({
   disabled = false,
 }: LabeledInputProps) {
   return (
-    <div>
-      <label htmlFor={name} className="block text-sm font-medium text-gray-700">
+    <div className={`${addClassName}`}>
+      <label
+        htmlFor={name}
+        className={`block text-sm font-medium text-gray-700`}
+      >
         {label}
       </label>
       <Input

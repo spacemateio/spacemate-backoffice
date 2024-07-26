@@ -21,7 +21,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
     setToasts((prevToasts) => [...prevToasts, { id, message, type }]);
     setTimeout(() => {
       setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id));
-    }, 4000);
+    }, 3000);
   };
 
   return (
