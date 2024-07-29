@@ -8,14 +8,14 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        VITE_API_URL: ${VITE_API_URL}
+        - VITE_API_URL=https://api.spacemate.io/bo
     ports:
       - 0.0.0.0:3001:3000
     environment:
-      - VITE_API_URL=${VITE_API_URL}
+      - VITE_API_URL=https://api.spacemate.io/bo
     restart: always
     deploy:
       resources:
         limits:
           cpus: '1'
-          memory: '2G'
+          memory: '1G'
