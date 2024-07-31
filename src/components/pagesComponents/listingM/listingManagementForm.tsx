@@ -82,11 +82,6 @@ export default function ListingManagementForm({
       addToast("Failed to reject listing", "error");
     }
   };
-
-  const handleCancel = () => {
-    console.log("Cancel");
-  };
-
   const handleSave = async () => {
     try {
       addToast("Processing your listing update...", "info");
@@ -286,9 +281,6 @@ export default function ListingManagementForm({
               Save
             </Button>
           )}
-          <Button type="button" variant="default" onClick={handleCancel}>
-            Cancel
-          </Button>
         </div>
         {!isShow && (
           <div>

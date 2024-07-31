@@ -84,10 +84,6 @@ export default function UserManagementForm({
     // submit form data
   };
 
-  const handleCancel = () => {
-    // reset form or handle cancel action
-  };
-
   const handleActive = (id?: number) => {
     try {
       if (id) {
@@ -373,20 +369,10 @@ export default function UserManagementForm({
           <Button type="submit" className="mr-2" disabled={isShow}>
             Save
           </Button>
-          <Button
-            type="button"
-            variant="secondary"
-            onClick={handleCancel}
-            disabled={isShow}
-          >
-            Cancel
-          </Button>
         </div>
         <div>
           <Button
-            variant="outline"
-            size="sxm"
-            style={{ fontSize: "12px" }}
+            variant="approve"
             onClick={() => handleActive(initialData?.id)}
             disabled={!(initialData !== undefined)}
             className="mr-2"
@@ -394,9 +380,7 @@ export default function UserManagementForm({
             Active
           </Button>
           <Button
-            variant="outline"
-            size="sxm"
-            style={{ fontSize: "12px" }}
+            variant="destructive"
             onClick={() => handlePassive(initialData?.id)}
             disabled={!(initialData !== undefined)}
           >
