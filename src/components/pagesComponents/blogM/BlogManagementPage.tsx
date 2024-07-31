@@ -81,24 +81,6 @@ const BlogManagementPage = () => {
     }
   };
 
-  const handleActive = async (id: number) => {
-    try {
-      await blogApiHelper.activateBlog(id);
-      addToast("Blog activated successfully", "success");
-    } catch (error) {
-      addToast("Failed to activate blog", "error");
-    }
-  };
-
-  const handlePassive = async (id: number) => {
-    try {
-      await blogApiHelper.deactivateBlog(id);
-      addToast("Blog passived successfully", "success");
-    } catch (error) {
-      addToast("Failed to Passive blog", "error");
-    }
-  };
-
   const handleDelete = async (id: number) => {
     try {
       await blogApiHelper.deleteBlog(id);
@@ -124,12 +106,7 @@ const BlogManagementPage = () => {
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
   const handleTogglePosition = () => setIsCentered(!isCentered);
-  const columns = createColumns(
-    handleShow,
-    handleActive,
-    handlePassive,
-    confirmDelete
-  );
+  const columns = createColumns(handleShow, confirmDelete);
 
   const handleAddNewBlog = () => {
     setAddNewBlog((prevState) => !prevState);

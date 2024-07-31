@@ -6,8 +6,6 @@ import * as Tooltip from "@radix-ui/react-tooltip";
 
 export const createColumns = (
   handleShow: (id: number) => void,
-  handleActive: (id: number) => void,
-  handlePassive: (id: number) => void,
   handleDelete: (id: number) => void
 ): ColumnDef<BlogModel>[] => [
   {
@@ -170,26 +168,6 @@ export const createColumns = (
           >
             Show
           </Button>
-          {/*{row.original.status !== 0 && (
-            <Button
-              variant="approve"
-              size="sxm"
-              style={{ fontSize: "12px" }}
-              onClick={() => handleActive(id)}
-            >
-              Active
-            </Button>
-          )}
-          {row.original.status !== 1 && (
-            <Button
-              variant="destructive"
-              size="sxm"
-              style={{ fontSize: "12px" }}
-              onClick={() => handlePassive(id)}
-            >
-              Passive
-            </Button>
-          )}{" "}*/}
           <Button
             variant="sea"
             size="sxm"

@@ -6,10 +6,7 @@ import { ArrowUpDown } from "lucide-react";
 
 export const createColumns = (
   handleShow: (id: number) => void,
-  handleApprove: (id: number) => void,
-  handleReject: (id: number) => void,
-  handleUpdate: (id: number) => void,
-  listType: string
+  handleUpdate: (id: number) => void
 ): ColumnDef<AdModel>[] => [
   {
     id: "select",
@@ -179,27 +176,7 @@ export const createColumns = (
             onClick={() => handleUpdate(id)}
           >
             Update
-          </Button>{" "}
-          {listType !== "approved" && (
-            <Button
-              variant="approve"
-              size="sxm"
-              style={{ fontSize: "12px" }}
-              onClick={() => handleApprove(id)}
-            >
-              Approve
-            </Button>
-          )}{" "}
-          {listType !== "rejected" && (
-            <Button
-              variant="destructive"
-              size="sxm"
-              style={{ fontSize: "12px" }}
-              onClick={() => handleReject(id)}
-            >
-              Reject
-            </Button>
-          )}
+          </Button>
         </div>
       );
     },

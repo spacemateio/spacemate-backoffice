@@ -51,24 +51,6 @@ const ListingManagementPage = () => {
     handleOpenModal();
   };
 
-  const handleApprove = async (id: number) => {
-    try {
-      await adApiHelper.approveAd(id);
-      addToast("Listing approved successfully", "success");
-    } catch (error) {
-      addToast("Failed to approve listing", "error");
-    }
-  };
-
-  const handleReject = async (id: number) => {
-    try {
-      await adApiHelper.rejectAd(id);
-      addToast("Listing rejected successfully", "success");
-    } catch (error) {
-      addToast("Failed to reject listing", "error");
-    }
-  };
-
   const handleUpdate = async (id: number) => {
     setIsShow(false);
     setShowRow(tableData.find((item) => item.id === id));
@@ -78,13 +60,7 @@ const ListingManagementPage = () => {
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
   const handleTogglePosition = () => setIsCentered(!isCentered);
-  const columns = createColumns(
-    handleShow,
-    handleApprove,
-    handleReject,
-    handleUpdate,
-    listType
-  );
+  const columns = createColumns(handleShow, handleUpdate);
 
   return (
     <div className="w-full">
