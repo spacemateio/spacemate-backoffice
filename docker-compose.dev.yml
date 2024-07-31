@@ -1,0 +1,21 @@
+version: '3.3'
+
+services:
+  backoffice:
+    image: backoffice
+    container_name: backoffice
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=https://test-api.spacemate.io/bo
+    ports:
+      - 0.0.0.0:3001:3000
+    environment:
+      - VITE_API_URL=https://test-api.spacemate.io/bo
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: '1G'
