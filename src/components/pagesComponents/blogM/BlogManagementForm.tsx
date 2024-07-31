@@ -8,6 +8,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "./quill-custom.css";
 import Image from "../../image/Image.tsx";
+import { useNavigate } from "react-router-dom";
 
 const BlogManagementForm = ({
   blogPost,
@@ -26,6 +27,7 @@ const BlogManagementForm = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [imageName, setImageName] = useState<string>("");
   const [image, setImage] = useState<File | null>(null);
+  const navigate = useNavigate();
 
   const handleImageChange = (e: any) => {
     const file = e.target.files?.[0] || null;
@@ -60,7 +62,8 @@ const BlogManagementForm = ({
     }));
     try {
       await blogApiHelper.addBlog(blogPost, image);
-      addToast("Blog added successfully", "success");
+      await addToast("Blog added successfully", "success");
+      setAddNewBlog(false);
     } catch (error) {
       addToast("Failed to add blog", "error");
     }

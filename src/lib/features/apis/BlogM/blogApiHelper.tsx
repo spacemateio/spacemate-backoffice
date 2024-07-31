@@ -91,7 +91,7 @@ export const blogApiHelper = {
     }
   },
 
-  async getBlogAll(state: PaginationState): Promise<BlogModel[]> {
+  async getBlogAll(state: PaginationState): Promise<responseType> {
     try {
       const response: any = await axiosInstance.get(
         `/blog/all?limit=${state.pageSize}&offset=${state.pageIndex + 1}`
