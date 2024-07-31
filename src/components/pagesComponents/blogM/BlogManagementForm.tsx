@@ -8,7 +8,6 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "./quill-custom.css";
 import Image from "../../image/Image.tsx";
-import { useNavigate } from "react-router-dom";
 
 const BlogManagementForm = ({
   blogPost,
@@ -27,7 +26,7 @@ const BlogManagementForm = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [imageName, setImageName] = useState<string>("");
   const [image, setImage] = useState<File | null>(null);
-  const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false); // Yeni state ekledik
 
   const handleImageChange = (e: any) => {
     const file = e.target.files?.[0] || null;
@@ -54,6 +53,7 @@ const BlogManagementForm = ({
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setIsSubmitting(true); // Submit işlemine başlandığında butonu deaktive et
     setBlogPost((prev: any) => ({
       ...prev,
       ["createdDate"]: "",
@@ -66,6 +66,8 @@ const BlogManagementForm = ({
       setAddNewBlog(false);
     } catch (error) {
       addToast("Failed to add blog", "error");
+    } finally {
+      setIsSubmitting(false); // İşlem bitince butonu tekrar aktive et
     }
   };
 
@@ -221,13 +223,18 @@ const BlogManagementForm = ({
           />
         </div>
         <div className="flex gap-5">
-          <Button type="submit" className="w-full bg-green-400">
+          <Button
+            type="submit"
+            className="w-full bg-green-400"
+            disabled={isSubmitting} // Butonun deaktive edilmesi
+          >
             Save
           </Button>
           <Button
             type="submit"
             className="w-full bg-red-500"
             onClick={handleCancel}
+            disabled={isSubmitting} // Butonun deaktive edilmesi
           >
             Cancel
           </Button>

@@ -170,7 +170,7 @@ export const createColumns = (
           >
             Show
           </Button>
-          {row.original.status !== 0 && (
+          {/*{row.original.status !== 0 && (
             <Button
               variant="approve"
               size="sxm"
@@ -189,7 +189,7 @@ export const createColumns = (
             >
               Passive
             </Button>
-          )}{" "}
+          )}{" "}*/}
           <Button
             variant="sea"
             size="sxm"
