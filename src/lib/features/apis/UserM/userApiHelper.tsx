@@ -52,7 +52,7 @@ export const userApiHelper = {
   ): Promise<responseType> {
     try {
       const response: any = await axiosInstance.get(
-        `/users/filter?limit=${state.pageSize}&offset=${state.pageIndex + 1}`
+        `/users/filter=${searchText}&limit=${state.pageSize}&offset=${state.pageIndex + 1}`
       );
       return response.data;
     } catch (error) {
