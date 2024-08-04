@@ -1,15 +1,15 @@
 import { useCallback, useState } from "react";
 import { PaginationState } from "@tanstack/react-table";
-import { createColumns } from "./columns";
+import { useColumns } from "./useColumns.tsx";
 import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel.tsx";
 import { Button } from "../../ui/button.tsx";
 import { DataTable } from "../../customTable/data-table.tsx";
 import { blogApiHelper } from "../../../lib/features/apis/BlogM/blogApiHelper.tsx";
-import BlogManagementPreview from "./BlogManagementPreview";
-import BlogManagementAdd from "./BlogManagementAdd";
 import CustomModal from "../../customModals/CustomModal.tsx";
 import { useToast } from "../../Toast/ToastContext.tsx";
 import ConfirmDialog from "../../ui/ConfirmDialog.tsx";
+import { useNavigate } from "react-router-dom";
+import BlogManagementPreview from "./BlogManagementAdd/BlogManagementPreview.tsx";
 
 const BlogManagementPage = () => {
   const { addToast } = useToast();
@@ -18,7 +18,6 @@ const BlogManagementPage = () => {
   const [isCentered, setIsCentered] = useState<boolean>(true);
   const [_, setIsShow] = useState<boolean>(false);
   const [maxCount, setMaxCount] = useState<number>(1);
-  const [addNewBlog, setAddNewBlog] = useState<boolean>(false);
   const [showRow, setShowRow] = useState<BlogModel>({
     id: 0,
     url: "",
@@ -106,57 +105,51 @@ const BlogManagementPage = () => {
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
   const handleTogglePosition = () => setIsCentered(!isCentered);
-  const columns = createColumns(handleShow, confirmDelete);
+  const columns = useColumns(handleShow, confirmDelete);
+
+  const navigate = useNavigate();
 
   const handleAddNewBlog = () => {
-    setAddNewBlog((prevState) => !prevState);
+    navigate("add");
   };
 
   return (
-    <>
-      {addNewBlog ? (
-        <BlogManagementAdd setAddNewBlog={setAddNewBlog} />
-      ) : (
-        <div className="w-full">
-          <div className="py-5">
-            <p>Blog Management</p>
-          </div>
-          <Button className="bg-red-600" onClick={handleAddNewBlog}>
-            Add New Blog
-          </Button>
-          <div className="py-1">
-            <DataTable
-              columns={columns}
-              data={tableData}
-              filterPlaceholderName="Filter titles..."
-              filterHeaderName="title"
-              changePagination={changePagination}
-              handleDelete={() => {}}
-              maxCount={maxCount}
-              listType=""
-            />
-          </div>
-          <CustomModal
-            isOpen={isModalOpen}
-            onClose={handleCloseModal}
-            onTogglePosition={handleTogglePosition}
-            isCentered={isCentered}
-            title="Blog Detail"
-          >
-            <BlogManagementPreview blogPost={showRow} />
-          </CustomModal>
-          <ConfirmDialog
-            isOpen={confirmDialog.isOpen}
-            onClose={() =>
-              setConfirmDialog({ ...confirmDialog, isOpen: false })
-            }
-            onConfirm={confirmDialog.onConfirm}
-            title={confirmDialog.title}
-            message={confirmDialog.message}
-          />
-        </div>
-      )}
-    </>
+    <div className="w-full">
+      <div className="py-5">
+        <p>Blog Management</p>
+      </div>
+      <Button className="bg-red-600" onClick={handleAddNewBlog}>
+        Add New Blog
+      </Button>
+      <div className="py-1">
+        <DataTable
+          columns={columns}
+          data={tableData}
+          filterPlaceholderName="Filter titles..."
+          filterHeaderName="title"
+          changePagination={changePagination}
+          handleDelete={() => {}}
+          maxCount={maxCount}
+          listType=""
+        />
+      </div>
+      <CustomModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onTogglePosition={handleTogglePosition}
+        isCentered={isCentered}
+        title="Blog Detail"
+      >
+        <BlogManagementPreview blogPost={showRow} />
+      </CustomModal>
+      <ConfirmDialog
+        isOpen={confirmDialog.isOpen}
+        onClose={() => setConfirmDialog({ ...confirmDialog, isOpen: false })}
+        onConfirm={confirmDialog.onConfirm}
+        title={confirmDialog.title}
+        message={confirmDialog.message}
+      />
+    </div>
   );
 };
 

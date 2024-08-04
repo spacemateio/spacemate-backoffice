@@ -43,7 +43,7 @@ export const blogApiHelper = {
     }
   },
 
-  async getBlogById(id: number): Promise<any> {
+  async getBlogById(id: number): Promise<BlogModel> {
     try {
       const response: any = await axiosInstance.get(`/blog/${id}`);
       return response.data;
@@ -83,7 +83,7 @@ export const blogApiHelper = {
   async getBlogAllOLD(state: PaginationState): Promise<responseType> {
     try {
       const response: any = await axiosInstance.get(
-        `/blog/all?limit=${state.pageSize}&offset=${state.pageIndex + 1}`
+        `/blog/all?limit=${state.pageSize}&offset=${state.pageIndex + 1}`,
       );
       return response.data;
     } catch (error) {
@@ -94,7 +94,7 @@ export const blogApiHelper = {
   async getBlogAll(state: PaginationState): Promise<responseType> {
     try {
       const response: any = await axiosInstance.get(
-        `/blog/all?limit=${state.pageSize}&offset=${state.pageIndex + 1}`
+        `/blog/all?limit=${state.pageSize}&offset=${state.pageIndex + 1}`,
       );
       return response.data;
     } catch (error) {
