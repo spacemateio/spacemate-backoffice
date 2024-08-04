@@ -14,7 +14,7 @@ export const blogApiHelper = {
     });
   },
 
-  async updateBlog(data: BlogModel, image?: File): Promise<any> {
+  async updateBlog(data: BlogModel, image: File | null): Promise<any> {
     try {
       const response: any = await axiosInstance.put(
         `/blog/update/${data.id}`,
