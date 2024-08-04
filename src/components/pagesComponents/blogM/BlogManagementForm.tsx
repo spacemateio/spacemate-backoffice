@@ -4,13 +4,10 @@ import { Button } from "../../ui/button";
 import { useToast } from "../../Toast/ToastContext.tsx";
 import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel.tsx";
 import { blogApiHelper } from "../../../lib/features/apis/BlogM/blogApiHelper.tsx";
-import ReactQuill, { Quill } from "react-quill";
+import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "./quill-custom.css";
 import Image from "../../image/Image.tsx";
-import htmlEditButton from "quill-html-edit-button";
-
-Quill.register("modules/htmlEditButton", htmlEditButton);
 
 const BlogManagementForm = ({
   blogPost,
@@ -203,7 +200,6 @@ const BlogManagementForm = ({
                 [{ color: [] }, { background: [] }], // Renk seçenekleri eklendi
                 ["link", "image"],
                 ["clean"],
-                ["htmlEditButton"],
               ],
             }}
             formats={[
