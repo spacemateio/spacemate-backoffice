@@ -3,6 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../lib/features/auth/AuthContext.tsx";
 import { Button } from "../../../components/ui/button.tsx";
 import { Input } from "../../../components/ui/input.tsx";
+import {Badge} from "../../../components/ui/badge.tsx";
+
+
+const isLocal = window.location.hostname === "localhost";
+
+const defaultAdmin = {
+  email: "user1@gmail.com",
+  password: "test1",
+}
 
 const Login = () => {
   const navigate = useNavigate();
@@ -60,7 +69,7 @@ const Login = () => {
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-              Sign in to your account
+              Sign in to your account {isLocal && <Badge text="dev mode" bgColor="#fca8ff" />}
             </h1>
             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               <div>
@@ -76,6 +85,7 @@ const Login = () => {
                   id="email"
                   placeholder="name@company.com"
                   required
+                  defaultValue={isLocal ? defaultAdmin.email : ""}
                 />
               </div>
               <div>
@@ -91,6 +101,7 @@ const Login = () => {
                   id="password"
                   placeholder="••••••••"
                   required
+                  defaultValue={isLocal ? defaultAdmin.password : ""}
                 />
               </div>
               <Button type="submit">Sign in</Button>
