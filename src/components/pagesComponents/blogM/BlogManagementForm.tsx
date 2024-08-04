@@ -109,13 +109,13 @@ const BlogManagementForm = ({
           />
         </div>
         <div>
-          {/* <Label className="block text-lg font-medium mb-2">Blurb</Label> */}
+          {/* <Label className="block text-lg font-medium mb-2">Excerpt</Label> */}
           <Input
             type="text"
             name="excerpt"
             value={blogPost.excerpt}
             onChange={changeBlogPost}
-            placeholder="Blurb"
+            placeholder="Excerpt"
             className="w-full"
           />
         </div>
