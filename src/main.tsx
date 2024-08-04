@@ -38,7 +38,7 @@ const router = createBrowserRouter([
             element: <ListingManagement />,
           },
           {
-            path: "blogManagement",
+            path: "blogManagement/*",
             element: <BlogManagement />,
           },
           {
@@ -75,5 +75,5 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <ToastProvider>
     <RouterProvider router={router} /> <ToastManager />
-  </ToastProvider>
+  </ToastProvider>,
 );
