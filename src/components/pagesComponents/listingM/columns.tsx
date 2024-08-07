@@ -136,7 +136,7 @@ export const createColumns = (
         minute: "2-digit",
         hour12: true, // 12 saatlik sistemi kullanmak için
       };
-      return new Date(row.original.created).toLocaleString("en-US", options);
+      return new Date(row.original.created).toLocaleString("en-AU", options);
       return;
     },
   },

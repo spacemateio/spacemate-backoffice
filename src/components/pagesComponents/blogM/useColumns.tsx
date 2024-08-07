@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export const useColumns = (
   handleShow: (id: number) => void,
-  handleDelete: (id: number) => void,
+  handleDelete: (id: number) => void
 ): ColumnDef<BlogModel>[] => {
   const navigate = useNavigate();
 
@@ -155,8 +155,8 @@ export const useColumns = (
           hour12: true, // 12 saatlik sistemi kullanmak için
         };
         return new Date(row.original.createdDate).toLocaleString(
-          "en-US",
-          options,
+          "en-AU",
+          options
         );
         return;
       },
