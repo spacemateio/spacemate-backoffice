@@ -164,7 +164,31 @@ export const createColumns = (
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const truncatedText =
+        row?.original?.location?.length > 30
+          ? row.original.location.slice(0, 30) + "..."
+          : row.original.location;
+      return (
+        <Tooltip.Provider>
+          <Tooltip.Root>
+            <Tooltip.Trigger asChild>
+              <span>{truncatedText}</span>
+            </Tooltip.Trigger>
+            <Tooltip.Portal>
+              <Tooltip.Content side="top" align="center">
+                <div className="bg-white p-2 border border-gray-300 rounded shadow-lg max-w-2xl">
+                  {row.original.location}
+                </div>
+                <Tooltip.Arrow className="fill-current text-white" />
+              </Tooltip.Content>
+            </Tooltip.Portal>
+          </Tooltip.Root>
+        </Tooltip.Provider>
+      );
+    },
   },
+
   {
     accessorKey: "status",
     header: ({ column }) => {

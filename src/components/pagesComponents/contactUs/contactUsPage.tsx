@@ -26,7 +26,7 @@ const ContactUsPage = () => {
         await contactUsApiHelper.getAllContactus(state);
       setMaxCount(maxCount);
       setTableData(payload);
-      addToast("Contact us entry deleted successfully", "success");
+      addToast("Fetched all contact entries successfully", "success");
     } catch (error) {
       addToast("Failed to fetch contact us entries", "error");
     }
