@@ -8,7 +8,17 @@ export const useDeleteUser = () => {
     );
 
     if (promptUserEmail === email) {
-      await userApiHelper.hardDeleteUserByEmail(email);
+      try {
+        await userApiHelper.hardDeleteUserByEmail(email);
+        alert("User deleted successfully");
+
+        window.location.reload();
+      } catch (error: any) {
+        console.log(error);
+        alert(`An error occurred: ${error?.code}`);
+      }
+    } else {
+      alert("Emails do not match");
     }
   };
 
