@@ -202,7 +202,7 @@ export const createColumns = (
         hour12: true, // 12 saatlik sistemi kullanmak için
       };
       return new Date(row.original.createdDate).toLocaleString(
-        "en-US",
+        "en-AU",
         options
       );
       return;
