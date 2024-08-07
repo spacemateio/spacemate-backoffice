@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { createColumns } from "./columns";
 import { Input } from "../../ui/input.tsx";
 import { useToast } from "../../Toast/ToastContext.tsx";
@@ -22,8 +22,13 @@ const UserManagementPage = () => {
   const [maxCount, setMaxCount] = useState<number>(1);
   const [userId, setUserId] = useState<number>(1);
   const [listType] = useState<string>("pending");
-  const [searchTerm, setSearchTerm] = useState<string>("");
   const [pagination, setPagination] = useState<any>();
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const searchTermRef = useRef<string>(searchTerm);
+
+  useEffect(() => {
+    searchTermRef.current = searchTerm;
+  }, [searchTerm]);
 
   const changePagination = useCallback(
     async (state: PaginationState, listType: string, sorting: SortingState) => {
@@ -32,10 +37,15 @@ const UserManagementPage = () => {
       }
       setPagination(state);
       try {
-        if (searchTerm !== "") {
+        const currentSearchTerm = searchTermRef.current;
+
+        console.log("1.5: ", currentSearchTerm);
+        if (currentSearchTerm !== "") {
+          console.log("2: ", currentSearchTerm);
+
           const { maxCount, payload } = await userApiHelper.searchUsers(
             state,
-            searchTerm
+            currentSearchTerm
           );
           setMaxCount(maxCount);
           setTableData(payload);
@@ -72,14 +82,11 @@ const UserManagementPage = () => {
     handleListingOpenModal();
   };
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-  };
-
   const handleSearchKeyDown = async (
     e: React.KeyboardEvent<HTMLInputElement>
   ) => {
-    if (e.key === "Enter" && searchTerm.length >= 3) {
+    if (e.key === "Enter") {
+      console.log("1: ", searchTerm);
       try {
         await changePagination(pagination, listType, []);
         addToast("Search user successfully", "success");
@@ -106,7 +113,7 @@ const UserManagementPage = () => {
           type="text"
           placeholder="Search..."
           value={searchTerm}
-          onChange={handleSearchChange}
+          onChange={(e) => setSearchTerm(e.target.value)}
           onKeyDown={handleSearchKeyDown}
           className="mb-4 w-1/3"
         />

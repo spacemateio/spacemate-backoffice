@@ -22,37 +22,37 @@ export default function ListingManagementForm({
     userId: 0,
     email: "",
     title: "",
-    address: "",
+    //address: "",
     city: "",
     state: "",
     country: "",
     vote: 0,
-    reviewCount: 0,
+    //reviewCount: 0,
     description: "",
-    accessType: "",
-    accessTimes: 0,
-    accessTimeText: "",
-    listingType: 0,
-    space: "",
-    locked: false,
-    uid: 0,
+    //accessType: "",
+    //accessTimes: 0,
+    //accessTimeText: "",
+    //listingType: 0,
+    //space: "",
+    //locked: false,
+    //uid: 0,
     avatar: "",
     avatar_preview: "",
-    uname: "",
-    userReviewCount: 0,
+    //uname: "",
+    //userReviewCount: 0,
     location: "",
-    features: "",
+    //features: "",
     price: 0,
     images: [],
     isFavourite: false,
-    isVerified: false,
+    //isVerified: false,
     street_name: "",
     postcode: "",
     unit_no: "",
     timezone: "",
-    height: 0,
-    length: 0,
-    width: 0,
+    //height: 0,
+    //length: 0,
+    //width: 0,
     currency: "",
     created: "",
     status: 0,
@@ -128,13 +128,13 @@ export default function ListingManagementForm({
             />
           </div>
 
-          <LabeledInput
+          {/*<LabeledInput
             label="Username"
             name="uname"
             value={formData.uname}
             onChange={() => {}}
             disabled //={isShow}
-          />
+          />*/}
           <LabeledInput
             label="Email"
             name="email"
@@ -162,7 +162,7 @@ export default function ListingManagementForm({
         }}
         disabled={isShow}
       />
-      <LabeledInput
+      {/* <LabeledInput
         label="Features"
         name="features"
         value={formData.features}
@@ -175,7 +175,7 @@ export default function ListingManagementForm({
         value={formData.space}
         onChange={() => {}}
         disabled //={isShow}
-      />
+      />*/}
       <LabeledInput
         label="Price"
         name="price"
@@ -198,6 +198,7 @@ export default function ListingManagementForm({
             ))}
         </div>
       </div>
+      {/*
       <LabeledInput
         label="Address"
         name="address"
@@ -205,6 +206,7 @@ export default function ListingManagementForm({
         onChange={() => {}}
         disabled //={isShow}
       />
+      */}
       <LabeledInput
         label="City"
         name="city"
@@ -233,7 +235,7 @@ export default function ListingManagementForm({
         onChange={() => {}}
         disabled //={isShow}
       />
-      <LabeledInput
+      {/*<LabeledInput
         label="Review Count"
         name="reviewCount"
         value={formData.reviewCount}
@@ -267,8 +269,7 @@ export default function ListingManagementForm({
         value={formData.accessTimeText}
         onChange={() => {}}
         disabled //={isShow}
-      />
-
+      />*/}
       <div className="flex space-x-2 sticky bottom-0 bg-white p-4 justify-between">
         <div>
           {!isShow && (

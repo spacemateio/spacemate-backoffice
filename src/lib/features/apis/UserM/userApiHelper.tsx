@@ -51,8 +51,10 @@ export const userApiHelper = {
     searchText: string
   ): Promise<responseType> {
     try {
+      console.log("3:", searchText);
+
       const response: any = await axiosInstance.get(
-        `/users/filter=${searchText}&limit=${state.pageSize}&offset=${state.pageIndex + 1}`
+        `/users/filter?filter=${searchText}&limit=${state.pageSize}&offset=${state.pageIndex + 1}`
       );
       return response.data;
     } catch (error) {
