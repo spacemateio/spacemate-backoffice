@@ -1,26 +1,27 @@
 import { useRef, useState } from "react";
-import { Input } from "../../ui/input";
-import { Button } from "../../ui/button";
-import { useToast } from "../../Toast/ToastContext.tsx";
-import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel.tsx";
-import { blogApiHelper } from "../../../lib/features/apis/BlogM/blogApiHelper.tsx";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "./quill-custom.css";
-import Image from "../../image/Image.tsx";
+import { BlogModel } from "../../../../lib/features/models/BlogM/BlogModel.tsx";
+import { useToast } from "../../../Toast/ToastContext.tsx";
+import { blogApiHelper } from "../../../../lib/features/apis/BlogM/blogApiHelper.tsx";
+import { Input } from "../../../ui/input.tsx";
+import { Button } from "../../../ui/button.tsx";
+import Image from "../../../image/Image.tsx";
+import { useNavigate } from "react-router-dom";
 
 const BlogManagementForm = ({
   blogPost,
   setBlogPost,
   imageUrl,
   setImageUrl,
-  setAddNewBlog,
+  mode,
 }: {
   blogPost: BlogModel;
   setBlogPost: any;
   imageUrl: string | undefined;
   setImageUrl: (url: string | undefined) => void;
-  setAddNewBlog: (state: boolean) => void;
+  mode: "edit" | "add";
 }) => {
   const { addToast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -53,7 +54,7 @@ const BlogManagementForm = ({
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    setIsSubmitting(true); // Submit işlemine başlandığında butonu deaktive et
+    setIsSubmitting(true);
     setBlogPost((prev: any) => ({
       ...prev,
       ["createdDate"]: "",
@@ -61,13 +62,19 @@ const BlogManagementForm = ({
       ["imageExtId"]: "",
     }));
     try {
-      await blogApiHelper.addBlog(blogPost, image);
-      await addToast("Blog added successfully", "success");
-      setAddNewBlog(false);
+      if (mode === "add") {
+        await blogApiHelper.addBlog(blogPost, image);
+        addToast("Blog has been added successfully", "success");
+
+        return;
+      }
+
+      await blogApiHelper.updateBlog(blogPost, image);
+      addToast("Blog has been updated successfully", "success");
     } catch (error) {
-      addToast("Failed to add blog", "error");
+      addToast("Failed to add or edit blog", "error");
     } finally {
-      setIsSubmitting(false); // İşlem bitince butonu tekrar aktive et
+      setIsSubmitting(false);
     }
   };
 
@@ -79,8 +86,10 @@ const BlogManagementForm = ({
     }));
   };
 
+  const navigate = useNavigate();
+
   const handleCancel = () => {
-    setAddNewBlog(false);
+    navigate("../");
   };
 
   return (
@@ -109,13 +118,13 @@ const BlogManagementForm = ({
           />
         </div>
         <div>
-          {/* <Label className="block text-lg font-medium mb-2">Blurb</Label> */}
+          {/* <Label className="block text-lg font-medium mb-2">Excerpt</Label> */}
           <Input
             type="text"
             name="excerpt"
             value={blogPost.excerpt}
             onChange={changeBlogPost}
-            placeholder="Blurb"
+            placeholder="Excerpt"
             className="w-full"
           />
         </div>
