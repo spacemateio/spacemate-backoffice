@@ -8,8 +8,7 @@ import Image from "../../image/Image.tsx";
 import { userApiHelper } from "../../../lib/features/apis/UserM/userApiHelper.tsx";
 import { useToast } from "../../Toast/ToastContext.tsx";
 import { useDeleteUser } from "./useDeleteUser.ts";
-import { CrossIcon, DeleteIcon, PanelLeftCloseIcon } from "lucide-react";
-import { Cross1Icon, Cross2Icon } from "@radix-ui/react-icons";
+import { Cross2Icon } from "@radix-ui/react-icons";
 
 interface UserManagementFormProps {
   isShow: boolean;
