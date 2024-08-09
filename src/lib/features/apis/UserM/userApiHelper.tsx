@@ -6,7 +6,7 @@ export const userApiHelper = {
   async getUsers(state: PaginationState): Promise<responseType> {
     try {
       const response: any = await axiosInstance.get(
-        `/users/all?limit=${state.pageSize}&offset=${state.pageIndex + 1}`
+        `/users/all?limit=${state.pageSize}&offset=${state.pageIndex + 1}`,
       );
       return response.data;
     } catch (error) {
@@ -34,11 +34,11 @@ export const userApiHelper = {
 
   async getUsersOrderBy(
     state: PaginationState,
-    sorting: SortingState
+    sorting: SortingState,
   ): Promise<responseType> {
     try {
       const response: any = await axiosInstance.get(
-        `/users/all/order?limit=${state.pageSize}&offset=${state.pageIndex + 1}&orderBy=${sorting[0].id === "email" ? "EMAIL" : sorting[0].id}&sortBy=${sorting[0].desc === true ? "DESC" : "ASC"}`
+        `/users/all/order?limit=${state.pageSize}&offset=${state.pageIndex + 1}&orderBy=${sorting[0].id === "email" ? "EMAIL" : sorting[0].id}&sortBy=${sorting[0].desc === true ? "DESC" : "ASC"}`,
       );
       return response.data;
     } catch (error) {
@@ -48,15 +48,23 @@ export const userApiHelper = {
 
   async searchUsers(
     state: PaginationState,
-    searchText: string
+    searchText: string,
   ): Promise<responseType> {
     try {
       console.log("3:", searchText);
 
       const response: any = await axiosInstance.get(
-        `/users/filter?filter=${searchText}&limit=${state.pageSize}&offset=${state.pageIndex + 1}`
+        `/users/filter?filter=${searchText}&limit=${state.pageSize}&offset=${state.pageIndex + 1}`,
       );
       return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async hardDeleteUserByEmail(email: string): Promise<null> {
+    try {
+      return await axiosInstance.get(`/users/deleteUser/${email}`);
     } catch (error) {
       throw error;
     }

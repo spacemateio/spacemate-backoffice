@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { UserModel } from "../../../lib/features/models/UserM/UserModel.tsx";
 import { LabeledInput } from "../../labeledInput/LabeledInput.tsx";
 import { Checkbox } from "../../ui/checkbox.tsx";
@@ -7,6 +7,8 @@ import { Button } from "../../ui/button.tsx";
 import Image from "../../image/Image.tsx";
 import { userApiHelper } from "../../../lib/features/apis/UserM/userApiHelper.tsx";
 import { useToast } from "../../Toast/ToastContext.tsx";
+import { useDeleteUser } from "./useDeleteUser.ts";
+import { Cross2Icon } from "@radix-ui/react-icons";
 
 interface UserManagementFormProps {
   isShow: boolean;
@@ -52,7 +54,7 @@ export default function UserManagementForm({
   }, [isShow, initialData]);
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
     setFormData({
@@ -105,6 +107,8 @@ export default function UserManagementForm({
       addToast("Failed to passive user", "error");
     }
   };
+
+  const { handleDeleteUser } = useDeleteUser();
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -364,6 +368,15 @@ export default function UserManagementForm({
         onChange={handleChange}
         disabled={isShow}
       />
+
+      <Button
+        variant="destructive"
+        onClick={() => handleDeleteUser(initialData?.id!, initialData?.email!)}
+        disabled={!(initialData !== undefined)}
+      >
+        Delete user completely <Cross2Icon />
+      </Button>
+
       <div className="flex space-x-2 sticky bottom-0 bg-white p-4 justify-between">
         <div>
           <Button type="submit" className="mr-2" disabled={isShow}>
