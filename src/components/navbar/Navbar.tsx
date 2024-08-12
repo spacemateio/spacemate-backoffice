@@ -1,6 +1,5 @@
 import { ReactNode, useState } from "react";
 import IconDisplay from "../iconComponent/IconDisplay";
-import { LineChart, Menu, Package2 } from "lucide-react";
 import { menuItems } from "./MenuItems";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Button } from "../ui/button";
@@ -55,7 +54,7 @@ const Navbar = ({ children }: Props) => {
                 className="flex items-center gap-3 rounded-lg px-3 py-2 text-red-500 transition-all hover:text-red-700"
                 onClick={() => signOut()}
               >
-                <LineChart className="h-4 w-4" />
+                <IconDisplay iconName="LogOut" />
                 Logout
               </Link>
             </nav>
@@ -71,7 +70,8 @@ const Navbar = ({ children }: Props) => {
                 size="icon"
                 className="shrink-0 md:hidden"
               >
-                <Menu className="h-5 w-5" />
+                {/* <Menu className="h-5 w-5" />*/}
+                <IconDisplay iconName="Menu" />
                 <span className="sr-only">Toggle navigation menu</span>
               </Button>
             </SheetTrigger>
@@ -81,7 +81,8 @@ const Navbar = ({ children }: Props) => {
                   to="#"
                   className="flex items-center gap-2 text-lg font-semibold"
                 >
-                  <Package2 className="h-6 w-6" />
+                  {/*<Package2 className="h-6 w-6" />*/}
+                  <IconDisplay iconName="Package2" addStyle="h-6 w-6" />
                   <span className="sr-only">SpaceMate.io</span>
                 </Link>
                 {menuItems.map((item) => (
@@ -104,7 +105,7 @@ const Navbar = ({ children }: Props) => {
                   className="flex items-center gap-3 rounded-lg px-3 py-2 text-red-500 transition-all hover:text-red-700"
                   onClick={() => signOut()}
                 >
-                  <LineChart className="h-4 w-4" />
+                  <IconDisplay iconName="LogOut" />
                   Logout
                 </Link>
               </nav>

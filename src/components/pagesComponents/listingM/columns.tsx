@@ -3,6 +3,7 @@ import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
 import { Checkbox } from "../../ui/checkbox.tsx";
 import { Button } from "../../ui/button.tsx";
 import { ArrowUpDown } from "lucide-react";
+import IconDisplay from "../../iconComponent/IconDisplay.tsx";
 
 export const createColumns = (
   handleShow: (id: number) => void,
@@ -177,22 +178,24 @@ export const createColumns = (
     cell: ({ row }) => {
       const id = row.original.id;
       return (
-        <div>
+        <div className="flex gap-1">
           <Button
             variant="default"
             size="sxm"
             style={{ fontSize: "12px" }}
             onClick={() => handleShow(id)}
           >
+            <IconDisplay iconName="Eye" addStyle="h-4 w-4 mr-1" />
             Show
-          </Button>{" "}
+          </Button>
           <Button
             variant="sea"
             size="sxm"
             style={{ fontSize: "12px" }}
             onClick={() => handleUpdate(id)}
           >
-            Update
+            <IconDisplay iconName="Edit" addStyle="h-4 w-4 mr-1" />
+            Edit
           </Button>
         </div>
       );

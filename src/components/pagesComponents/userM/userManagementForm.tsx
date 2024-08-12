@@ -24,6 +24,7 @@ export default function UserManagementForm({
     id: 0,
     name: "",
     lastname: "",
+    fullName: "",
     password: "",
     email: "",
     mobile: "",
@@ -54,7 +55,7 @@ export default function UserManagementForm({
   }, [isShow, initialData]);
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData({

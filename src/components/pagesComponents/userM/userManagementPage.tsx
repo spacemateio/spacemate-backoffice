@@ -38,11 +38,7 @@ const UserManagementPage = () => {
       setPagination(state);
       try {
         const currentSearchTerm = searchTermRef.current;
-
-        console.log("1.5: ", currentSearchTerm);
         if (currentSearchTerm !== "") {
-          console.log("2: ", currentSearchTerm);
-
           const { maxCount, payload } = await userApiHelper.searchUsers(
             state,
             currentSearchTerm

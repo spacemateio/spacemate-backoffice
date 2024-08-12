@@ -2,9 +2,10 @@ import { ColumnDef } from "@tanstack/react-table";
 import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
 import { Checkbox } from "../../ui/checkbox.tsx";
 import { Button } from "../../ui/button.tsx";
+import IconDisplay from "../../iconComponent/IconDisplay.tsx";
 
 export const createColumns = (
-  handleShow: (id: number) => void,
+  handleShow: (id: number) => void
 ): ColumnDef<AdModel>[] => [
   {
     id: "select",
@@ -76,6 +77,7 @@ export const createColumns = (
             style={{ fontSize: "12px" }}
             onClick={() => handleShow(id)}
           >
+            <IconDisplay iconName="Eye" addStyle="h-4 w-4 mr-1" />
             Show
           </Button>
         </div>

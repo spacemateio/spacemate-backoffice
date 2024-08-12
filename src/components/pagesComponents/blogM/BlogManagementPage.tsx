@@ -10,6 +10,7 @@ import { useToast } from "../../Toast/ToastContext.tsx";
 import ConfirmDialog from "../../ui/ConfirmDialog.tsx";
 import { useNavigate } from "react-router-dom";
 import BlogManagementPreview from "./BlogManagementAdd/BlogManagementPreview.tsx";
+import IconDisplay from "../../iconComponent/IconDisplay.tsx";
 
 const BlogManagementPage = () => {
   const { addToast } = useToast();
@@ -119,6 +120,7 @@ const BlogManagementPage = () => {
         <p>Blog Management</p>
       </div>
       <Button className="bg-red-600" onClick={handleAddNewBlog}>
+        <IconDisplay iconName="Plus" addStyle="mr-1" />
         Add New Blog
       </Button>
       <div className="py-1">
