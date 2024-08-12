@@ -5,6 +5,7 @@ import { UserModel } from "../../../lib/features/models/UserM/UserModel";
 import { Button } from "../../ui/button";
 import { Badge } from "../../ui/badge";
 import Image from "../../image/Image.tsx";
+import { getBadgeStyles } from "../../../lib/features/models/AccountType.ts";
 
 export const createColumns = (
   handleShow: (id: number) => void,
@@ -94,13 +95,13 @@ export const createColumns = (
     accessorKey: "accountType",
     header: "Account Type",
     cell: ({ row }) => {
+      const { bgColor, textColor, text } = getBadgeStyles(
+        row.original.accountType
+      );
+
       return (
         <>
-          <Badge
-            bgColor="rgba(194, 223, 229, 1)"
-            textColor="black"
-            text="Renter"
-          />
+          <Badge bgColor={bgColor} textColor={textColor} text={text} />
           {row.original.isHost && (
             <Badge
               bgColor="rgba(233, 178, 155, 1)"

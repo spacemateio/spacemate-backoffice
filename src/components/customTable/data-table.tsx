@@ -30,6 +30,7 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table.tsx";
+import IconDisplay from "../iconComponent/IconDisplay.tsx";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -220,10 +221,11 @@ export function DataTable<TData, TValue>({
         {allowHandleDelete &&
           table.getFilteredSelectedRowModel().rows.length > 0 && (
             <Button
-              className="w-[250px]"
+              className="w-[225px]"
               variant="destructive"
               onClick={handleDeleteForSelectedRows}
             >
+              <IconDisplay iconName="Trash" addStyle="mr-2" />
               Delete Selected Rows
             </Button>
           )}

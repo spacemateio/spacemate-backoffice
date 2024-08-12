@@ -4,6 +4,7 @@ import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel.tsx";
 import { Button } from "../../ui/button.tsx";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import { useNavigate } from "react-router-dom";
+import IconDisplay from "../../iconComponent/IconDisplay.tsx";
 
 export const useColumns = (
   handleShow: (id: number) => void,
@@ -167,29 +168,32 @@ export const useColumns = (
       cell: ({ row }) => {
         const id = row.original.id;
         return (
-          <div className="flex gap-2">
-            <Button
-              variant="secondary"
-              size="sxm"
-              style={{ fontSize: "12px" }}
-              onClick={() => handleEdit(id)}
-            >
-              Edit
-            </Button>
+          <div className="flex gap-1">
             <Button
               variant="default"
               size="sxm"
               style={{ fontSize: "12px" }}
               onClick={() => handleShow(id)}
             >
+              <IconDisplay iconName="Eye" addStyle="h-4 w-4 mr-1" />
               Show
             </Button>
             <Button
               variant="sea"
               size="sxm"
               style={{ fontSize: "12px" }}
+              onClick={() => handleEdit(id)}
+            >
+              <IconDisplay iconName="Edit" addStyle="h-4 w-4 mr-1" />
+              Edit
+            </Button>
+            <Button
+              variant="secondary"
+              size="sxm"
+              style={{ fontSize: "12px" }}
               onClick={() => handleDelete(id)}
             >
+              <IconDisplay iconName="Trash" addStyle="h-4 w-4 mr-1" />
               Delete
             </Button>
           </div>

@@ -4,6 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "../../ui/checkbox.tsx";
 import { ArrowUpDown } from "lucide-react";
 import * as Tooltip from "@radix-ui/react-tooltip";
+import IconDisplay from "../../iconComponent/IconDisplay.tsx";
 
 export const createColumns = (
   handleShow: (id: number) => void
@@ -245,6 +246,7 @@ export const createColumns = (
             style={{ fontSize: "12px" }}
             onClick={() => handleShow(id)}
           >
+            <IconDisplay iconName="Eye" addStyle="h-4 w-4 mr-1" />
             Show
           </Button>
         </div>
