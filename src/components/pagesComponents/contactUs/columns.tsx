@@ -164,7 +164,31 @@ export const createColumns = (
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const truncatedText =
+        row?.original?.location?.length > 30
+          ? row.original.location.slice(0, 30) + "..."
+          : row.original.location;
+      return (
+        <Tooltip.Provider>
+          <Tooltip.Root>
+            <Tooltip.Trigger asChild>
+              <span>{truncatedText}</span>
+            </Tooltip.Trigger>
+            <Tooltip.Portal>
+              <Tooltip.Content side="top" align="center">
+                <div className="bg-white p-2 border border-gray-300 rounded shadow-lg max-w-2xl">
+                  {row.original.location}
+                </div>
+                <Tooltip.Arrow className="fill-current text-white" />
+              </Tooltip.Content>
+            </Tooltip.Portal>
+          </Tooltip.Root>
+        </Tooltip.Provider>
+      );
+    },
   },
+
   {
     accessorKey: "status",
     header: ({ column }) => {
@@ -193,19 +217,19 @@ export const createColumns = (
       );
     },
     cell: ({ row }) => {
-      const options: Intl.DateTimeFormatOptions = {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true, // 12 saatlik sistemi kullanmak için
-      };
-      return new Date(row.original.createdDate).toLocaleString(
-        "en-AU",
-        options
+      const date = new Date(row.original.createdDate);
+      const localDate = new Date(
+        date.getTime() - date.getTimezoneOffset() * 60000
       );
-      return;
+      return localDate.toLocaleString(undefined, {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        timeZoneName: "short",
+      });
     },
   },
   {

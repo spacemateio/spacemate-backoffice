@@ -128,16 +128,33 @@ export const createColumns = (
       );
     },
     cell: ({ row }) => {
-      const options: Intl.DateTimeFormatOptions = {
-        day: "2-digit",
-        month: "2-digit",
+      const date = new Date(row.original.created);
+      const localDate = new Date(
+        date.getTime() - date.getTimezoneOffset() * 60000
+      );
+      console.log(
+        "beDate: ",
+        row.original.created,
+        "- locale: ",
+        localDate.toLocaleString(undefined, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+          second: "numeric",
+          timeZoneName: "short",
+        })
+      );
+      return localDate.toLocaleString(undefined, {
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true, // 12 saatlik sistemi kullanmak için
-      };
-      return new Date(row.original.created).toLocaleString("en-AU", options);
-      return;
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        timeZoneName: "short",
+      });
     },
   },
   {
