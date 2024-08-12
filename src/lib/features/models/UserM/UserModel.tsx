@@ -2,6 +2,7 @@ export interface UserModel {
   id: number;
   name: string;
   lastname: string;
+  fullName: string;
   password: string;
   email: string;
   mobile: string;
