@@ -95,22 +95,42 @@ export const createColumns = (
     accessorKey: "accountType",
     header: "Account Type",
     cell: ({ row }) => {
+      return (
+        <>
+          {!row.original.isHost && (
+            <Badge
+              bgColor="rgba(233, 178, 155, 1)"
+              textColor="rgba(197, 83, 35, 1)"
+              text="Renter"
+            />
+          )}
+          {row.original.isHost && (
+            <>
+              <Badge
+                bgColor="rgba(233, 178, 155, 1)"
+                textColor="rgba(197, 83, 35, 1)"
+                text="Renter"
+              />
+              <Badge
+                bgColor="rgba(233, 178, 155, 1)"
+                textColor="rgba(197, 83, 35, 1)"
+                text="Host"
+              />
+            </>
+          )}
+        </>
+      );
+    },
+  },
+  {
+    id: "REGISTER_TYPE",
+    header: "Register Type",
+    cell: ({ row }) => {
       const { bgColor, textColor, text } = getBadgeStyles(
         row.original.accountType
       );
 
-      return (
-        <>
-          <Badge bgColor={bgColor} textColor={textColor} text={text} />
-          {row.original.isHost && (
-            <Badge
-              bgColor="rgba(233, 178, 155, 1)"
-              textColor="rgba(197, 83, 35, 1)"
-              text="Host"
-            />
-          )}
-        </>
-      );
+      return <Badge bgColor={bgColor} textColor={textColor} text={text} />;
     },
   },
   {
