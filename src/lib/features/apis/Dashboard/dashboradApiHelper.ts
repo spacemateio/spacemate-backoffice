@@ -11,7 +11,7 @@ export const dashboardApiHelper = {
           throw error;
         }
     }, 
-    async getNewListings(): Promise<number> { //TODO: maxCount uygun değil
+    async getNewListings(): Promise<number> {
         try {
         const response: any = await axiosInstance.get(
             `/listing/new?limit=1&offset=1`
@@ -21,7 +21,7 @@ export const dashboardApiHelper = {
         throw error;
         }
     },
-    async getListingByStatus(): Promise<number> { //TODO: maxCount uygun değil
+    async getListingByStatus(): Promise<number> { 
         try {
         const response: any = await axiosInstance.get(
             `/listing/all/1?limit=1&offset=1`

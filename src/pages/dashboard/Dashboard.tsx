@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import * as Progress from "@radix-ui/react-progress";
 import { User, Home, FileText, Phone } from "lucide-react";
 import { dashboardApiHelper } from "../../lib/features/apis/Dashboard/dashboradApiHelper";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+
   const [userCount, setUserCount] = useState<number | null>(null);
   const [listingCount, setListingCount] = useState<number | null>(null);
-  const [activeListingCount, setActiveListingCount] = useState<number | null>(
+  const [pendingListingCount, setPendingListingCount] = useState<number | null>(
     null
   );
   const [blogCount, setBlogCount] = useState<number | null>(null);
@@ -18,8 +21,8 @@ const Dashboard = () => {
       try {
         const [
           userCountData,
+          pendingListingCount,
           listingCountData,
-          activeListingData,
           blogCountData,
           contactUsData,
         ] = await Promise.all([
@@ -32,7 +35,7 @@ const Dashboard = () => {
 
         setUserCount(userCountData);
         setListingCount(listingCountData);
-        setActiveListingCount(activeListingData);
+        setPendingListingCount(pendingListingCount);
         setBlogCount(blogCountData);
         setContactUsCount(contactUsData);
       } catch (err: unknown) {
@@ -62,15 +65,18 @@ const Dashboard = () => {
     bgColor,
     iconColor,
     squareBgColor,
+    link,
   }: {
     icon: React.ElementType;
     title: string;
     count: number | null;
     bgColor: string;
     iconColor: string;
-    squareBgColor: string; // Add square background color prop
+    squareBgColor: string;
+    link: string;
   }) => (
     <div
+      onClick={() => navigate(link)}
       className={`flex items-center p-3 rounded-lg shadow-md ${bgColor} w-full`}
     >
       <div
@@ -98,7 +104,8 @@ const Dashboard = () => {
           count={userCount}
           bgColor="bg-gray-100"
           iconColor="text-black"
-          squareBgColor="bg-[#F5C6C6]" // Ecru Red
+          squareBgColor="bg-[#F5C6C6]"
+          link="/admin/userManagement"
         />
         <Card
           icon={Home}
@@ -106,15 +113,17 @@ const Dashboard = () => {
           count={listingCount}
           bgColor="bg-gray-100"
           iconColor="text-black"
-          squareBgColor="bg-[#C6D8F5]" // Ecru Blue
+          squareBgColor="bg-[#C6D8F5]"
+          link="/admin/listingManagement"
         />
         <Card
           icon={Home}
-          title="Active Listings"
-          count={activeListingCount}
+          title="Pending Listings"
+          count={pendingListingCount}
           bgColor="bg-gray-100"
           iconColor="text-black"
-          squareBgColor="bg-[#C6F5D1]" // Ecru Green
+          squareBgColor="bg-[#C6F5D1]"
+          link="/admin/listingManagement"
         />
         <Card
           icon={FileText}
@@ -122,7 +131,8 @@ const Dashboard = () => {
           count={blogCount}
           bgColor="bg-gray-100"
           iconColor="text-black"
-          squareBgColor="bg-[#F5D1C6]" // Ecru Orange
+          squareBgColor="bg-[#F5D1C6]"
+          link="/admin/blogManagement"
         />
         <Card
           icon={Phone}
@@ -130,7 +140,8 @@ const Dashboard = () => {
           count={contactUsCount}
           bgColor="bg-gray-100"
           iconColor="text-black"
-          squareBgColor="bg-[#F5C6E7]" // Ecru Pink
+          squareBgColor="bg-[#F5C6E7]"
+          link="/admin/contactUs"
         />
       </div>
     </div>
