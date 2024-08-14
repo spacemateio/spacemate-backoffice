@@ -133,6 +133,7 @@ const BlogManagementPage = () => {
           handleDelete={() => {}}
           maxCount={maxCount}
           listType=""
+          textFilter={true}
         />
       </div>
       <CustomModal

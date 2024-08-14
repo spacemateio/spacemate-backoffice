@@ -70,7 +70,6 @@ const Navbar = ({ children }: Props) => {
                 size="icon"
                 className="shrink-0 md:hidden"
               >
-                {/* <Menu className="h-5 w-5" />*/}
                 <IconDisplay iconName="Menu" />
                 <span className="sr-only">Toggle navigation menu</span>
               </Button>
@@ -81,7 +80,6 @@ const Navbar = ({ children }: Props) => {
                   to="#"
                   className="flex items-center gap-2 text-lg font-semibold"
                 >
-                  {/*<Package2 className="h-6 w-6" />*/}
                   <IconDisplay iconName="Package2" addStyle="h-6 w-6" />
                   <span className="sr-only">SpaceMate.io</span>
                 </Link>
@@ -89,11 +87,9 @@ const Navbar = ({ children }: Props) => {
                   <Link
                     key={item.id}
                     to={item.url}
-                    className={
-                      selectedMenuItem === item.url
-                        ? "mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-blue-600"
-                        : "mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-blue-600 transition-all hover:text-blue-600"
-                    }
+                    className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-blue-600
+                      ${selectedMenuItem === item.url && "transition-all hover:text-blue-600"}
+                    `}
                     onClick={() => setSelectedMenuItem(item.url)}
                   >
                     <IconDisplay iconName={item.icon} />

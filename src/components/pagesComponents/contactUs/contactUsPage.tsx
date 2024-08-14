@@ -80,6 +80,7 @@ const ContactUsPage = () => {
           maxCount={maxCount}
           listType=""
           allowHandleDelete={true}
+          textFilter={true}
         />
       </div>
       <ConfirmDialog
