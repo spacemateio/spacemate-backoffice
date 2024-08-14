@@ -20,7 +20,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu.tsx";
-import { Input } from "../ui/input.tsx";
+//import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
 import {
   Table,
@@ -53,8 +53,8 @@ interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({
   columns,
   data,
-  filterPlaceholderName,
-  filterHeaderName,
+  // filterPlaceholderName,
+  //filterHeaderName,
   changePagination,
   handleDelete,
   maxCount,
