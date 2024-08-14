@@ -152,7 +152,7 @@ export const createColumns = (
       );
     },
   },
-  {
+  /*{
     accessorKey: "location",
     header: ({ column }) => {
       return (
@@ -188,7 +188,7 @@ export const createColumns = (
         </Tooltip.Provider>
       );
     },
-  },
+  },*/
 
   {
     accessorKey: "status",

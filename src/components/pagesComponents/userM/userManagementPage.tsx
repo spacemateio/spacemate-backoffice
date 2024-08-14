@@ -122,7 +122,7 @@ const UserManagementPage = () => {
           handleDelete={() => {}}
           maxCount={maxCount}
           listType={listType}
-          textFilter={false}
+          textFilter={true}
         />
       </div>
       <CustomModal

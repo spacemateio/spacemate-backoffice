@@ -98,23 +98,15 @@ export const createColumns = (
       return (
         <>
           {!row.original.isHost && (
-            <Badge
-              bgColor="rgba(233, 178, 155, 1)"
-              textColor="rgba(197, 83, 35, 1)"
-              text="Renter"
-            />
+            <Badge bgColor="#C2DFE5" textColor="#243944" text="R" />
           )}
           {row.original.isHost && (
             <>
+              <Badge bgColor="#C2DFE5" textColor="#243944" text="R" />
               <Badge
                 bgColor="rgba(233, 178, 155, 1)"
                 textColor="rgba(197, 83, 35, 1)"
-                text="Renter"
-              />
-              <Badge
-                bgColor="rgba(233, 178, 155, 1)"
-                textColor="rgba(197, 83, 35, 1)"
-                text="Host"
+                text="H"
               />
             </>
           )}
@@ -151,7 +143,7 @@ export const createColumns = (
           <Badge
             bgColor="rgba(253, 205, 205, 1)"
             textColor="rgba(127, 57, 57, 1)"
-            text="Not Verified"
+            text="Unverified"
           />
         );
       }
@@ -205,7 +197,7 @@ export const createColumns = (
           <Badge
             bgColor="rgba(253, 205, 205, 1)"
             textColor="rgba(127, 57, 57, 1)"
-            text="Not Verified"
+            text="Unverified"
           />
         );
       }

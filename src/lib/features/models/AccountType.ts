@@ -9,16 +9,16 @@ export enum AccountType {
 export const getBadgeStyles = (accountType: AccountType) => {
   switch (accountType) {
     case AccountType.Email:
-      return { bgColor: "#D9A19A", textColor: "#4A4031", text: "Email" }; // Red Ecru
+      return { bgColor: "#F0B500", textColor: "#000000", text: "@" }; 
     case AccountType.Google:
-      return { bgColor: "#EEDCB3", textColor: "#4A4031", text: "Google" }; // Yellow Ecru
+      return { bgColor: "#3B7DED", textColor: "#FFFFFF", text: "Gmail" };
     case AccountType.Apple:
-      return { bgColor: "#B8B8B8", textColor: "#2B2418", text: "Apple" }; // Gray Ecru
+      return { bgColor: "#B8B8B8", textColor: "#2B2418", text: "Apple" }; 
     case AccountType.Facebook:
-      return { bgColor: "#9AB3D9", textColor: "#1F1B11", text: "Facebook" }; // Blue Ecru
+      return { bgColor: "#9AB3D9", textColor: "#1F1B11", text: "Facebook" }; 
     case AccountType.Backoffice:
-      return { bgColor: "#ECEAE4", textColor: "#5D5246", text: "Backoffice" }; // Light Ecru
+      return { bgColor: "#ECEAE4", textColor: "#5D5246", text: "Backoffice" }; 
     default:
-      return { bgColor: "#E0D6C5", textColor: "#3D3427", text: "Unknown" }; // Default Ecru
+      return { bgColor: "#E0D6C5", textColor: "#3D3427", text: "Unknown" }; 
   }
 };

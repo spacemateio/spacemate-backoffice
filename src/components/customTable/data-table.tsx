@@ -120,7 +120,7 @@ export function DataTable<TData, TValue>({
     <div>
       {textFilter && (
         <div className="flex items-center py-4">
-          <Input
+          {/*<Input
             placeholder={filterPlaceholderName}
             value={
               (table.getColumn(filterHeaderName)?.getFilterValue() as string) ??
@@ -132,7 +132,7 @@ export function DataTable<TData, TValue>({
                 ?.setFilterValue(event.target.value)
             }
             className="max-w-sm"
-          />
+          />*/}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">
