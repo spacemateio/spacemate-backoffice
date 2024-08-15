@@ -101,14 +101,14 @@ export const createColumns = (
             <Badge bgColor="#C2DFE5" textColor="#243944" text="R" />
           )}
           {row.original.isHost && (
-            <>
+            <div className="flex gap-1">
               <Badge bgColor="#C2DFE5" textColor="#243944" text="R" />
               <Badge
                 bgColor="rgba(233, 178, 155, 1)"
                 textColor="rgba(197, 83, 35, 1)"
                 text="H"
               />
-            </>
+            </div>
           )}
         </>
       );
