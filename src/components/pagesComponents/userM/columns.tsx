@@ -6,6 +6,7 @@ import { Button } from "../../ui/button";
 import { Badge } from "../../ui/badge";
 import Image from "../../image/Image.tsx";
 import { getBadgeStyles } from "../../../lib/features/models/AccountType.ts";
+import IconDisplay from "../../iconComponent/IconDisplay.tsx";
 
 export const createColumns = (
   handleShow: (id: number) => void,
@@ -224,22 +225,22 @@ export const createColumns = (
     cell: ({ row }) => {
       const id = row.original.id;
       return (
-        <div>
+        <div className="flex gap-1">
           <Button
             variant="outline"
             size="sxm"
             style={{ fontSize: "12px" }}
             onClick={() => handleShow(id)}
           >
-            User Id
-          </Button>{" "}
+            <IconDisplay iconName="Eye" addStyle="h-4 w-4" />
+          </Button>
           <Button
             variant="outline"
             size="sxm"
             style={{ fontSize: "12px" }}
             onClick={() => handleListing(id)}
           >
-            Listing
+            <IconDisplay iconName="List" addStyle="h-4 w-4" />
           </Button>
         </div>
       );

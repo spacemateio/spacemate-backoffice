@@ -180,22 +180,20 @@ export const createColumns = (
       return (
         <div className="flex gap-1">
           <Button
-            variant="default"
+            variant="outline"
             size="sxm"
             style={{ fontSize: "12px" }}
             onClick={() => handleShow(id)}
           >
-            <IconDisplay iconName="Eye" addStyle="h-4 w-4 mr-1" />
-            Show
+            <IconDisplay iconName="Eye" addStyle="h-4 w-4" />
           </Button>
           <Button
-            variant="sea"
+            variant="outline"
             size="sxm"
             style={{ fontSize: "12px" }}
             onClick={() => handleUpdate(id)}
           >
-            <IconDisplay iconName="Edit" addStyle="h-4 w-4 mr-1" />
-            Edit
+            <IconDisplay iconName="Edit" addStyle="h-4 w-4" />
           </Button>
         </div>
       );
