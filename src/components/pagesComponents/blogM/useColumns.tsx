@@ -98,31 +98,28 @@ export const useColumns = (
         return (
           <div className="flex gap-1">
             <Button
-              variant="default"
+              variant="outline"
               size="sxm"
               style={{ fontSize: "12px" }}
               onClick={() => handleShow(id)}
             >
-              <IconDisplay iconName="Eye" addStyle="h-4 w-4 mr-1" />
-              Show
+              <IconDisplay iconName="Eye" addStyle="h-4 w-4" />
             </Button>
             <Button
-              variant="sea"
+              variant="outline"
               size="sxm"
               style={{ fontSize: "12px" }}
               onClick={() => handleEdit(id)}
             >
-              <IconDisplay iconName="Edit" addStyle="h-4 w-4 mr-1" />
-              Edit
+              <IconDisplay iconName="Edit" addStyle="h-4 w-4" />
             </Button>
             <Button
-              variant="secondary"
+              variant="destructive"
               size="sxm"
               style={{ fontSize: "12px" }}
               onClick={() => handleDelete(id)}
             >
-              <IconDisplay iconName="Trash" addStyle="h-4 w-4 mr-1" />
-              Delete
+              <IconDisplay iconName="Trash" addStyle="h-4 w-4" />
             </Button>
           </div>
         );

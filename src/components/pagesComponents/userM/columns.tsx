@@ -232,15 +232,15 @@ export const createColumns = (
             style={{ fontSize: "12px" }}
             onClick={() => handleShow(id)}
           >
-            <IconDisplay iconName="Eye" addStyle="h-4 w-4 mr-1" />
-          </Button>{" "}
+            <IconDisplay iconName="Eye" addStyle="h-4 w-4" />
+          </Button>
           <Button
             variant="outline"
             size="sxm"
             style={{ fontSize: "12px" }}
             onClick={() => handleListing(id)}
           >
-            <IconDisplay iconName="List" addStyle="h-4 w-4 mr-1" />
+            <IconDisplay iconName="List" addStyle="h-4 w-4" />
           </Button>
         </div>
       );
