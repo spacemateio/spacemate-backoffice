@@ -1,14 +1,16 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { UserModel } from "../../../lib/features/models/UserM/UserModel.tsx";
 import { LabeledInput } from "../../labeledInput/LabeledInput.tsx";
-import { Checkbox } from "../../ui/checkbox.tsx";
-import { Textarea } from "../../ui/textarea.tsx";
 import { Button } from "../../ui/button.tsx";
-import Image from "../../image/Image.tsx";
+import { UserModel } from "../../../lib/features/models/UserM/UserModel.tsx";
 import { userApiHelper } from "../../../lib/features/apis/UserM/userApiHelper.tsx";
 import { useToast } from "../../Toast/ToastContext.tsx";
 import { useDeleteUser } from "./useDeleteUser.ts";
 import { Cross2Icon } from "@radix-ui/react-icons";
+import { Badge } from "../../ui/badge";
+import { Label } from "../../ui/label.tsx";
+import Image from "../../image/Image.tsx";
+import IconDisplay from "../../iconComponent/IconDisplay.tsx";
+import { getBadgeStyles } from "../../../lib/features/models/AccountType.ts";
 
 interface UserManagementFormProps {
   isShow: boolean;
@@ -65,22 +67,6 @@ export default function UserManagementForm({
     });
   };
 
-  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: checked,
-    });
-  };
-
-  /*
-  const handleDateChange = (name: keyof UserModel, date: Date) => {
-    setFormData({
-      ...formData,
-      [name]: date,
-    });
-  };
-   */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("81 UserManagementForm: ", formData);
@@ -113,105 +99,139 @@ export default function UserManagementForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="flex items-start">
-        {formData.avatar && (
-          <div className="w-48 h-48 relative">
-            <Image
-              className="object-contain"
-              src={formData.avatar}
-              alt="Avatar Preview"
-              layout="fill"
-            />
+      <div className="flex items-center justify-between mt-3">
+        <div className="flex items-center">
+          <div className="w-24 h-24 relative mr-4">
+            {formData.avatar ? (
+              <Image
+                className="object-cover rounded-full"
+                src={formData.avatar}
+                alt="Avatar Preview"
+                layout="fill"
+              />
+            ) : (
+              <div className="w-full h-full bg-orange-500 rounded-full flex items-center justify-center">
+                <span className="text-white text-4xl font-semibold">
+                  {formData.name?.charAt(0).toUpperCase()}
+                  {formData.lastname?.charAt(0).toUpperCase()}
+                </span>
+              </div>
+            )}
           </div>
-        )}
-        <div className="flex flex-col gap-4 flex-grow">
-          <div className="flex gap-4">
-            <div className="w-1/2">
-              <LabeledInput
-                label="Name"
-                name="name"
-                placeholder="Name"
-                value={formData.name || ""}
-                onChange={handleChange}
-                disabled={isShow}
-              />
-            </div>
-            <div className="w-1/2">
-              <LabeledInput
-                label="Last Name"
-                name="lastname"
-                placeholder="Last Name"
-                value={formData.lastname || ""}
-                onChange={handleChange}
-                disabled={isShow}
-              />
-            </div>
-          </div>
-          <div className="flex gap-4">
-            <div className="w-1/2">
-              <LabeledInput
-                label="Password"
-                name="password"
-                type="password"
-                placeholder="Password"
-                value={formData.password || ""}
-                onChange={handleChange}
-                disabled={isShow}
-              />
-            </div>
-            <div className="w-1/2">
-              <LabeledInput
-                label="Email"
-                name="email"
-                type="email"
-                placeholder="Email"
-                value={formData.email || ""}
-                onChange={handleChange}
-                disabled={isShow}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div className="flex gap-4">
-        <div className="w-25">
-          <LabeledInput
-            label="Mobile Code"
-            name="mobileCode"
-            placeholder="Code"
-            value={formData.mobileCode || ""}
-            onChange={handleChange}
-            disabled={isShow}
-          />
+          <div>
+            <h2 className="text-4xl font-semibold mb-2">
+              {formData.name?.charAt(0).toUpperCase() +
+                formData.name?.slice(1).toLowerCase()}{" "}
+              {formData.lastname?.charAt(0).toUpperCase() +
+                formData.lastname?.slice(1).toLowerCase()}
+            </h2>
+            {!formData.isHost && (
+              <Badge bgColor="#C2DFE5" textColor="#243944" text="Renter" />
+            )}
+            {formData.isHost && (
+              <div className="flex gap-1">
+                <Badge bgColor="#C2DFE5" textColor="#243944" text="Renter" />
+                <Badge
+                  bgColor="rgba(233, 178, 155, 1)"
+                  textColor="rgba(197, 83, 35, 1)"
+                  text="Host"
+                />
+              </div>
+            )}
+          </div>
         </div>
-        <div className="flex-1">
-          <LabeledInput
-            label="Mobile"
-            name="mobile"
-            placeholder="Mobile"
-            value={formData.mobile || ""}
-            onChange={handleChange}
-            disabled={isShow}
-          />
+
+        <div className="flex flex-col items-end gap-3 ml-auto">
+          <div className="flex items-center">
+            <Label className="mr-2 text-gray-700">Email Verification:</Label>
+            {formData.status ? (
+              <Badge
+                bgColor="rgba(186, 242, 199, 1)"
+                textColor="rgba(36, 125, 55, 1)"
+                text="Verified"
+              />
+            ) : (
+              <Badge
+                bgColor="rgba(253, 205, 205, 1)"
+                textColor="rgba(127, 57, 57, 1)"
+                text="Unverified"
+              />
+            )}
+          </div>
+          <div className="flex items-center">
+            <Label className="mr-2 text-gray-700">ID Verification:</Label>
+            {formData.isVerified ? (
+              <Badge
+                bgColor="rgba(186, 242, 199, 1)"
+                textColor="rgba(36, 125, 55, 1)"
+                text="Verified"
+              />
+            ) : (
+              <Badge
+                bgColor="rgba(253, 205, 205, 1)"
+                textColor="rgba(127, 57, 57, 1)"
+                text="Unverified"
+              />
+            )}
+          </div>
+          <div className="flex items-center">
+            <Label className="mr-2 text-gray-700">Account Type</Label>
+            {formData.accountType && (
+              <Badge
+                bgColor={getBadgeStyles(formData.accountType).bgColor}
+                textColor={getBadgeStyles(formData.accountType).textColor}
+                text={getBadgeStyles(formData.accountType).text}
+              />
+            )}
+          </div>
         </div>
       </div>
-      <div>
-        <label
-          htmlFor="address"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Address
-        </label>
-        <Textarea
-          name="address"
-          id="address"
-          placeholder="Address"
-          value={formData.address || ""}
-          onChange={handleChange}
-          disabled={isShow}
-          className="mt-1"
-        />
+      <div className="py-4">
+        <hr />
+      </div>
+      <div className="flex flex-col flex-grow gap-4">
+        <div className="space-y-4">
+          <div className="flex items-center">
+            <Label className="text-gray-700">Email:</Label>
+            <IconDisplay
+              iconName="Mail"
+              addStyle="md:ml-16 mr-2 text-gray-700"
+            />
+            <span className="text-gray-700">{formData.email}</span>
+          </div>
+          <div className="flex items-center">
+            <Label className="text-gray-700">Phone:</Label>
+            <IconDisplay
+              iconName="Phone"
+              addStyle="text-gray-700 md:ml-14 mr-2 "
+            />
+            <span className="text-gray-700">
+              {formData.mobileCode || ""} {formData.mobile || ""}
+            </span>
+          </div>
+          <div className="flex items-center">
+            <Label className="text-gray-700">Created Date:</Label>
+            <IconDisplay
+              iconName="Calendar"
+              addStyle="text-gray-700 md:ml-3 mr-2 "
+            />
+            <span className="text-gray-700">
+              {new Date(formData.createDate).toLocaleDateString()}
+            </span>
+          </div>
+          <div className="flex items-center">
+            <Label className="text-gray-700">Address:</Label>
+            <IconDisplay
+              iconName="MapPin"
+              addStyle="text-gray-700 md:ml-11 mr-2 "
+            />
+            <span className="text-gray-700">{formData.address || ""}</span>
+          </div>
+        </div>
+      </div>
+      <div className="py-4">
+        <hr />
       </div>
       <LabeledInput
         label="Town"
@@ -237,86 +257,7 @@ export default function UserManagementForm({
         onChange={handleChange}
         disabled={isShow}
       />
-      <div>
-        <label
-          htmlFor="birthDay"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Birthday
-        </label>
-      </div>
-      <div className="flex gap-4">
-        <div className="flex items-center">
-          <Checkbox
-            name="isHost"
-            id="isHost"
-            checked={formData.isHost}
-            onChange={() => handleCheckboxChange}
-            disabled={isShow}
-          />
-          <label htmlFor="isHost" className="ml-2">
-            Is Host
-          </label>
-        </div>
-        <div className="flex items-center">
-          <Checkbox
-            name="isVerified"
-            id="isVerified"
-            checked={formData.isVerified}
-            onChange={() => handleCheckboxChange}
-            disabled={isShow}
-          />
-          <label htmlFor="isVerified" className="ml-2">
-            Is Verified
-          </label>
-        </div>
-      </div>
-      <div>
-        <label
-          htmlFor="accountType"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Account Type
-        </label>
-        <select
-          name="accountType"
-          id="accountType"
-          value={formData.accountType.toString()} // Convert to string for Select component
-          onChange={handleChange} // Correctly handle change
-          className="border p-2 rounded"
-          disabled={isShow}
-        >
-          <option value="0">Standard</option>
-          <option value="1">Premium</option>
-        </select>
-      </div>
-      <div>
-        <label
-          htmlFor="status"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Status
-        </label>
-        <select
-          name="status"
-          id="status"
-          value={formData.status.toString()} // Convert to string for Select component
-          onChange={handleChange} // Correctly handle change
-          className="border p-2 rounded"
-          disabled={isShow}
-        >
-          <option value="0">Inactive</option>
-          <option value="1">Active</option>
-        </select>
-      </div>
-      <LabeledInput
-        label="Avatar URL"
-        name="avatar"
-        placeholder="Avatar URL"
-        value={formData.avatar || ""}
-        onChange={handleChange}
-        disabled={isShow}
-      />
+
       <LabeledInput
         label="Emergency Contact"
         name="emergencyContact"
@@ -341,26 +282,6 @@ export default function UserManagementForm({
         onChange={handleChange}
         disabled={isShow}
       />
-      {/*<div>
-        <label htmlFor="updateDate" className="block text-sm font-medium text-gray-700">Update Date</label>
-        <DatePicker
-          name="updateDate"
-          id="updateDate"
-          selected={formData.updateDate}
-          onChange={(date) => handleDateChange("updateDate", date)}
-          disabled={isShow}
-        />
-      </div>
-      <div>
-        <label htmlFor="createDate" className="block text-sm font-medium text-gray-700">Create Date</label>
-        <DatePicker
-          name="createDate"
-          id="createDate"
-          selected={formData.createDate}
-          onChange={(date) => handleDateChange("createDate", date)}
-          disabled={isShow}
-        />
-      </div>*/}
       <LabeledInput
         label="Referral Code"
         name="refCode"
@@ -369,7 +290,25 @@ export default function UserManagementForm({
         onChange={handleChange}
         disabled={isShow}
       />
-
+      <div>
+        <label
+          htmlFor="status"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Status
+        </label>
+        <select
+          name="status"
+          id="status"
+          value={formData.status.toString()}
+          onChange={handleChange}
+          className="border p-2 rounded"
+          disabled={isShow}
+        >
+          <option value="0">Inactive</option>
+          <option value="1">Active</option>
+        </select>
+      </div>
       <Button
         variant="destructive"
         onClick={() => handleDeleteUser(initialData?.id!, initialData?.email!)}
@@ -377,7 +316,6 @@ export default function UserManagementForm({
       >
         Delete user completely <Cross2Icon />
       </Button>
-
       <div className="flex space-x-2 sticky bottom-0 bg-white p-4 justify-between">
         <div>
           <Button type="submit" className="mr-2" disabled={isShow}>
