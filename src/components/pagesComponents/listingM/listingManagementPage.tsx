@@ -79,6 +79,7 @@ const ListingManagementPage = () => {
           maxCount={maxCount}
           listType={listType}
           textFilter={true}
+          countName={`${listType.charAt(0).toUpperCase() + listType.slice(1)} Listing`}
         />
       </div>
       <CustomModal

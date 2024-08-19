@@ -123,6 +123,7 @@ const UserManagementPage = () => {
           maxCount={maxCount}
           listType={listType}
           textFilter={true}
+          countName="User"
         />
       </div>
       <CustomModal
