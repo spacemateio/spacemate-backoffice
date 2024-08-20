@@ -18,8 +18,8 @@ const SimpleTable: React.FC<SimpleTableProps> = ({ data }) => {
   };
 
   // Butona tıklandığında yönlendirme fonksiyonu
-  const handleViewDetails = (id: number) => {
-    navigate(`/admin/listingManagement/${id}`);
+  const handleViewDetails = () => {
+    navigate(`/admin/listingManagement`);
   };
 
   return (
@@ -55,12 +55,12 @@ const SimpleTable: React.FC<SimpleTableProps> = ({ data }) => {
                   {item.price}
                 </td>
                 <td className="px-4 py-2 text-sm text-gray-700 flex items-center space-x-4">
-                  <div onClick={() => handleViewDetails(item.id)}>
+                  <div onClick={handleViewDetails}>
                     <IconDisplay iconName="Eye" />
                   </div>
                   <button
                     className="px-2 py-1 text-sm text-white bg-blue-500 rounded"
-                    onClick={() => handleViewDetails(item.id)}
+                    onClick={handleViewDetails}
                   >
                     Action
                   </button>
