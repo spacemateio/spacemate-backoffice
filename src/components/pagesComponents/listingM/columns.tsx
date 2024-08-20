@@ -2,7 +2,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
 import { Checkbox } from "../../ui/checkbox.tsx";
 import { Button } from "../../ui/button.tsx";
-import { ArrowUpDown } from "lucide-react";
 import IconDisplay from "../../iconComponent/IconDisplay.tsx";
 
 export const createColumns = (
@@ -44,7 +43,7 @@ export const createColumns = (
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Email
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
     },
@@ -58,7 +57,7 @@ export const createColumns = (
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Title
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
     },
@@ -79,7 +78,7 @@ export const createColumns = (
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Price
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
     },
@@ -96,7 +95,7 @@ export const createColumns = (
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Country
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
     },
@@ -110,7 +109,7 @@ export const createColumns = (
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           City
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
     },
@@ -124,7 +123,7 @@ export const createColumns = (
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Created Date
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
     },
@@ -167,7 +166,7 @@ export const createColumns = (
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           State
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
     },

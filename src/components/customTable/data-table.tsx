@@ -12,7 +12,6 @@ import {
   VisibilityState,
   PaginationState,
 } from "@tanstack/react-table";
-
 import { DataTablePagination } from "./data-table-pagination";
 import {
   DropdownMenu,
@@ -37,6 +36,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   filterPlaceholderName: string;
   filterHeaderName: string;
+  paginationShow?: boolean;
   changePagination: (
     states: PaginationState,
     listType: string,
@@ -56,6 +56,7 @@ export function DataTable<TData, TValue>({
   data,
   // filterPlaceholderName,
   //filterHeaderName,
+  paginationShow = true,
   changePagination,
   handleDelete,
   maxCount,
@@ -213,7 +214,7 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       <div className="flex flex-col gap-2.5 mt-3">
-        <DataTablePagination table={table} />
+        {paginationShow && <DataTablePagination table={table} />}
         {allowHandleDelete &&
           table.getFilteredSelectedRowModel().rows.length > 0 && (
             <Button

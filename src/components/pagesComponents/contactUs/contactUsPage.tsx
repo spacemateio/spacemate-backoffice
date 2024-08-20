@@ -46,6 +46,7 @@ const ContactUsPage = () => {
           tableData.filter((entry) => !selectedRowIds.includes(entry.id))
         );
         setIsDialogOpen(false);
+        window.location.reload(); // Sayfayı yeniden yükler
         addToast("Contact us entry deleted successfully", "success");
       } catch (error) {
         addToast("Failed to delete contact us entry", "error");
