@@ -5,6 +5,7 @@ import { LabeledInput } from "../../labeledInput/LabeledInput.tsx";
 import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
 import { adApiHelper } from "../../../lib/features/apis/AdM/adApiHelper.tsx";
 import Image from "../../image/Image.tsx";
+import ConfirmDialog from "../../ui/ConfirmDialog.tsx";
 
 interface ListingManagementFormProps {
   isShow: boolean;
@@ -58,6 +59,13 @@ export default function ListingManagementForm({
     status: 0,
   });
 
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    onConfirm: () => {},
+    title: "",
+    message: "",
+  });
+
   useEffect(() => {
     if (initialData) {
       setFormData(initialData);
@@ -93,6 +101,43 @@ export default function ListingManagementForm({
     } catch (error) {
       addToast("Failed to update listing", "error");
     }
+  };
+
+  const confirmReject = () => {
+    setConfirmDialog({
+      isOpen: true,
+      onConfirm: () => {
+        handleReject(formData.id);
+        setConfirmDialog({ ...confirmDialog, isOpen: false });
+      },
+      title: "Confirm Reject",
+      message: "Are you sure you want to reject this Listing?",
+    });
+  };
+
+  const confirmApprove = () => {
+    setConfirmDialog({
+      isOpen: true,
+      onConfirm: () => {
+        handleApprove(formData.id);
+        setConfirmDialog({ ...confirmDialog, isOpen: false });
+      },
+      title: "Confirm Approve",
+      message: "Are you sure you want to approve this Listing?",
+    });
+  };
+
+  const confirmSave = () => {
+    setConfirmDialog({
+      isOpen: true,
+      onConfirm: () => {
+        handleSave();
+        setConfirmDialog({ ...confirmDialog, isOpen: false });
+      },
+      title: "Confirm Save Changes",
+      message:
+        "Do you want to save the updates you made to the title and description?",
+    });
   };
 
   return (
@@ -277,7 +322,7 @@ export default function ListingManagementForm({
               className="mr-2"
               type="button"
               variant="sea"
-              onClick={handleSave}
+              onClick={confirmSave}
             >
               Save
             </Button>
@@ -290,7 +335,7 @@ export default function ListingManagementForm({
                 className="mr-2"
                 type="submit"
                 variant="approve"
-                onClick={() => handleApprove(formData.id)}
+                onClick={() => confirmApprove()}
               >
                 Approve
               </Button>
@@ -299,7 +344,7 @@ export default function ListingManagementForm({
               <Button
                 type="button"
                 variant="destructive"
-                onClick={() => handleReject(formData.id)}
+                onClick={confirmReject}
               >
                 Reject
               </Button>
@@ -307,6 +352,13 @@ export default function ListingManagementForm({
           </div>
         )}
       </div>
+      <ConfirmDialog
+        isOpen={confirmDialog.isOpen}
+        onClose={() => setConfirmDialog({ ...confirmDialog, isOpen: false })}
+        onConfirm={confirmDialog.onConfirm}
+        title={confirmDialog.title}
+        message={confirmDialog.message}
+      />
     </div>
   );
 }

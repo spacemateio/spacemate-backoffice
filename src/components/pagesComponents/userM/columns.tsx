@@ -1,5 +1,4 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
 import { Checkbox } from "../../ui/checkbox";
 import { UserModel } from "../../../lib/features/models/UserM/UserModel";
 import { Button } from "../../ui/button";
@@ -44,7 +43,7 @@ export const createColumns = (
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Full Name
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
     },
@@ -86,7 +85,7 @@ export const createColumns = (
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Email
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
     },
@@ -160,7 +159,7 @@ export const createColumns = (
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Register Date
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
     },
@@ -214,7 +213,7 @@ export const createColumns = (
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           REF Code
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
     },

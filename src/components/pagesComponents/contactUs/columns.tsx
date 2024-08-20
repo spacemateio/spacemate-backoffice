@@ -2,7 +2,6 @@ import { ContactUsModel } from "../../../lib/features/models/ContactUs/ContactUs
 import { Button } from "../../ui/button.tsx";
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "../../ui/checkbox.tsx";
-import { ArrowUpDown } from "lucide-react";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import IconDisplay from "../../iconComponent/IconDisplay.tsx";
 
@@ -40,7 +39,7 @@ export const createColumns = (
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Id
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
     },
@@ -54,7 +53,7 @@ export const createColumns = (
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           userId
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
     },
@@ -69,7 +68,7 @@ export const createColumns = (
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Full Name
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
     },
@@ -88,7 +87,7 @@ export const createColumns = (
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Email
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
     },
@@ -106,7 +105,7 @@ export const createColumns = (
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Title
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
     },
@@ -127,7 +126,7 @@ export const createColumns = (
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Message
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
     },
@@ -199,7 +198,7 @@ export const createColumns = (
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Status
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
     },
@@ -213,7 +212,7 @@ export const createColumns = (
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           CreatedDate
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
     },
