@@ -38,11 +38,8 @@ const Navbar = ({ children }: Props) => {
                 <Link
                   key={item.id}
                   to={item.url}
-                  className={
-                    selectedMenuItem === item.url
-                      ? "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-blue-600 bg-muted text-blue-600"
-                      : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-blue-600"
-                  }
+                  className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-blue-600             
+                    ${selectedMenuItem === item.url ? "bg-muted text-blue-600" : "text-gray-500"}`}
                   onClick={() => setSelectedMenuItem(item.url)}
                 >
                   <IconDisplay iconName={item.icon} />
@@ -78,17 +75,21 @@ const Navbar = ({ children }: Props) => {
               <nav className="grid gap-2 text-lg font-medium">
                 <Link
                   to="#"
-                  className="flex items-center gap-2 text-lg font-semibold"
+                  className="flex items-center gap-2 text-lg font-semibold mb-4"
                 >
-                  <IconDisplay iconName="Package2" addStyle="h-6 w-6" />
-                  <span className="sr-only">SpaceMate.io</span>
+                  <img
+                    src="https://spacemate.io/favicon.ico"
+                    alt="SpaceMate.io"
+                    className="h-6 w-6"
+                  />
+                  <span className="">SpaceMate.io</span>
                 </Link>
                 {menuItems.map((item) => (
                   <Link
                     key={item.id}
                     to={item.url}
-                    className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-blue-600
-                      ${selectedMenuItem === item.url && "transition-all hover:text-blue-600"}
+                    className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 transition-all hover:text-blue-600
+                      ${selectedMenuItem === item.url ? "text-blue-600" : "text-gray-500"}
                     `}
                     onClick={() => setSelectedMenuItem(item.url)}
                   >
@@ -98,7 +99,7 @@ const Navbar = ({ children }: Props) => {
                 ))}
                 <Link
                   to=""
-                  className="flex items-center gap-3 rounded-lg px-3 py-2 text-red-500 transition-all hover:text-red-700"
+                  className="flex items-center gap-3 rounded-lg py-2 text-red-500 transition-all hover:text-red-700"
                   onClick={() => signOut()}
                 >
                   <IconDisplay iconName="LogOut" />

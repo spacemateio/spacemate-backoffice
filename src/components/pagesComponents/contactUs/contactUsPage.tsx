@@ -97,7 +97,7 @@ const ContactUsPage = () => {
         onClose={handleCloseModal}
         onTogglePosition={handleTogglePosition}
         isCentered={isCentered}
-        title="Listing Detail"
+        title="Contact Us Detail"
       >
         <ContactUsForm isShow={isShow} initialData={showRow} />
       </CustomModal>
