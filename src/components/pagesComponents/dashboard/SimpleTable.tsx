@@ -58,12 +58,6 @@ const SimpleTable: React.FC<SimpleTableProps> = ({ data }) => {
                   <div onClick={handleViewDetails}>
                     <IconDisplay iconName="Eye" />
                   </div>
-                  <button
-                    className="px-2 py-1 text-sm text-white bg-blue-500 rounded"
-                    onClick={handleViewDetails}
-                  >
-                    Action
-                  </button>
                 </td>
               </tr>
             ))}
