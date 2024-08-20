@@ -48,6 +48,7 @@ interface DataTableProps<TData, TValue> {
   textFilter?: boolean;
   listType: string;
   allowHandleDelete?: boolean;
+  countName?: string;
 }
 
 export function DataTable<TData, TValue>({
@@ -62,6 +63,7 @@ export function DataTable<TData, TValue>({
   textFilter = false,
   listType,
   allowHandleDelete = false,
+  countName = "",
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -120,7 +122,13 @@ export function DataTable<TData, TValue>({
     <div>
       {textFilter && (
         <div className="flex items-center py-4">
-          {maxCount === 1 ? "" : <span>User Count: {maxCount}</span>}
+          {maxCount === 1 ? (
+            ""
+          ) : (
+            <span>
+              {countName} Count: {maxCount}
+            </span>
+          )}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">

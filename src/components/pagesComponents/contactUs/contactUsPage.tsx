@@ -81,6 +81,7 @@ const ContactUsPage = () => {
           listType=""
           allowHandleDelete={true}
           textFilter={true}
+          countName="Contact Us Entry"
         />
       </div>
       <ConfirmDialog

@@ -134,6 +134,7 @@ const BlogManagementPage = () => {
           maxCount={maxCount}
           listType=""
           textFilter={true}
+          countName="Blog"
         />
       </div>
       <CustomModal

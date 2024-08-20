@@ -26,12 +26,16 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error?.response?.status === 401) {
+    const status = error?.response?.status;
+    const message = error?.response?.data?.message;
+    if (
+      status === 401 ||
+      message === "Token expired" ||
+      message === "Unauthorized"
+    ) {
       authLocalStorageService.removeUser();
-      //window.location.reload();
       window.location.href = "/auth/login";
     }
-
     throw error;
   }
 );
