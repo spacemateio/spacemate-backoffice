@@ -63,7 +63,7 @@ export default function UserManagementForm({
   }, [isShow, initialData]);
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
     setFormData({
@@ -339,13 +339,16 @@ export default function UserManagementForm({
           </select>
         </div>
         <Button
+          style={{
+            display: "none",
+          }}
           variant="destructive"
           onClick={() =>
             handleDeleteUser(initialData?.id!, initialData?.email!)
           }
           disabled={!(initialData !== undefined)}
         >
-          Delete user completely <Cross2Icon />
+          Delete user completely <Cross2Icon className="ml-2" />
         </Button>
         <div className="flex space-x-2 sticky bottom-0 bg-white p-4 justify-between">
           <div>
