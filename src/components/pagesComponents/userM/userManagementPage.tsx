@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createColumns } from "./columns";
-import { Input } from "../../ui/input.tsx";
 import { useToast } from "../../Toast/ToastContext.tsx";
 import { DataTable } from "../../customTable/data-table.tsx";
 import { PaginationState, SortingState } from "@tanstack/react-table";
