@@ -1,6 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
-import { Checkbox } from "../../ui/checkbox.tsx";
 import { Button } from "../../ui/button.tsx";
 import IconDisplay from "../../iconComponent/IconDisplay.tsx";
 
@@ -8,38 +7,36 @@ export const createColumns = (
   handleShow: (id: number) => void
 ): ColumnDef<AdModel>[] => [
   {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
     accessorKey: "id",
     header: "Id",
   },
   {
     accessorKey: "email",
-    header: "Email",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Email
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "title",
-    header: "Title",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Title
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const truncatedText =
         row.original.title.length > 30
@@ -50,19 +47,113 @@ export const createColumns = (
   },
   {
     accessorKey: "price",
-    header: "Price",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Price
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      return <>{`$${row.original.price}`}</>;
+    },
   },
   {
     accessorKey: "country",
-    header: "Country",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Country
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "city",
-    header: "City",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          City
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "created",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Created Date
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const date = new Date(row.original.created);
+      const localDate = new Date(
+        date.getTime() - date.getTimezoneOffset() * 60000
+      );
+      console.log(
+        "beDate: ",
+        row.original.created,
+        "- locale: ",
+        localDate.toLocaleString(undefined, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+          second: "numeric",
+          timeZoneName: "short",
+        })
+      );
+      const dateTimeString = localDate.toLocaleString(undefined, {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+      const timeZoneString = localDate.toLocaleString(undefined, {
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        timeZoneName: "short",
+      });
+      return (
+        <div>
+          <div>{dateTimeString}</div>
+          <div>{timeZoneString}</div>
+        </div>
+      );
+    },
   },
   {
     accessorKey: "state",
-    header: "State",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          State
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     id: "actions",
@@ -70,15 +161,14 @@ export const createColumns = (
     cell: ({ row }) => {
       const id = row.original.id;
       return (
-        <div>
+        <div className="flex gap-1">
           <Button
-            variant="default"
+            variant="outline"
             size="sxm"
             style={{ fontSize: "12px" }}
             onClick={() => handleShow(id)}
           >
-            <IconDisplay iconName="Eye" addStyle="h-4 w-4 mr-1" />
-            Show
+            <IconDisplay iconName="Eye" addStyle="h-4 w-4" />
           </Button>
         </div>
       );

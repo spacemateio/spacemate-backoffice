@@ -1,5 +1,4 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Checkbox } from "../../ui/checkbox";
 import { UserModel } from "../../../lib/features/models/UserM/UserModel";
 import { Button } from "../../ui/button";
 import { Badge } from "../../ui/badge";
@@ -11,28 +10,6 @@ export const createColumns = (
   handleShow: (id: number) => void,
   handleListing: (id: number) => void
 ): ColumnDef<UserModel>[] => [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
   {
     accessorFn: (row) => `${row.name} ${row.lastname}`,
     id: "NAME",

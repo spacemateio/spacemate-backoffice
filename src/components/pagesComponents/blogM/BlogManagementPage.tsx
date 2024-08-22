@@ -119,23 +119,27 @@ const BlogManagementPage = () => {
       <div className="py-5">
         <p>Blog Management</p>
       </div>
-      <Button className="bg-red-600" onClick={handleAddNewBlog}>
-        <IconDisplay iconName="Plus" addStyle="mr-1" />
-        Add New Blog
-      </Button>
       <div className="py-1">
-        <DataTable
-          columns={columns}
-          data={tableData}
-          filterPlaceholderName="Filter titles..."
-          filterHeaderName="title"
-          changePagination={changePagination}
-          handleDelete={() => {}}
-          maxCount={maxCount}
-          listType=""
-          textFilter={true}
-          countName="Blog"
-        />
+        <div className="absolute z-10" style={{ marginTop: "16px" }}>
+          <Button className="bg-red-600" onClick={handleAddNewBlog}>
+            <IconDisplay iconName="Plus" addStyle="mr-1" />
+            Add New Blog
+          </Button>
+        </div>
+        <div className="relative">
+          <DataTable
+            columns={columns}
+            data={tableData}
+            filterPlaceholderName="Filter titles..."
+            filterHeaderName="title"
+            changePagination={changePagination}
+            handleDelete={() => {}}
+            maxCount={maxCount}
+            listType=""
+            textFilter={true}
+            countName="Blog"
+          />{" "}
+        </div>
       </div>
       <CustomModal
         isOpen={isModalOpen}

@@ -67,20 +67,25 @@ const ListingManagementPage = () => {
       <div className="py-5">
         <p>List Management</p>
       </div>
-      <ListTypeComponent listType={listType} setListType={setListType} />
+
       <div className="py-1">
-        <DataTable
-          columns={columns}
-          data={tableData}
-          filterPlaceholderName="Filter titles..."
-          filterHeaderName="title"
-          changePagination={changePagination}
-          handleDelete={() => {}}
-          maxCount={maxCount}
-          listType={listType}
-          textFilter={true}
-          countName={`${listType.charAt(0).toUpperCase() + listType.slice(1)} Listing`}
-        />
+        <div className="absolute z-10" style={{ marginTop: "16px" }}>
+          <ListTypeComponent listType={listType} setListType={setListType} />
+        </div>
+        <div className="relative">
+          <DataTable
+            columns={columns}
+            data={tableData}
+            filterPlaceholderName="Filter titles..."
+            filterHeaderName="title"
+            changePagination={changePagination}
+            handleDelete={() => {}}
+            maxCount={maxCount}
+            listType={listType}
+            textFilter={true}
+            countName={`${listType.charAt(0).toUpperCase() + listType.slice(1)} Listing`}
+          />{" "}
+        </div>
       </div>
       <CustomModal
         isOpen={isModalOpen}

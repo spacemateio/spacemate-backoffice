@@ -23,37 +23,21 @@ export default function ListingManagementForm({
     userId: 0,
     email: "",
     title: "",
-    //address: "",
     city: "",
     state: "",
     country: "",
     vote: 0,
-    //reviewCount: 0,
     description: "",
-    //accessType: "",
-    //accessTimes: 0,
-    //accessTimeText: "",
-    //listingType: 0,
-    //space: "",
-    //locked: false,
-    //uid: 0,
     avatar: "",
     avatar_preview: "",
-    //uname: "",
-    //userReviewCount: 0,
     location: "",
-    //features: "",
     price: 0,
     images: [],
     isFavourite: false,
-    //isVerified: false,
     street_name: "",
     postcode: "",
     unit_no: "",
     timezone: "",
-    //height: 0,
-    //length: 0,
-    //width: 0,
     currency: "",
     created: "",
     status: 0,
@@ -90,6 +74,7 @@ export default function ListingManagementForm({
       addToast("Failed to reject listing", "error");
     }
   };
+
   const handleSave = async () => {
     try {
       addToast("Processing your listing update...", "info");
@@ -142,179 +127,128 @@ export default function ListingManagementForm({
 
   return (
     <div className="space-y-4">
-      <div className="flex gap-4">
-        {formData.avatar && (
-          <div className="w-48 h-48 relative">
-            <Image
-              className="object-contain"
-              src={formData.avatar}
-              alt="Avatar Preview"
-              layout="fill"
-            />
+      <div className="space-y-6">
+        {/* 1. Section */}
+        <div className="bg-gray-100 rounded-lg shadow p-4">
+          <div className="flex gap-4 items-center justify-between">
+            <div className="flex items-center">
+              <div className="w-20 h-20 rounded-full bg-blue-500 flex items-center justify-center overflow-hidden">
+                {formData.avatar ? (
+                  <Image
+                    className="object-cover w-full h-full"
+                    src={formData.avatar}
+                    alt=""
+                    layout="fill"
+                  />
+                ) : null}
+              </div>
+              <div className="flex-1 flex flex-col gap-1 ml-4">
+                <p className="text-lg">{formData.email}</p>
+                <div className="flex gap-4 mt-2">
+                  <span className="text-sm text-gray-700">
+                    <strong>ID:</strong> {formData.id}
+                  </span>
+                  <span className="text-sm text-gray-700">
+                    <strong>User ID:</strong> {formData.userId}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white text-black w-24 h-24 rounded-md flex flex-col items-center justify-center">
+              <p className="text-sm uppercase font-semibold tracking-wide border-b border-black pb-2">
+                Price
+              </p>
+              <div className="flex flex-row items-center justify-center">
+                {formData.price > 0 && (
+                  <p className="text-xs uppercase tracking-wide">
+                    {formData.currency}
+                  </p>
+                )}
+                <p className="text-2xl font-semibold mt-1">{formData.price}</p>
+              </div>
+            </div>
           </div>
-        )}
-        <div className="flex-1 flex flex-col gap-4">
-          <div className="flex gap-4">
-            <LabeledInput
-              label="Id"
-              name="id"
-              value={formData.id}
-              onChange={() => {}}
-              disabled //={isShow}
-              addClassName="flex-1"
-            />
-            <LabeledInput
-              label="userId"
-              name="userId"
-              value={formData.userId}
-              onChange={() => {}}
-              disabled //={isShow}
-              addClassName="flex-1"
-            />
-          </div>
-
-          {/*<LabeledInput
-            label="Username"
-            name="uname"
-            value={formData.uname}
-            onChange={() => {}}
-            disabled //={isShow}
-          />*/}
+        </div>
+        {/* 2. Section */}
+        <div className="bg-gray-100 rounded-lg shadow p-4 flex flex-col gap-3">
           <LabeledInput
-            label="Email"
-            name="email"
-            value={formData.email}
-            onChange={() => {}}
-            disabled //={isShow}
+            label="Title"
+            name="title"
+            value={formData.title}
+            onChange={(e) => {
+              setFormData((prev) => ({ ...prev, title: e.target.value }));
+            }}
+            disabled={isShow}
+          />
+          <LabeledInput
+            label="Description"
+            name="description"
+            value={formData.description}
+            onChange={(e) => {
+              setFormData((prev) => ({ ...prev, description: e.target.value }));
+            }}
+            disabled={isShow}
           />
         </div>
-      </div>
-      <LabeledInput
-        label="Title"
-        name="title"
-        value={formData.title}
-        onChange={(e) => {
-          setFormData((prev) => ({ ...prev, title: e.target.value }));
-        }}
-        disabled={isShow}
-      />
-      <LabeledInput
-        label="Description"
-        name="description"
-        value={formData.description}
-        onChange={(e) => {
-          setFormData((prev) => ({ ...prev, description: e.target.value }));
-        }}
-        disabled={isShow}
-      />
-      {/* <LabeledInput
-        label="Features"
-        name="features"
-        value={formData.features}
-        onChange={() => {}}
-        disabled //={isShow}
-      />
-      <LabeledInput
-        label="Space"
-        name="space"
-        value={formData.space}
-        onChange={() => {}}
-        disabled //={isShow}
-      />*/}
-      <LabeledInput
-        label="Price"
-        name="price"
-        value={formData.price}
-        onChange={() => {}}
-        disabled //={isShow}
-      />
-      <div className="overflow-x-auto">
-        <div className="flex space-x-4 p-4">
-          {formData.images &&
-            formData.images.map((item, index) => (
-              <Image
-                key={index}
-                src={item.image}
-                alt="Image Preview"
-                width={200}
-                height={200}
-                className="object-cover rounded"
-              />
-            ))}
+        {/* 3. Section */}
+        {formData.images.length > 0 && (
+          <div className="bg-gray-100 rounded-lg shadow p-4">
+            <div className="overflow-x-auto">
+              <div className="flex space-x-4 p-4">
+                {formData.images.map((item, index) => (
+                  <Image
+                    key={index}
+                    src={item.image}
+                    alt="Image Preview"
+                    width={200}
+                    height={200}
+                    className="object-cover rounded"
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+        {/* 4. Section */}
+        <div className="bg-gray-100 rounded-lg shadow p-4">
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <label className="text-sm font-medium text-gray-700">
+                Country:
+              </label>
+              <span className="text-sm text-gray-700">{formData.country}</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <label className="text-sm font-medium text-gray-700">
+                State:
+              </label>
+              <span className="text-sm text-gray-700">{formData.state}</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <label className="text-sm font-medium text-gray-700">City:</label>
+              <span className="text-sm text-gray-700">{formData.city}</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <label className="text-sm font-medium text-gray-700">
+                Street Name:
+              </label>
+              <span className="text-sm text-gray-700">
+                {formData.street_name}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <label className="text-sm font-medium text-gray-700">
+                Location:
+              </label>
+              <span className="text-sm text-gray-700">{formData.location}</span>
+            </div>
+          </div>
         </div>
       </div>
-      {/*
-      <LabeledInput
-        label="Address"
-        name="address"
-        value={formData.address}
-        onChange={() => {}}
-        disabled //={isShow}
-      />
-      */}
-      <LabeledInput
-        label="City"
-        name="city"
-        value={formData.city}
-        onChange={() => {}}
-        disabled //={isShow}
-      />
-      <LabeledInput
-        label="State"
-        name="state"
-        value={formData.state}
-        onChange={() => {}}
-        disabled //={isShow}
-      />
-      <LabeledInput
-        label="Country"
-        name="country"
-        value={formData.country}
-        onChange={() => {}}
-        disabled //={isShow}
-      />
-      <LabeledInput
-        label="Location"
-        name="location"
-        value={formData.location}
-        onChange={() => {}}
-        disabled //={isShow}
-      />
-      {/*<LabeledInput
-        label="Review Count"
-        name="reviewCount"
-        value={formData.reviewCount}
-        onChange={() => {}}
-        disabled //={isShow}
-      />
-      <LabeledInput
-        label="User Review Count"
-        name="userReviewCount"
-        value={formData.userReviewCount}
-        onChange={() => {}}
-        disabled //={isShow}
-      />
-      <LabeledInput
-        label="Access Type"
-        name="accessType"
-        value={formData.accessType}
-        onChange={() => {}}
-        disabled //={isShow}
-      />
-      <LabeledInput
-        label="Access Times"
-        name="accessTimes"
-        value={formData.accessTimes}
-        onChange={() => {}}
-        disabled //={isShow}
-      />
-      <LabeledInput
-        label="Access Time Text"
-        name="accessTimeText"
-        value={formData.accessTimeText}
-        onChange={() => {}}
-        disabled //={isShow}
-      />*/}
       <div className="flex space-x-2 sticky bottom-0 bg-white p-4 justify-between">
         <div>
           {!isShow && (
