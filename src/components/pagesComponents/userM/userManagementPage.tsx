@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createColumns } from "./columns";
-import { Input } from "../../ui/input.tsx";
 import { useToast } from "../../Toast/ToastContext.tsx";
 import { DataTable } from "../../customTable/data-table.tsx";
 import { PaginationState, SortingState } from "@tanstack/react-table";
@@ -105,26 +104,29 @@ const UserManagementPage = () => {
         <p>User Management</p>
       </div>
       <div className="py-1">
-        <Input
+        <input
           type="text"
           placeholder="Search..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onKeyDown={handleSearchKeyDown}
-          className="mb-4 w-1/3"
+          className="w-1/4 absolute z-10 border p-2 rounded-lg border-gray-300 focus:outline-none"
+          style={{ marginTop: "16px" }}
         />
-        <DataTable
-          columns={columns}
-          data={tableData}
-          filterPlaceholderName="Search..."
-          filterHeaderName="email"
-          changePagination={changePagination}
-          handleDelete={() => {}}
-          maxCount={maxCount}
-          listType={listType}
-          textFilter={true}
-          countName="User"
-        />
+        <div className="relative">
+          <DataTable
+            columns={columns}
+            data={tableData}
+            filterPlaceholderName="Search..."
+            filterHeaderName="email"
+            changePagination={changePagination}
+            handleDelete={() => {}}
+            maxCount={maxCount}
+            listType={listType}
+            textFilter={true}
+            countName="User"
+          />
+        </div>
       </div>
       <CustomModal
         isOpen={isModalOpen}

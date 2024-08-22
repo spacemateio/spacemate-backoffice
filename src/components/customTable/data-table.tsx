@@ -122,7 +122,7 @@ export function DataTable<TData, TValue>({
   return (
     <div>
       {textFilter && (
-        <div className="flex items-center py-4">
+        <div className="flex items-center justify-end py-4 gap-4">
           {maxCount === 1 ? (
             ""
           ) : (
@@ -132,9 +132,7 @@ export function DataTable<TData, TValue>({
           )}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-auto">
-                Columns
-              </Button>
+              <Button variant="outline">Columns</Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               {table

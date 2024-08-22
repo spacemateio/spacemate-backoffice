@@ -26,9 +26,9 @@ const CustomModal = ({
       className={`fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50`}
     >
       <div
-        className={`fixed ${isCentered ? "top-20 bottom-20 left-1/2 transform -translate-x-1/2 w-2/5" : "top-0 bottom-0 right-0 w-2/5"} bg-white shadow-lg rounded-lg md:h-auto overflow-y-auto`}
+        className={`fixed ${isCentered ? "top-20 bottom-20 left-1/2 transform -translate-x-1/2 w-1/3" : "top-0 bottom-0 right-0 w-1/3"} bg-white shadow-lg rounded-lg md:h-auto overflow-y-auto`}
       >
-        <div className="flex justify-between items-center p-4 border-b sticky top-0 z-10 bg-white">
+        <div className="flex justify-between items-center px-4 py-2 border-b sticky top-0 z-10 bg-white">
           <h2 className="text-lg font-semibold">{title}</h2>
           <div className="flex space-x-2">
             <Button variant="outline" onClick={onTogglePosition}>

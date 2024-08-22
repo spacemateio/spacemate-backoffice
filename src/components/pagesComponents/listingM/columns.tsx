@@ -1,6 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
-import { Checkbox } from "../../ui/checkbox.tsx";
 import { Button } from "../../ui/button.tsx";
 import IconDisplay from "../../iconComponent/IconDisplay.tsx";
 
@@ -8,28 +7,6 @@ export const createColumns = (
   handleShow: (id: number) => void,
   handleUpdate: (id: number) => void
 ): ColumnDef<AdModel>[] => [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
   {
     accessorKey: "id",
     header: "Id",

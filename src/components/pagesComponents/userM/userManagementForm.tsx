@@ -1,5 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
-import { LabeledInput } from "../../labeledInput/LabeledInput.tsx";
+import React, { useEffect, useState } from "react";
 import { Button } from "../../ui/button.tsx";
 import { UserModel } from "../../../lib/features/models/UserM/UserModel.tsx";
 import { userApiHelper } from "../../../lib/features/apis/UserM/userApiHelper.tsx";
@@ -61,17 +60,6 @@ export default function UserManagementForm({
       setFormData(initialData);
     }
   }, [isShow, initialData]);
-
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
-  ) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]:
-        name === "accountType" || name === "status" ? parseInt(value) : value,
-    });
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -150,7 +138,7 @@ export default function UserManagementForm({
             </div>
 
             <div>
-              <h2 className="text-4xl font-semibold mb-2">
+              <h2 className="text-2xl font-semibold mb-2">
                 {formData.name?.charAt(0).toUpperCase() +
                   formData.name?.slice(1).toLowerCase()}{" "}
                 {formData.lastname?.charAt(0).toUpperCase() +
@@ -226,117 +214,104 @@ export default function UserManagementForm({
               <Label className="text-gray-700">Email:</Label>
               <IconDisplay
                 iconName="Mail"
-                addStyle="md:ml-16 mr-2 text-gray-700"
+                addStyle="md:ml-16 mr-2 text-gray-700 h-5 w-5"
               />
-              <span className="text-gray-700">{formData.email}</span>
+              <span className="text-gray-700 text-sm">{formData.email}</span>
             </div>
             <div className="flex items-center">
               <Label className="text-gray-700">Phone:</Label>
               <IconDisplay
                 iconName="Phone"
-                addStyle="text-gray-700 md:ml-14 mr-2 "
+                addStyle="text-gray-700 md:ml-14 mr-2 h-5 w-5"
               />
-              <span className="text-gray-700">
-                {formData.mobileCode || ""} {formData.mobile || ""}
+              <span className="text-gray-700 text-sm">
+                {formData.mobileCode || "-"} {formData.mobile || "-"}
               </span>
             </div>
             <div className="flex items-center">
               <Label className="text-gray-700">Created Date:</Label>
               <IconDisplay
                 iconName="Calendar"
-                addStyle="text-gray-700 md:ml-3 mr-2 "
+                addStyle="text-gray-700 md:ml-3 mr-2 h-5 w-5"
               />
-              <span className="text-gray-700">
+              <span className="text-gray-700 text-sm">
                 {new Date(formData.createDate).toLocaleDateString()}
               </span>
             </div>
             <div className="flex items-center">
-              <Label className="text-gray-700">Address:</Label>
+              <Label className="text-gray-700 text-sm">Address:</Label>
               <IconDisplay
                 iconName="MapPin"
-                addStyle="text-gray-700 md:ml-11 mr-2 "
+                addStyle="text-gray-700 md:ml-11 mr-2 h-5 w-5"
               />
-              <span className="text-gray-700">{formData.address || ""}</span>
+              <span className="text-gray-700 text-sm">
+                {formData.address || "-"}
+              </span>
+            </div>
+            <div className="flex items-center">
+              <Label className="text-gray-700 text-sm">Town:</Label>
+              <IconDisplay
+                iconName="MapPin"
+                addStyle="text-gray-700 md:ml-16 mr-2 h-5 w-5"
+              />
+              <span className="text-gray-700 text-sm">
+                {formData.town || "-"}
+              </span>
+            </div>
+            <div className="flex items-center">
+              <Label className="text-gray-700 text-sm">State:</Label>
+              <span className="text-gray-700 text-sm md:ml-20">
+                {formData.state || "-"}
+              </span>
+            </div>
+            <div className="flex items-center">
+              <Label className="text-gray-700 text-sm">Postal Code:</Label>
+              <span className="text-gray-700 text-sm md:ml-12">
+                {formData.postalCode || "-"}
+              </span>
             </div>
           </div>
         </div>
-        <div className="py-4">
+        <div className="py-2">
           <hr />
         </div>
-        <LabeledInput
-          label="Town"
-          name="town"
-          placeholder="Town"
-          value={formData.town || ""}
-          onChange={handleChange}
-          disabled={isShow}
-        />
-        <LabeledInput
-          label="State"
-          name="state"
-          placeholder="State"
-          value={formData.state || ""}
-          onChange={handleChange}
-          disabled={isShow}
-        />
-        <LabeledInput
-          label="Postal Code"
-          name="postalCode"
-          placeholder="Postal Code"
-          value={formData.postalCode || ""}
-          onChange={handleChange}
-          disabled={isShow}
-        />
-        <LabeledInput
-          label="Emergency Contact"
-          name="emergencyContact"
-          placeholder="Emergency Contact"
-          value={formData.emergencyContact || ""}
-          onChange={handleChange}
-          disabled={isShow}
-        />
-        <LabeledInput
-          label="Emergency Contact Mobile Code"
-          name="emergencyContactMobileCode"
-          placeholder="Emergency Contact Mobile Code"
-          value={formData.emergencyContactMobileCode || ""}
-          onChange={handleChange}
-          disabled={isShow}
-        />
-        <LabeledInput
-          label="Emergency Contact Mobile"
-          name="emergencyContactMobile"
-          placeholder="Emergency Contact Mobile"
-          value={formData.emergencyContactMobile || ""}
-          onChange={handleChange}
-          disabled={isShow}
-        />
-        <LabeledInput
-          label="Referral Code"
-          name="refCode"
-          placeholder="Referral Code"
-          value={formData.refCode}
-          onChange={handleChange}
-          disabled={isShow}
-        />
-        <div>
-          <label
-            htmlFor="status"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Status
+        <div className="space-y-4">
+          <div className="flex items-center gap-2">
+            <label className="text-sm font-medium text-gray-700">
+              Emergency Contact:
+            </label>
+            <span className="text-sm text-gray-700">
+              {formData.emergencyContact}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <label className="text-sm font-medium text-gray-700">
+              Emergency Contact Mobile:
+            </label>
+            <span className="text-sm text-gray-700">
+              {formData.emergencyContactMobileCode}{" "}
+              {formData.emergencyContactMobile}
+            </span>
+          </div>
+        </div>
+        <div className="py-2">
+          <hr />
+        </div>
+        <div className="flex items-center gap-2">
+          <label className="text-sm font-medium text-gray-700">
+            Referral Code:
           </label>
-          <select
-            name="status"
-            id="status"
-            value={formData.status.toString()}
-            onChange={handleChange}
-            className="border p-2 rounded"
-            disabled={isShow}
-          >
-            <option value="0">Inactive</option>
-            <option value="1">Active</option>
-          </select>
+          <span className="text-sm text-gray-700">{formData.refCode}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <label className="text-sm font-medium text-gray-700">Status:</label>
+          <span className="text-sm text-gray-700">
+            {formData.status.toString() ? "Active" : "Passive"}
+          </span>
+        </div>
+        <div className="py-2">
+          <hr />
         </div>
         <Button
           style={{
