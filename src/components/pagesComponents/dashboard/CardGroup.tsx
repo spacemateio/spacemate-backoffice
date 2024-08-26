@@ -23,7 +23,7 @@ const Card: React.FC<CardProps> = ({
   const navigate = useNavigate();
   return (
     <div
-      className={`flex items-center p-4 w-full ${bgColor}`}
+      className={`flex items-center p-4 w-full ${bgColor} cursor-pointer`}
       onClick={() => navigate(link)}
     >
       <div

@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
-import { useToast } from "../../Toast/ToastContext";
-import { AdModel } from "../../../lib/features/models/AdM/AdModel";
-import { adApiHelper } from "../../../lib/features/apis/AdM/adApiHelper";
-import { DataTable } from "../../customTable/data-table";
 import { createColumns } from "./columns";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "../../../Toast/ToastContext";
+import { DataTable } from "../../../customTable/data-table";
+import { AdModel } from "../../../../lib/features/models/AdM/AdModel";
+import { adApiHelper } from "../../../../lib/features/apis/AdM/adApiHelper";
 
 const PendingListingComponent: React.FC = () => {
+  const navigate = useNavigate();
   const { addToast } = useToast();
   const [tableData, setTableData] = useState<AdModel[]>([]);
   const [maxCount, setMaxCount] = useState<number>(1);
-  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,20 +28,21 @@ const PendingListingComponent: React.FC = () => {
         addToast("Failed to fetch pending listings", "error");
       }
     };
-
     fetchData();
   }, []);
 
   const handleShow = () => {
     navigate(`/admin/listingManagement`);
   };
+
   const columns = createColumns(handleShow);
+
   return (
     <div className="w-full">
-      <p className="text-lg font-bold pt-5 pb-1">Pending List Management</p>
+      <p className="text-lg font-bold pb-1">Pending Listing</p>
       {tableData.length === 0 ? (
         <div className="w-full bg-gray-100 text-gray-500 text-center py-10 rounded-lg border border-gray-200">
-          <p>No l istings available at the moment</p>
+          <p>No listings available at the moment</p>
         </div>
       ) : (
         <>

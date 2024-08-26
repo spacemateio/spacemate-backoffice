@@ -1,7 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
-import { Button } from "../../ui/button.tsx";
-import IconDisplay from "../../iconComponent/IconDisplay.tsx";
+import { AdModel } from "../../../../lib/features/models/AdM/AdModel.tsx";
+import { Button } from "../../../ui/button.tsx";
+import IconDisplay from "../../../iconComponent/IconDisplay.tsx";
 
 export const createColumns = (
   handleShow: (id: number) => void

@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
 import { User, Home, FileText, Phone } from "lucide-react";
 import { dashboardApiHelper } from "../../lib/features/apis/Dashboard/dashboradApiHelper";
-import PendingListingComponent from "../../components/pagesComponents/dashboard/PendingListingComponent";
 import CardGroup from "../../components/pagesComponents/dashboard/CardGroup";
+import UserTableComponent from "../../components/pagesComponents/dashboard/UserListing/UserTableComponent";
+import PendingListingComponent from "../../components/pagesComponents/dashboard/PendingListing/PendingListingComponent";
 
 const Dashboard = () => {
   const [userCount, setUserCount] = useState<number | null>(null);
   const [listingCount, setListingCount] = useState<number | null>(null);
   const [blogCount, setBlogCount] = useState<number | null>(null);
   const [contactUsCount, setContactUsCount] = useState<number | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const [pendingListingCount, setPendingListingCount] = useState<number | null>(
     null
   );
-  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const loadData = async () => {
@@ -100,12 +101,15 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="flex flex-col justify-center gap-10">
-      <div className="text-5xl font-semibold mb-8 text-transparent bg-clip-text bg-gradient-to-b from-blue-600 to-blue-400">
+    <div className="flex flex-col justify-center gap-7">
+      <div className="text-5xl font-semibold text-transparent bg-clip-text bg-gradient-to-b from-blue-600 to-blue-400">
         Dashboard
       </div>
       <CardGroup cardData={cardData} />
-      <PendingListingComponent />
+      <div className="flex flex-row gap-6">
+        <PendingListingComponent />
+        <UserTableComponent />
+      </div>
     </div>
   );
 };
