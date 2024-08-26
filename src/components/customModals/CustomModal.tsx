@@ -1,14 +1,15 @@
-import { X } from "lucide-react"; // Icon for close button
 import { ReactNode } from "react";
 import { Button } from "../ui/button";
+import IconDisplay from "../iconComponent/IconDisplay";
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onTogglePosition: () => void;
-  isCentered: boolean;
-  children: ReactNode; // Adding children prop
+  onTogglePosition?: () => void;
+  isCentered?: boolean;
+  children: ReactNode;
   title: string;
+  positionInfo?: boolean;
 }
 
 const CustomModal = ({
@@ -18,6 +19,7 @@ const CustomModal = ({
   isCentered,
   children,
   title,
+  positionInfo = true,
 }: ModalProps) => {
   if (!isOpen) return null;
 
@@ -30,12 +32,15 @@ const CustomModal = ({
       >
         <div className="flex justify-between items-center px-4 py-2 border-b sticky top-0 z-10 bg-white">
           <h2 className="text-lg font-semibold">{title}</h2>
+
           <div className="flex space-x-2">
-            <Button variant="outline" onClick={onTogglePosition}>
-              Toggle Position
-            </Button>
+            {positionInfo && (
+              <Button variant="outline" onClick={onTogglePosition}>
+                Toggle Position
+              </Button>
+            )}
             <Button variant="ghost" onClick={onClose}>
-              <X className="w-5 h-5" />
+              <IconDisplay iconName="X" />
             </Button>
           </div>
         </div>
