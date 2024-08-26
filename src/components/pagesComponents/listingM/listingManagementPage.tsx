@@ -6,8 +6,8 @@ import { DataTable } from "../../customTable/data-table.tsx";
 import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
 import { adApiHelper } from "../../../lib/features/apis/AdM/adApiHelper.tsx";
 import ListingManagementForm from "./listingManagementForm";
-import ListTypeComponent from "../../listTypeComponent";
 import CustomModal from "../../customModals/CustomModal.tsx";
+import TabComponent from "../../ui/TabComponent.tsx";
 
 const ListingManagementPage = () => {
   const { addToast } = useToast();
@@ -65,12 +65,11 @@ const ListingManagementPage = () => {
   return (
     <div className="w-full">
       <div className="py-5">
-        <p>List Management</p>
+        <p>Listing Management</p>
       </div>
-
       <div className="py-1">
-        <div className="absolute z-10" style={{ marginTop: "16px" }}>
-          <ListTypeComponent listType={listType} setListType={setListType} />
+        <div className="absolute z-10" style={{ marginTop: "10px" }}>
+          <TabComponent listType={listType} setListType={setListType} />
         </div>
         <div className="relative">
           <DataTable
@@ -84,7 +83,7 @@ const ListingManagementPage = () => {
             listType={listType}
             textFilter={true}
             countName={`${listType.charAt(0).toUpperCase() + listType.slice(1)} Listing`}
-          />{" "}
+          />
         </div>
       </div>
       <CustomModal

@@ -51,7 +51,9 @@ const BlogManagementAdd: FC = () => {
   }
   return (
     <div className="flex">
-      <div className="w-2/5 p-6 border-r border-gray-200">
+      <div className="w-2/5">
+        <p className="text-3xl font-bold">Create New Blog</p>
+        <hr className="mb-2 mt-4" />
         <BlogManagementForm
           setBlogPost={setBlogPost}
           blogPost={blogPost}
@@ -60,7 +62,7 @@ const BlogManagementAdd: FC = () => {
           mode={blogIdParam ? "edit" : "add"}
         />
       </div>
-      <div className="w-3/5 p-6">
+      <div className="w-3/5 px-6 pt-2 bg-white rounded-xl">
         <BlogManagementPreview blogPost={blogPost} imageUrl={imageUrl} />
       </div>
     </div>

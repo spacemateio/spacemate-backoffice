@@ -13,6 +13,7 @@ import BlogManagementPreview from "./BlogManagementAdd/BlogManagementPreview.tsx
 import IconDisplay from "../../iconComponent/IconDisplay.tsx";
 
 const BlogManagementPage = () => {
+  const navigate = useNavigate();
   const { addToast } = useToast();
   const [tableData, setTableData] = useState<BlogModel[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -108,8 +109,6 @@ const BlogManagementPage = () => {
   const handleTogglePosition = () => setIsCentered(!isCentered);
   const columns = useColumns(handleShow, confirmDelete);
 
-  const navigate = useNavigate();
-
   const handleAddNewBlog = () => {
     navigate("add");
   };
@@ -138,7 +137,7 @@ const BlogManagementPage = () => {
             listType=""
             textFilter={true}
             countName="Blog"
-          />{" "}
+          />
         </div>
       </div>
       <CustomModal
@@ -147,6 +146,7 @@ const BlogManagementPage = () => {
         onTogglePosition={handleTogglePosition}
         isCentered={isCentered}
         title="Blog Detail"
+        positionInfo={false}
       >
         <BlogManagementPreview blogPost={showRow} />
       </CustomModal>

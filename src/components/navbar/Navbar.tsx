@@ -5,6 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Button } from "../ui/button";
 import { useAuth } from "../../lib/features/auth/AuthContext.tsx";
 import { Link } from "react-router-dom";
+import ProfileButton from "../profile/ProfileButton.tsx";
 
 type Props = { children: ReactNode };
 const Navbar = ({ children }: Props) => {
@@ -108,8 +109,9 @@ const Navbar = ({ children }: Props) => {
               </nav>
             </SheetContent>
           </Sheet>
-          <div className="w-full flex-1">
+          <div className="w-full flex items-center justify-between">
             {userInfo ? `Hello ${userInfo?.name}` : ""}
+            <ProfileButton />
           </div>
           {/*<ToggleMode />*/}
         </header>
