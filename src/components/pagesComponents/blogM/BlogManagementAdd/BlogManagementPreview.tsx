@@ -30,7 +30,7 @@ const BlogManagementPreview = ({
     }
   };
   return (
-    <>
+    <div className="bg-white p-6 rounded-xl shadow-2xl">
       <Input
         type="text"
         disabled
@@ -59,7 +59,7 @@ const BlogManagementPreview = ({
         className="saved-content text-start"
         style={{ marginLeft: "100px", marginRight: "100px" }}
       ></div>
-    </>
+    </div>
   );
 };
 

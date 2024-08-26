@@ -23,6 +23,7 @@ const BlogManagementForm = ({
   setImageUrl: (url: string | undefined) => void;
   mode: "edit" | "add";
 }) => {
+  const navigate = useNavigate();
   const { addToast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [imageName, setImageName] = useState<string>("");
@@ -65,12 +66,11 @@ const BlogManagementForm = ({
       if (mode === "add") {
         await blogApiHelper.addBlog(blogPost, image);
         addToast("Blog has been added successfully", "success");
-
-        return;
+        navigate("../");
       }
-
       await blogApiHelper.updateBlog(blogPost, image);
       addToast("Blog has been updated successfully", "success");
+      navigate("../");
     } catch (error) {
       addToast("Failed to add or edit blog", "error");
     } finally {
@@ -85,8 +85,6 @@ const BlogManagementForm = ({
       [name]: value,
     }));
   };
-
-  const navigate = useNavigate();
 
   const handleCancel = () => {
     navigate("../");
@@ -231,7 +229,7 @@ const BlogManagementForm = ({
             className="bg-white"
           />
         </div>
-        <div className="flex gap-5">
+        <div className="sticky bottom-0 flex gap-5 bg-white p-4">
           <Button
             type="submit"
             className="w-full bg-green-400"
