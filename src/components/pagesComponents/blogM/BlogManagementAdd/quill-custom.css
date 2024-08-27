@@ -21,4 +21,8 @@
     color:blue; 
     text-decoration: underline; 
 }
-  
+  /* Ensure these styles are not hiding lists */
+.saved-content ol, .saved-content ul {
+    list-style-type: decimal; /* or any other style you prefer */
+    margin-left: 20px; /* Ensure there's space for the list */
+}
