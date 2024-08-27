@@ -1,0 +1,45 @@
+.entryArea {
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+}
+
+.inputLabel {
+    position: absolute;
+    width: 100%;
+    outline: none;
+    font-size: 1.1em;
+    padding: 0 30px;
+    line-height: 50px;
+    border-radius: 10px;
+    border: 1px solid #e3e3e3;
+    background: transparent;
+    transition: 0.1s ease;
+    z-index: 1111;
+}
+
+.labelLine {
+position: absolute;
+font-size: 1em;
+color: #6d6d6d;
+padding: 0 5px;
+margin: 0 20px;
+background-color: #ffffff;
+transition: 0.2s ease;
+}
+
+.inputLabel:focus,
+.inputLabel:valid{
+    color: #4e4e4e;
+    border: 1px solid #e0e0e0;
+}
+
+.inputLabel:focus + .labelLine,
+.inputLabel:valid + .labelLine{
+    color: #616161;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 12px;
+    transform: translate(-15px, -16px) scale(0.88);
+    z-index: 1111;
+}

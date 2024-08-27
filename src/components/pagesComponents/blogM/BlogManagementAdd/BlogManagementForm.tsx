@@ -9,6 +9,7 @@ import { Input } from "../../../ui/input.tsx";
 import { Button } from "../../../ui/button.tsx";
 import Image from "../../../image/Image.tsx";
 import { useNavigate } from "react-router-dom";
+import InputWithLabel from "../../../ui/InputWithLabel/InputWithLabel.tsx";
 
 const BlogManagementForm = ({
   blogPost,
@@ -92,37 +93,40 @@ const BlogManagementForm = ({
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="p-6 max-w-4xl mx-auto space-y-4">
+      <form
+        onSubmit={handleSubmit}
+        className="p-6 max-w-4xl mx-auto space-y-4 flex flex-col gap-4"
+      >
         <div>
           {/* <Label className="block text-lg font-medium mb-2">URL</Label> */}
-          <Input
+          <InputWithLabel
             type="text"
             name="url"
             value={blogPost.url}
             onChange={changeBlogPost}
-            placeholder="URL..."
+            label="URL..."
             className="w-full"
           />
         </div>
         <div>
           {/* <Label className="block text-lg font-medium mb-2">Title</Label> */}
-          <Input
+          <InputWithLabel
             type="text"
             name="title"
             value={blogPost.title}
             onChange={changeBlogPost}
-            placeholder="Title"
+            label="Title"
             className="w-full"
           />
         </div>
         <div>
           {/* <Label className="block text-lg font-medium mb-2">Excerpt</Label> */}
-          <Input
+          <InputWithLabel
             type="text"
             name="excerpt"
             value={blogPost.excerpt}
             onChange={changeBlogPost}
-            placeholder="Excerpt"
+            label="Excerpt"
             className="w-full"
           />
         </div>
@@ -161,12 +165,12 @@ const BlogManagementForm = ({
         </div>
         <div>
           {/* <Label className="block text-lg font-medium mb-2">Image Alt</Label> */}
-          <Input
+          <InputWithLabel
             type="text"
             name="imageAlt"
             value={blogPost.imageAlt}
             onChange={changeBlogPost}
-            placeholder="Image Alt"
+            label="Image Alt"
             className="w-full"
           />
         </div>
@@ -174,12 +178,12 @@ const BlogManagementForm = ({
           {/* <Label className="block text-lg font-medium mb-2">
             Meta Description
           </Label> */}
-          <Input
+          <InputWithLabel
             type="text"
             name="metaDescription"
             value={blogPost.metaDescription}
             onChange={changeBlogPost}
-            placeholder="Meta Description"
+            label="Meta Description"
             className="w-full"
           />
         </div>
