@@ -16,7 +16,16 @@ const UserTableComponent = () => {
     const fetchData = async () => {
       try {
         const state = { pageSize: 10, pageIndex: 1 };
-        const { maxCount, payload } = await userApiHelper.getUsers(state);
+        const sorting = [
+          {
+            id: "REGISTER_DATE",
+            desc: true,
+          },
+        ];
+        const { maxCount, payload } = await userApiHelper.getUsersOrderBy(
+          state,
+          sorting
+        );
         setMaxCount(maxCount);
         setTableData(payload);
         addToast("Fetch all users successfully", "success");
