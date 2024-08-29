@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import ReactQuill, { Quill } from "react-quill";
+import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "./quill-custom.css";
 import { BlogModel } from "../../../../lib/features/models/BlogM/BlogModel.tsx";
