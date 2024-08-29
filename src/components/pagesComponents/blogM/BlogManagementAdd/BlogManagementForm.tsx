@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "./quill-custom.css";
 import { BlogModel } from "../../../../lib/features/models/BlogM/BlogModel.tsx";
@@ -199,7 +199,12 @@ const BlogManagementForm = ({
             }
             modules={{
               toolbar: [
-                [{ header: "1" }, { header: "2" }, { font: [] }],
+                [
+                  { header: "1" },
+                  { header: "2" },
+                  { header: "3" },
+                  { font: [] },
+                ],
                 [{ size: [] }],
                 ["bold", "italic", "underline", "strike", "blockquote"],
                 [

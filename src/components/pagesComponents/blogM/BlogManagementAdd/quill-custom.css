@@ -1,25 +1,41 @@
 /* quill-custom.css */
-.ql-editor h1 { 
+.ql-editor h1 {
     font-size: 40px;
 }
-.ql-editor h2 { 
+
+.ql-editor h2 {
     font-size: 30px;
 }
+
+.ql-editor h3 {
+    font-size: 24px;
+}
+
+.ql-header[value='3']:after {
+    clear: both;
+    content: "H3";
+    display: table;
+    font-weight: 600;
+    margin-top: -2px;
+    margin-left: 1px;
+    font-size: 14px;
+}
+
 .ql-editor a {
     color:blue;
     text-decoration: underline;
 }
 
 /* Saved content styles */
-.saved-content h1 { 
+.saved-content h1 {
     font-size: 40px;
 }
-.saved-content h2 { 
+.saved-content h2 {
     font-size: 25px;
 }
 .saved-content a {
-    color:blue; 
-    text-decoration: underline; 
+    color:blue;
+    text-decoration: underline;
 }
   /* Ensure these styles are not hiding lists */
 .saved-content ol, .saved-content ul {
