@@ -15,7 +15,7 @@ const UserTableComponent = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const state = { pageSize: 10, pageIndex: 1 };
+        const state = { pageSize: 10, pageIndex: 0 };
         const { maxCount, payload } = await userApiHelper.getUsers(state);
         setMaxCount(maxCount);
         setTableData(payload);
