@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "./quill-custom.css";
@@ -26,10 +26,17 @@ const BlogManagementForm = ({
 }) => {
   const navigate = useNavigate();
   const { addToast } = useToast();
+  const quillRef = useRef<ReactQuill | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [imageName, setImageName] = useState<string>("");
   const [image, setImage] = useState<File | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false); // Yeni state ekledik
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [popoverVisible, setPopoverVisible] = useState(false);
+  const [popoverPosition, setPopoverPosition] = useState({ top: 0, left: 0 });
+  const [altText, setAltText] = useState("");
+  const [selectedImage, setSelectedImage] = useState<HTMLImageElement | null>(
+    null
+  );
 
   const handleImageChange = (e: any) => {
     const file = e.target.files?.[0] || null;
@@ -90,6 +97,48 @@ const BlogManagementForm = ({
 
   const handleCancel = () => {
     navigate("../");
+  };
+
+  useEffect(() => {
+    // Check if quillRef.current is not null
+    if (quillRef.current) {
+      const quillInstance = quillRef.current.getEditor();
+
+      const handleClick = (event: MouseEvent) => {
+        const target = event.target as HTMLElement;
+        if (target.tagName === "IMG") {
+          const imgElement = target as HTMLImageElement;
+          const rect = target.getBoundingClientRect();
+          setPopoverPosition({
+            top: rect.top + window.scrollY,
+            left: rect.left + window.scrollX,
+          });
+          setSelectedImage(imgElement); // Store the reference to the clicked image
+          console.log(imgElement);
+
+          setAltText(imgElement.alt); // Pre-fill the input with the current alt text
+          setPopoverVisible(true);
+          console.log("Image clicked!");
+        } else {
+          setPopoverVisible(false);
+        }
+      };
+
+      quillInstance.root.addEventListener("click", handleClick);
+
+      // Cleanup the event listener on component unmount
+      return () => {
+        quillInstance.root.removeEventListener("click", handleClick);
+      };
+    }
+  }, []);
+
+  const handleSave = () => {
+    if (selectedImage) {
+      selectedImage.alt = altText; // Update the alt attribute of the selected image
+      console.log("Alt text updated:", altText);
+    }
+    setPopoverVisible(false);
   };
 
   return (
@@ -192,6 +241,7 @@ const BlogManagementForm = ({
           {/* <Label className="block text-lg font-medium mb-2">Content</Label> */}
           <ReactQuill
             value={blogPost.content}
+            ref={quillRef}
             onChange={(value) =>
               setBlogPost((prev: any) => ({
                 ...prev,
@@ -238,6 +288,43 @@ const BlogManagementForm = ({
             ]}
             className="bg-white"
           />
+          {popoverVisible && (
+            <div
+              style={{
+                position: "absolute",
+                top: popoverPosition.top,
+                left: popoverPosition.left,
+                backgroundColor: "white",
+                border: "1px solid #ccc",
+                padding: "10px",
+                zIndex: 1000,
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <input
+                type="text"
+                value={altText}
+                onChange={(e) => setAltText(e.target.value)}
+                placeholder="Enter alt text"
+                style={{ marginRight: "10px" }}
+              />
+              <i
+                className="fas fa-check"
+                style={{
+                  color: "green",
+                  cursor: "pointer",
+                  marginRight: "10px",
+                }}
+                onClick={handleSave}
+              ></i>
+              <i
+                className="fas fa-times"
+                style={{ color: "red", cursor: "pointer" }}
+                onClick={() => setPopoverVisible(false)}
+              ></i>
+            </div>
+          )}
         </div>
         <div className="sticky bottom-0 flex gap-5 bg-white p-4">
           <Button

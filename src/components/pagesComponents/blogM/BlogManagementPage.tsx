@@ -46,7 +46,10 @@ const BlogManagementPage = () => {
 
   const changePagination = useCallback(async (state: PaginationState) => {
     try {
-      const { maxCount, payload } = await blogApiHelper.getBlogAll(state);
+      const { maxCount, payload } = await blogApiHelper.getBlogAll(state, {
+        type: "DESC",
+        name: "REGISTER_DATE",
+      });
       setMaxCount(maxCount);
       setTableData(payload);
       addToast("Get all blogs successfully", "success");
