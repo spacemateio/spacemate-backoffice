@@ -15,17 +15,8 @@ const UserTableComponent = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const state = { pageSize: 10, pageIndex: 1 };
-        const sorting = [
-          {
-            id: "REGISTER_DATE",
-            desc: true,
-          },
-        ];
-        const { maxCount, payload } = await userApiHelper.getUsersOrderBy(
-          state,
-          sorting
-        );
+        const state = { pageSize: 10, pageIndex: 0 };
+        const { maxCount, payload } = await userApiHelper.getUsers(state);
         setMaxCount(maxCount);
         setTableData(payload);
         addToast("Fetch all users successfully", "success");
