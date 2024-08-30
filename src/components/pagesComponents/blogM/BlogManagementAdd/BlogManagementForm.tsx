@@ -68,10 +68,11 @@ const BlogManagementForm = ({
         await blogApiHelper.addBlog(blogPost, image);
         addToast("Blog has been added successfully", "success");
         navigate("../");
+      } else {
+        await blogApiHelper.updateBlog(blogPost, image);
+        addToast("Blog has been updated successfully", "success");
+        navigate("../");
       }
-      await blogApiHelper.updateBlog(blogPost, image);
-      addToast("Blog has been updated successfully", "success");
-      navigate("../");
     } catch (error) {
       addToast("Failed to add or edit blog", "error");
     } finally {
