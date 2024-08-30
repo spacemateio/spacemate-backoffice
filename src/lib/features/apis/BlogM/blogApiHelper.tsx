@@ -102,10 +102,13 @@ export const blogApiHelper = {
     }
   },
 
-  async getBlogAll(state: PaginationState): Promise<responseType> {
+  async getBlogAll(
+    state: PaginationState,
+    sorting: any
+  ): Promise<responseType> {
     try {
       const response: any = await axiosInstance.get(
-        `/blog/all?limit=${state.pageSize}&offset=${state.pageIndex + 1}`,
+        `/blog/all?limit=${state.pageSize}&offset=${state.pageIndex + 1}&orderBy=${sorting.name}&sortBy=${sorting.type}`
       );
       return response.data;
     } catch (error) {
