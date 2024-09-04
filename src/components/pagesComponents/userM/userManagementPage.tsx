@@ -141,6 +141,7 @@ const UserManagementPage = () => {
         isOpen={isListingModalOpen}
         onClose={handleListingCloseModal}
         title=""
+        size="lg"
       >
         <UserListingManagement userId={userId} />
       </MiddleModal>
