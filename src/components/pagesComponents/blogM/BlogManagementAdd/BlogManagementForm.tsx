@@ -81,6 +81,7 @@ const BlogManagementForm = ({
         navigate("../");
       }
     } catch (error) {
+      console.log("SERTAC--- ", error, " ---SERTAC");
       addToast("Failed to add or edit blog", "error");
     } finally {
       setIsSubmitting(false);
