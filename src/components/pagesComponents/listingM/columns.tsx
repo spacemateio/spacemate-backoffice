@@ -109,7 +109,7 @@ export const createColumns = (
       const localDate = new Date(
         date.getTime() - date.getTimezoneOffset() * 60000
       );
-      console.log(
+      /*console.log(
         "beDate: ",
         row.original.created,
         "- locale: ",
@@ -122,7 +122,7 @@ export const createColumns = (
           second: "numeric",
           timeZoneName: "short",
         })
-      );
+      );*/
       return localDate.toLocaleString(undefined, {
         year: "numeric",
         month: "long",
