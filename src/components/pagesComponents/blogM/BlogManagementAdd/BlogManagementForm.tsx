@@ -10,6 +10,8 @@ import { Button } from "../../../ui/button.tsx";
 import Image from "../../../image/Image.tsx";
 import { useNavigate } from "react-router-dom";
 import InputWithLabel from "../../../ui/InputWithLabel/InputWithLabel.tsx";
+import MiddleModal from "../../../customModals/MiddleModal.tsx";
+import ErrorDisplay from "./ErrorDisplay.tsx";
 
 const BlogManagementForm = ({
   blogPost,
@@ -37,6 +39,11 @@ const BlogManagementForm = ({
   const [selectedImage, setSelectedImage] = useState<HTMLImageElement | null>(
     null
   );
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [errorAdd, setErrorAdd] = useState<any>("");
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
 
   const handleImageChange = (e: any) => {
     const file = e.target.files?.[0] || null;
@@ -80,11 +87,14 @@ const BlogManagementForm = ({
         addToast("Blog has been updated successfully", "success");
         navigate("../");
       }
-    } catch (error) {
+    } catch (error: any) {
+      setErrorAdd(error);
       console.log("SERTAC--- ", error, " ---SERTAC");
       addToast("Failed to add or edit blog", "error");
+      handleOpenModal();
     } finally {
       setIsSubmitting(false);
+      handleOpenModal();
     }
   };
 
@@ -345,6 +355,14 @@ const BlogManagementForm = ({
           </Button>
         </div>
       </form>
+      <MiddleModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        title="Blog Error Detail"
+        size="md"
+      >
+        <ErrorDisplay error={errorAdd} />
+      </MiddleModal>
     </>
   );
 };
