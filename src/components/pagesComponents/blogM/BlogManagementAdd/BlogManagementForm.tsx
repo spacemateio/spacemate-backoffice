@@ -13,6 +13,7 @@ import ErrorDisplay from "./ErrorDisplay.tsx";
 import MiddleModal from "../../../customModals/MiddleModal.tsx";
 import BlogManagementPreview from "./BlogManagementPreview.tsx";
 import InputWithLabel from "../../../ui/InputWithLabel/InputWithLabel.tsx";
+import IconDisplay from "../../../iconComponent/IconDisplay.tsx";
 
 const BlogManagementForm = ({
   blogPost,
@@ -246,6 +247,7 @@ const BlogManagementForm = ({
                 className="w-full bg-green-400"
                 disabled={isSubmitting}
               >
+                <IconDisplay iconName="Check" addStyle="h-4 w-4 mr-1" />
                 Save
               </Button>
               <Button
@@ -254,6 +256,7 @@ const BlogManagementForm = ({
                 onClick={handleCancel}
                 disabled={isSubmitting}
               >
+                <IconDisplay iconName="X" addStyle="h-4 w-4 mr-1" />
                 Cancel
               </Button>
               <Button
@@ -261,6 +264,7 @@ const BlogManagementForm = ({
                 className="w-full bg-blue-500"
                 onClick={handleOpenPreviewModal}
               >
+                <IconDisplay iconName="Eye" addStyle="h-4 w-4 mr-1" />
                 Preview
               </Button>
             </div>
