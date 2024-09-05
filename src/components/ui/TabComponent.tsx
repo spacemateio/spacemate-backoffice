@@ -9,7 +9,7 @@ const TabComponent = ({
 
   return (
     <div className="w-full">
-      <div className="relative border border-gray-300 rounded-lg shadow-sm">
+      <div className="relative border border-gray-300 rounded-lg shadow-sm p-1">
         <ul
           className="relative flex flex-wrap p-1 list-none rounded-lg bg-blue-gray-50/60"
           role="list"
