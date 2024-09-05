@@ -42,7 +42,7 @@ const ContactUsLisitng: React.FC = () => {
         </div>
       ) : (
         <>
-          <div className="bg-gray-100 p-2 flex flex-col gap-2 rounded-lg overflow-y-auto max-h-[207px]">
+          <div className="bg-gray-100 p-2 flex flex-col gap-2 rounded-lg overflow-y-auto max-h-[225px]">
             {data.map((item: ContactUsModel, index: number) => (
               <ContactUsItem key={index} item={item} />
             ))}

@@ -8,7 +8,7 @@ const ContactUsItem = ({ item }: { item: ContactUsModel }) => {
     const surnameInitial = surname ? surname[0].toLocaleUpperCase() : "";
     return `${nameInitial}${surnameInitial}`;
   };
-  const asd = (createdDate: string) => {
+  const formatDate = (createdDate: string) => {
     const date = new Date(createdDate);
     const localDate = new Date(
       date.getTime() - date.getTimezoneOffset() * 60000
@@ -35,11 +35,13 @@ const ContactUsItem = ({ item }: { item: ContactUsModel }) => {
             {name} {surname}
           </div>
           <div className="bg-gray-200 text-gray-700 px-1 flex items-center rounded text-xs">
-            {asd(createdDate)}
+            {formatDate(createdDate)}
           </div>
         </div>
       </div>
-      <div className="w-full px-1 text-sm">{message ? message : title}</div>
+      <div className="max-w-2xl w-full px-1 text-sm truncate">
+        {message ? message : title}
+      </div>
     </div>
   );
 };
