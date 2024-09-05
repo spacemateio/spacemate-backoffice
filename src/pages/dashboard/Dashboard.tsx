@@ -4,6 +4,7 @@ import { dashboardApiHelper } from "../../lib/features/apis/Dashboard/dashboradA
 import CardGroup from "../../components/pagesComponents/dashboard/CardGroup";
 import UserTableComponent from "../../components/pagesComponents/dashboard/UserListing/UserTableComponent";
 import PendingListingComponent from "../../components/pagesComponents/dashboard/PendingListing/PendingListingComponent";
+import ContactUsLisitng from "../../components/pagesComponents/dashboard/ContactUsListing/ContactUsLisitng";
 
 const Dashboard = () => {
   const [userCount, setUserCount] = useState<number | null>(null);
@@ -107,8 +108,13 @@ const Dashboard = () => {
       </div>
       <CardGroup cardData={cardData} />
       <div className="flex flex-row gap-6">
-        <PendingListingComponent />
-        <UserTableComponent />
+        <div className="w-1/2 flex flex-col gap-1">
+          <PendingListingComponent />
+          <ContactUsLisitng />
+        </div>
+        <div className="w-1/2 ">
+          <UserTableComponent />
+        </div>
       </div>
     </div>
   );

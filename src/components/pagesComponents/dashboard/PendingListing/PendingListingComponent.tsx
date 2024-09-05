@@ -39,30 +39,30 @@ const PendingListingComponent: React.FC = () => {
 
   return (
     <div className="w-full">
-      <p className="text-lg font-bold pb-1">Pending Listing</p>
+      <div className="flex justify-between items-center">
+        <p className="text-lg font-semibold">Pending Listing</p>
+        <div className="text-gray-700 text-sm">
+          You have {maxCount} new listings awaiting approval
+        </div>
+      </div>
       {tableData.length === 0 ? (
         <div className="w-full bg-gray-100 text-gray-500 text-center py-10 rounded-lg border border-gray-200">
           <p>No listings available at the moment</p>
         </div>
       ) : (
-        <>
-          <div className="text-gray-700 font-medium py-2">
-            You have {maxCount} new listings awaiting approval.
-          </div>
-          <DataTable
-            columns={columns}
-            data={tableData}
-            paginationShow={false}
-            filterPlaceholderName="Filter titles..."
-            filterHeaderName="title"
-            changePagination={() => {}}
-            handleDelete={() => {}}
-            maxCount={maxCount}
-            listType=""
-            textFilter={false}
-            countName=""
-          />
-        </>
+        <DataTable
+          columns={columns}
+          data={tableData}
+          paginationShow={false}
+          filterPlaceholderName="Filter titles..."
+          filterHeaderName="title"
+          changePagination={() => {}}
+          handleDelete={() => {}}
+          maxCount={maxCount}
+          listType=""
+          textFilter={false}
+          countName=""
+        />
       )}
     </div>
   );

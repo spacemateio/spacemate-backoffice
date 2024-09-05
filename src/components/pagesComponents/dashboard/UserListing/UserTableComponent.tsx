@@ -35,31 +35,32 @@ const UserTableComponent = () => {
 
   return (
     <div className="w-full">
-      <p className="text-lg font-bold pb-1">User List</p>
-      <div className="text-gray-700 font-medium"></div>
+      <div className="flex justify-between items-center">
+        <p className="text-lg font-semibold">User List</p>
+        {tableData.length != 0 && (
+          <div className="text-gray-700 text-sm">
+            The last 10 created user accounts
+          </div>
+        )}
+      </div>
       {tableData.length === 0 ? (
         <div className="w-full bg-gray-100 text-gray-500 text-center py-10 rounded-lg border border-gray-200">
           <p>No listings available at the moment</p>
         </div>
       ) : (
-        <>
-          <div className="text-gray-700 font-medium py-2">
-            <p>The last 10 created user accounts.</p>
-          </div>
-          <DataTable
-            columns={columns}
-            data={tableData}
-            filterPlaceholderName="Search..."
-            filterHeaderName="email"
-            paginationShow={false}
-            changePagination={() => {}}
-            handleDelete={() => {}}
-            maxCount={maxCount}
-            listType=""
-            textFilter={false}
-            countName="User"
-          />
-        </>
+        <DataTable
+          columns={columns}
+          data={tableData}
+          filterPlaceholderName="Search..."
+          filterHeaderName="email"
+          paginationShow={false}
+          changePagination={() => {}}
+          handleDelete={() => {}}
+          maxCount={maxCount}
+          listType=""
+          textFilter={false}
+          countName="User"
+        />
       )}
     </div>
   );
