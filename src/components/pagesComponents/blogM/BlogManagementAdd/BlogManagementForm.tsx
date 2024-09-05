@@ -88,8 +88,8 @@ const BlogManagementForm = ({
         navigate("../");
       }
     } catch (error: any) {
-      setErrorAdd(error);
-      console.log("SERTAC--- ", error, " ---SERTAC");
+      setErrorAdd(error.response.data);
+      console.log("ERROR--- ", error, " ---ERROR");
       addToast("Failed to add or edit blog", "error");
       handleOpenModal();
     } finally {

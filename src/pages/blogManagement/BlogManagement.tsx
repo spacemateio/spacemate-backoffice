@@ -1,6 +1,6 @@
 import BlogManagementPage from "../../components/pagesComponents/blogM/BlogManagementPage.tsx";
 import { Route, Routes } from "react-router-dom";
-import BlogManagementAdd from "../../components/pagesComponents/blogM/BlogManagementAdd/BlogManagementAdd.tsx";
+import BlogManagementAdd from "../../components/pagesComponents/blogM/NewBlog/BlogManagementAdd.tsx";
 
 const BlogManagement = () => {
   return (
