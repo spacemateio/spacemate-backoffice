@@ -15,7 +15,7 @@ const UserTableComponent = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const state = { pageSize: 10, pageIndex: 0 };
+        const state = { pageSize: 5, pageIndex: 0 };
         const { maxCount, payload } = await userApiHelper.getUsers(state);
         setMaxCount(maxCount);
         setTableData(payload);
@@ -39,7 +39,7 @@ const UserTableComponent = () => {
         <p className="text-lg font-semibold">User List</p>
         {tableData.length != 0 && (
           <div className="text-gray-700 text-sm">
-            The last 10 created user accounts
+            The last 5 created user accounts
           </div>
         )}
       </div>

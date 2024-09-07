@@ -102,18 +102,18 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="flex flex-col justify-center gap-7">
+    <div className="flex flex-col justify-center gap-4">
       <div className="text-5xl font-semibold text-transparent bg-clip-text bg-gradient-to-b from-blue-600 to-blue-400">
         Dashboard
       </div>
       <CardGroup cardData={cardData} />
-      <div className="flex flex-row gap-6">
-        <div className="w-1/2 flex flex-col gap-1">
+      <div className="flex flex-col">
+        <div className="w-full flex flex-row gap-6">
           <PendingListingComponent />
-          <ContactUsLisitng />
-        </div>
-        <div className="w-1/2 ">
           <UserTableComponent />
+        </div>
+        <div className="w-full">
+          <ContactUsLisitng />
         </div>
       </div>
     </div>
