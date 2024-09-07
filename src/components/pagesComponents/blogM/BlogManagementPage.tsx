@@ -1,23 +1,22 @@
 import { useCallback, useState } from "react";
-import { PaginationState } from "@tanstack/react-table";
 import { useColumns } from "./useColumns.tsx";
-import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel.tsx";
 import { Button } from "../../ui/button.tsx";
-import { DataTable } from "../../customTable/data-table.tsx";
-import { blogApiHelper } from "../../../lib/features/apis/BlogM/blogApiHelper.tsx";
-import CustomModal from "../../customModals/CustomModal.tsx";
-import { useToast } from "../../Toast/ToastContext.tsx";
-import ConfirmDialog from "../../ui/ConfirmDialog.tsx";
 import { useNavigate } from "react-router-dom";
-import BlogManagementPreview from "./BlogManagementAdd/BlogManagementPreview.tsx";
+import { useToast } from "../../Toast/ToastContext.tsx";
+import { PaginationState } from "@tanstack/react-table";
+import { DataTable } from "../../customTable/data-table.tsx";
+import { BlogModel } from "../../../lib/features/models/BlogM/BlogModel.tsx";
+import { blogApiHelper } from "../../../lib/features/apis/BlogM/blogApiHelper.tsx";
+import ConfirmDialog from "../../ui/ConfirmDialog.tsx";
+import MiddleModal from "../../customModals/MiddleModal.tsx";
 import IconDisplay from "../../iconComponent/IconDisplay.tsx";
+import BlogManagementPreview from "./BlogManagementAdd/BlogManagementPreview.tsx";
 
 const BlogManagementPage = () => {
   const navigate = useNavigate();
   const { addToast } = useToast();
   const [tableData, setTableData] = useState<BlogModel[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [isCentered, setIsCentered] = useState<boolean>(true);
   const [_, setIsShow] = useState<boolean>(false);
   const [maxCount, setMaxCount] = useState<number>(1);
   const [showRow, setShowRow] = useState<BlogModel>({
@@ -109,7 +108,6 @@ const BlogManagementPage = () => {
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
-  const handleTogglePosition = () => setIsCentered(!isCentered);
   const columns = useColumns(handleShow, confirmDelete);
 
   const handleAddNewBlog = () => {
@@ -143,16 +141,9 @@ const BlogManagementPage = () => {
           />
         </div>
       </div>
-      <CustomModal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        onTogglePosition={handleTogglePosition}
-        isCentered={isCentered}
-        title="Blog Detail"
-        positionInfo={false}
-      >
+      <MiddleModal isOpen={isModalOpen} onClose={handleCloseModal} size="lg">
         <BlogManagementPreview blogPost={showRow} />
-      </CustomModal>
+      </MiddleModal>
       <ConfirmDialog
         isOpen={confirmDialog.isOpen}
         onClose={() => setConfirmDialog({ ...confirmDialog, isOpen: false })}

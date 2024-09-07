@@ -6,7 +6,7 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode; // Adding children prop
-  title: string;
+  title?: string;
   size: "sm" | "md" | "lg";
 }
 
@@ -25,10 +25,12 @@ const MiddleModal = ({
       style={{ zIndex: "111111" }}
     >
       <div
-        className={`relative ${size === "sm" ? "w-4/12 h-2/6" : size === "md" ? "w-8/12 h-2/6" : "w-11/12 h-5/6"} p-8 bg-white rounded-lg overflow-auto`}
+        className={`relative ${size === "sm" ? "w-4/12 h-2/6" : size === "md" ? "w-8/12 h-2/6" : "w-10/12 h-5/6"} bg-white rounded-lg overflow-auto`}
       >
-        <div className="flex justify-between items-center p-4 border-b sticky top-0 z-10 bg-white">
-          <h2 className="text-lg font-semibold">{title} Listing</h2>
+        <div className="flex justify-between items-center border-b sticky top-0 z-10 bg-white">
+          {title && (
+            <h2 className="text-lg font-semibold p-4">{title} Listing</h2>
+          )}
           <div className="flex space-x-2">
             <Button variant="ghost" onClick={onClose}>
               <X className="w-5 h-5" />
