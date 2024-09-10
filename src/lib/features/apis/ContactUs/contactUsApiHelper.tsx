@@ -13,6 +13,20 @@ export const contactUsApiHelper = {
       throw error;
     }
   },
+  async getAllContactusByType(
+    state: PaginationState,
+    type: string
+  ): Promise<responseType> {
+    try {
+      // title = notifyme or contactus
+      const response: any = await axiosInstance.get(
+        `/contactus/all?title=${type}&limit=${state.pageSize}&offset=${state.pageIndex + 1}`
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
   async deleteContactus(ids: any[]): Promise<void> {
     try {
       if (ids.length === 1) {
