@@ -18,7 +18,7 @@ export const contactUsApiHelper = {
     type: string
   ): Promise<responseType> {
     try {
-      // title = notifyme or contactus
+      // title = notifyme or contact
       const response: any = await axiosInstance.get(
         `/contactus/all?title=${type}&limit=${state.pageSize}&offset=${state.pageIndex + 1}`
       );
