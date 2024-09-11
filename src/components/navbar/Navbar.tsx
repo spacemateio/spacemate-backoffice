@@ -12,12 +12,7 @@ const Navbar = ({ children }: Props) => {
   const [selectedMenuItem, setSelectedMenuItem] =
     useState<string>("/dashboard");
 
-  const { userInfo, logout } = useAuth();
-
-  const signOut = async () => {
-    logout();
-    window.location.reload();
-  };
+  const { userInfo } = useAuth();
 
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
@@ -47,14 +42,6 @@ const Navbar = ({ children }: Props) => {
                   {item.name}
                 </Link>
               ))}
-              {/*<Link
-                to=""
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-red-500 transition-all hover:text-red-700"
-                onClick={() => signOut()}
-              >
-                <IconDisplay iconName="LogOut" />
-                Logout
-              </Link>*/}
             </nav>
           </div>
         </div>
@@ -98,14 +85,6 @@ const Navbar = ({ children }: Props) => {
                     {item.name}
                   </Link>
                 ))}
-                {/*<Link
-                  to=""
-                  className="flex items-center gap-3 rounded-lg py-2 text-red-500 transition-all hover:text-red-700"
-                  onClick={() => signOut()}
-                >
-                  <IconDisplay iconName="LogOut" />
-                  Logout
-                </Link>*/}
               </nav>
             </SheetContent>
           </Sheet>
