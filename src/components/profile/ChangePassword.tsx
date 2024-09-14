@@ -2,17 +2,30 @@ import React, { useState } from "react";
 import { InputPassword } from "../ui/InputPassword";
 import IconDisplay from "../iconComponent/IconDisplay";
 import { Button } from "../ui/button";
+import { resetPasswordApiHelper } from "../../lib/features/auth/ResetPasswordApi";
+import { useAuth } from "../../lib/features/auth/AuthContext";
+import { useToast } from "../Toast/ToastContext";
 
 const ChangePassword: React.FC = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const user = useAuth();
+  const { addToast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Current Password:", currentPassword);
-    console.log("New Password:", newPassword);
-    console.log("Confirm Password:", confirmPassword);
+    try {
+      if (user.userInfo) {
+        await resetPasswordApiHelper.changePassword(
+          user.userInfo?.id,
+          newPassword
+        );
+      }
+      addToast(`Update password successfully`, "success");
+    } catch (error) {
+      addToast(`Failed to update password`, "error");
+    }
   };
 
   return (

@@ -6,7 +6,7 @@ import IconDisplay from "../iconComponent/IconDisplay";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
 const ProfileButton: React.FC = () => {
-  const { userInfo } = useAuth();
+  const { userInfo, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -20,6 +20,11 @@ const ProfileButton: React.FC = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false); // Close the modal
+  };
+
+  const signOut = async () => {
+    logout();
+    window.location.reload();
   };
 
   return (
@@ -41,14 +46,22 @@ const ProfileButton: React.FC = () => {
         </DropdownMenu.Trigger>
         <DropdownMenu.Portal>
           <DropdownMenu.Content
-            className="bg-white shadow-md rounded-md p-2"
+            className="bg-white shadow-2xl rounded-md p-2"
             sideOffset={5}
           >
             <DropdownMenu.Item
-              className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-md"
+              className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-md flex flex-row gap-2 items-center"
               onSelect={handleChangePasswordClick}
             >
+              <IconDisplay iconName="Key" />
               Change Password
+            </DropdownMenu.Item>
+            <DropdownMenu.Item
+              className="px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer rounded-md flex flex-row gap-2 items-center text-red-500"
+              onSelect={signOut}
+            >
+              <IconDisplay iconName="LogOut" />
+              Logout
             </DropdownMenu.Item>
           </DropdownMenu.Content>
         </DropdownMenu.Portal>

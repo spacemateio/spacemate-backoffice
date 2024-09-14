@@ -15,10 +15,14 @@ const ContactUsLisitng = () => {
 
   const fetch = async () => {
     try {
-      const { maxCount, payload } = await contactUsApiHelper.getAllContactus({
-        pageIndex: 0,
-        pageSize: 5,
-      });
+      const { maxCount, payload } =
+        await contactUsApiHelper.getAllContactusByType(
+          {
+            pageIndex: 0,
+            pageSize: 5,
+          },
+          "contact"
+        );
       setMaxCount(maxCount);
       setTableData(payload);
       addToast("Fetched all contact entries successfully", "success");
