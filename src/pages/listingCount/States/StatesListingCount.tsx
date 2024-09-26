@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { listingApiHelper } from "../../../lib/features/apis/ListingCount/ListingApiHelper";
 import { DataTable } from "../../../components/customTable/data-table";
 import { useToast } from "../../../components/Toast/ToastContext";
@@ -12,12 +12,17 @@ const StatesListingCount = () => {
   const [maxCount, setMaxCount] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [pagination, setPagination] = useState<any>();
+  const searchTermRef = useRef<string>(searchTerm);
+
+  useEffect(() => {
+    searchTermRef.current = searchTerm;
+  }, [searchTerm]);
 
   const changePagination = useCallback(async (state: PaginationState) => {
     setPagination(state);
     try {
       const { maxCount, payload } = await listingApiHelper.getCoutries(
-        searchTerm,
+        searchTermRef.current,
         true,
         state
       );
