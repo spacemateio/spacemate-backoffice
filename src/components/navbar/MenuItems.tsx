@@ -29,4 +29,10 @@ export const menuItems = [
     name: "Contact Us",
     icon: "Package2",
   },
+  {
+    id: "6",
+    url: "/admin/listingCount",
+    name: "Listing Count",
+    icon: "Package2",
+  },
 ];

@@ -14,6 +14,7 @@ import BlogManagement from "./pages/blogManagement/BlogManagement.tsx";
 import UserManagement from "./pages/userManagement/UserManagement.tsx";
 import ListingManagement from "./pages/listingManagement/ListingManagement.tsx";
 import AnonymousComponent from "./lib/features/auth/AnonymousComponent/AnonymousComponent.tsx";
+import ListingCount from "./pages/listingCount/ListingCount.tsx";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
             path: "userManagement",
             element: <UserManagement />,
           },
+          {
+            path: "listingCount",
+            element: <ListingCount />,
+          },
         ],
       },
 
@@ -75,5 +80,5 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <ToastProvider>
     <RouterProvider router={router} /> <ToastManager />
-  </ToastProvider>,
+  </ToastProvider>
 );
