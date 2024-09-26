@@ -106,9 +106,35 @@ const BlogManagementPage = () => {
     });
   };
 
+  const activeOrPassive = async (id: number) => {
+    const item = tableData.find((item) => item.id === id);
+    if (item) {
+      try {
+        const newItem = { ...item, status: item.status === 0 ? 1 : 0 };
+        await blogApiHelper.activeOrPassiveBlog(newItem);
+        setTableData((prevData) =>
+          prevData.map((blog) =>
+            blog.id === id
+              ? { ...blog, status: blog.status === 0 ? 1 : 0 }
+              : blog
+          )
+        );
+        addToast(
+          `Blog ${item.status ? "Passive" : "Active"} successfully`,
+          "success"
+        );
+      } catch (error) {
+        addToast(
+          `Failed to ${item.status ? "Passive" : "Active"} blog`,
+          "error"
+        );
+      }
+    }
+  };
+
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
-  const columns = useColumns(handleShow, confirmDelete);
+  const columns = useColumns(handleShow, confirmDelete, activeOrPassive);
 
   const handleAddNewBlog = () => {
     navigate("add");

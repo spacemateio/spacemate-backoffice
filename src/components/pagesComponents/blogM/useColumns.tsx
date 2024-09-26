@@ -4,10 +4,12 @@ import { Button } from "../../ui/button.tsx";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import { useNavigate } from "react-router-dom";
 import IconDisplay from "../../iconComponent/IconDisplay.tsx";
+import { Badge } from "../../ui/badge.tsx";
 
 export const useColumns = (
   handleShow: (id: number) => void,
-  handleDelete: (id: number) => void
+  handleDelete: (id: number) => void,
+  activeOrPassive: (id: number) => void
 ): ColumnDef<BlogModel>[] => {
   const navigate = useNavigate();
 
@@ -47,6 +49,25 @@ export const useColumns = (
     {
       accessorKey: "status",
       header: "Status",
+      cell: ({ row }) => {
+        if (row.original.status) {
+          return (
+            <Badge
+              bgColor="rgba(186, 242, 199, 1)"
+              textColor="rgba(36, 125, 55, 1)"
+              text="Active"
+            />
+          );
+        } else {
+          return (
+            <Badge
+              bgColor="rgba(253, 205, 205, 1)"
+              textColor="rgba(127, 57, 57, 1)"
+              text="Passive"
+            />
+          );
+        }
+      },
     },
     {
       accessorKey: "createdDate",
@@ -91,6 +112,14 @@ export const useColumns = (
               <IconDisplay iconName="Edit" addStyle="h-4 w-4" />
             </Button>
             <Button
+              variant="outline"
+              size="sxm"
+              style={{ fontSize: "12px" }}
+              onClick={() => activeOrPassive(id)}
+            >
+              <StatusIcon status={row.original.status} />
+            </Button>
+            <Button
               variant="destructive"
               size="sxm"
               style={{ fontSize: "12px" }}
@@ -103,4 +132,10 @@ export const useColumns = (
       },
     },
   ];
+};
+const StatusIcon = ({ status }: { status: number }) => {
+  const iconStyle =
+    status === 0 ? "h-4 w-4 text-green-600" : "h-4 w-4 text-red-600";
+
+  return <IconDisplay iconName="Check" addStyle={iconStyle} />;
 };

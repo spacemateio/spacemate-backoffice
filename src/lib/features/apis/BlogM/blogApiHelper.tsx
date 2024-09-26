@@ -18,7 +18,7 @@ export const blogApiHelper = {
     try {
       const response: any = await axiosInstance.put(
         `/blog/update/${data.id}`,
-        data,
+        data
       );
 
       if (image) {
@@ -94,7 +94,7 @@ export const blogApiHelper = {
   async getBlogAllOLD(state: PaginationState): Promise<responseType> {
     try {
       const response: any = await axiosInstance.get(
-        `/blog/all?limit=${state.pageSize}&offset=${state.pageIndex + 1}`,
+        `/blog/all?limit=${state.pageSize}&offset=${state.pageIndex + 1}`
       );
       return response.data;
     } catch (error) {
@@ -111,6 +111,32 @@ export const blogApiHelper = {
         `/blog/all?limit=${state.pageSize}&offset=${state.pageIndex + 1}&orderBy=${sorting.name}&sortBy=${sorting.type}`
       );
       return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async activeOrPassiveBlog(data: BlogModel): Promise<any> {
+    try {
+      const response: any = await axiosInstance.put(
+        `/blog/update/${data.id}`,
+        data
+      );
+
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getAllBlogURL(): Promise<string[]> {
+    try {
+      const response: any = await axiosInstance.get(
+        `/blog/all?limit=10000&offset=1&orderBy=REGISTER_DATE&sortBy=DESC`
+      );
+      const urlList = response.data.payload.map((blog: BlogModel) => blog.url);
+
+      return urlList;
     } catch (error) {
       throw error;
     }

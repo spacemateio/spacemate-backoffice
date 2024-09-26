@@ -45,6 +45,7 @@ const BlogManagementForm = ({
   const handleClosePreviewModal = () => setIsPreviewModelOpen(false);
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
+  const [urlList, setUrlList] = useState<string[]>([]);
   const [selectedImage, setSelectedImage] = useState<HTMLImageElement | null>(
     null
   );
@@ -74,6 +75,10 @@ const BlogManagementForm = ({
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    if (urlList.find((x) => x === blogPost.url)) {
+      addToast("This URL has already been used.", "error");
+      return;
+    }
     setIsSubmitting(true);
     setBlogPost((prev: any) => ({
       ...prev,
@@ -115,6 +120,7 @@ const BlogManagementForm = ({
   };
 
   useEffect(() => {
+    fetchUrlInfo();
     // Check if quillRef.current is not null
     if (quillRef.current) {
       const quillInstance = quillRef.current.getEditor();
@@ -154,6 +160,10 @@ const BlogManagementForm = ({
       console.log("Alt text updated:", altText);
     }
     setPopoverVisible(false);
+  };
+
+  const fetchUrlInfo = async () => {
+    setUrlList(await blogApiHelper.getAllBlogURL());
   };
 
   return (
