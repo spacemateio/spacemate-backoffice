@@ -10,7 +10,7 @@ const ListingCount = () => {
       <div className="max-w-md mt-5">
         <div className="flex flex-row border-b border-gray-200 gap-4">
           <button
-            className={`flex-1 py-2 text-center whitespace-nowrap ${
+            className={`flex-1 pt-1 text-center whitespace-nowrap ${
               activeTab === "tab1"
                 ? "border-b-2 border-blue-500 text-blue-500"
                 : "text-gray-500"
@@ -20,7 +20,7 @@ const ListingCount = () => {
             City & Town
           </button>
           <button
-            className={`flex-1 py-2 text-center whitespace-nowrap ${
+            className={`flex-1 pt-1 text-center whitespace-nowrap ${
               activeTab === "tab2"
                 ? "border-b-2 border-blue-500 text-blue-500"
                 : "text-gray-500"
@@ -31,7 +31,7 @@ const ListingCount = () => {
           </button>
         </div>
       </div>
-      <div className="p-4">
+      <div>
         {activeTab === "tab1" && <CityListingCount />}
         {activeTab === "tab2" && <StatesListingCount />}
       </div>
