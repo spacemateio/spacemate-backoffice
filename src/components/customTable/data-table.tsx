@@ -211,8 +211,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex flex-col gap-2.5 mt-3">
-        {paginationShow && <DataTablePagination table={table} />}
+      <div className="flex flex-row gap-2.5 mt-3">
         {allowHandleDelete &&
           table.getFilteredSelectedRowModel().rows.length > 0 && (
             <Button
@@ -224,6 +223,7 @@ export function DataTable<TData, TValue>({
               Delete Selected Rows
             </Button>
           )}
+        {paginationShow && <DataTablePagination table={table} />}
       </div>
     </div>
   );
