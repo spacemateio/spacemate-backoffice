@@ -32,7 +32,7 @@ export const menuItems = [
   {
     id: "6",
     url: "/admin/listingCount",
-    name: "Listing Count",
+    name: "City, Town, State",
     icon: "Building",
   },
 ];
