@@ -179,7 +179,7 @@ const BlogManagementForm = ({
                 onChange={changeBlogPost}
                 label="URL..."
                 className="w-full"
-                maxLength={255}
+                maxLength={160}
               />
             </div>
             <div>
@@ -190,7 +190,7 @@ const BlogManagementForm = ({
                 onChange={changeBlogPost}
                 label="Title"
                 className="w-full"
-                maxLength={255}
+                maxLength={160}
               />
             </div>
             <div>
@@ -241,7 +241,7 @@ const BlogManagementForm = ({
                 onChange={changeBlogPost}
                 label="Image Alt"
                 className="w-full"
-                maxLength={255}
+                maxLength={160}
               />
             </div>
             <div className="">
@@ -254,7 +254,7 @@ const BlogManagementForm = ({
                   label="Meta Description"
                   className="w-full"
                   showCount={true}
-                  maxLength={255}
+                  maxLength={160}
                 />
               </div>
             </div>
