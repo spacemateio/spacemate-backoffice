@@ -83,14 +83,6 @@ export const blogApiHelper = {
     }
   },
 
-  async activateBlog(id: number): Promise<any> {
-    try {
-      console.log(id);
-    } catch (error) {
-      throw error;
-    }
-  },
-
   async getBlogAllOLD(state: PaginationState): Promise<responseType> {
     try {
       const response: any = await axiosInstance.get(
@@ -129,14 +121,12 @@ export const blogApiHelper = {
     }
   },
 
-  async getAllBlogURL(): Promise<string[]> {
+  async getAllBlogURL(url: string): Promise<boolean> {
     try {
-      const response: any = await axiosInstance.get(
-        `/blog/all?limit=10000&offset=1&orderBy=REGISTER_DATE&sortBy=DESC`
-      );
-      const urlList = response.data.payload.map((blog: BlogModel) => blog.url);
-
-      return urlList;
+      const response: any = await axiosInstance.post(`/blog/check-url`, {
+        url: url,
+      });
+      return response.data.exists;
     } catch (error) {
       throw error;
     }

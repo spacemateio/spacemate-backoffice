@@ -137,5 +137,10 @@ const StatusIcon = ({ status }: { status: number }) => {
   const iconStyle =
     status === 0 ? "h-4 w-4 text-green-600" : "h-4 w-4 text-red-600";
 
-  return <IconDisplay iconName="Check" addStyle={iconStyle} />;
+  return (
+    <IconDisplay
+      iconName={`${status === 0 ? "Check" : "X"}`}
+      addStyle={iconStyle}
+    />
+  );
 };
