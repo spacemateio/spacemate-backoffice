@@ -74,7 +74,7 @@ const BlogManagementForm = ({
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    if (await fetchUrlInfo()) {
+    if (mode === "add" && (await fetchUrlInfo())) {
       addToast("This URL has already been used.", "error");
       return;
     }
