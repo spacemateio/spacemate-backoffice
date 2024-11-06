@@ -15,6 +15,7 @@ import UserManagement from "./pages/userManagement/UserManagement.tsx";
 import ListingManagement from "./pages/listingManagement/ListingManagement.tsx";
 import AnonymousComponent from "./lib/features/auth/AnonymousComponent/AnonymousComponent.tsx";
 import ListingCount from "./pages/listingCount/ListingCount.tsx";
+import ReservationCancellation from "./components/pagesComponents/reservationManagement/ReservationCancellation.tsx";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
           {
             path: "listingCount",
             element: <ListingCount />,
+          },
+          {
+            path: "reservationCancellation",
+            element: <ReservationCancellation />,
           },
         ],
       },

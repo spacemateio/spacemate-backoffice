@@ -13,9 +13,23 @@ export const menuItems = [
   },
   {
     id: "3",
-    url: "/admin/listingManagement",
+    url: "/admin/listingM",
     name: "Listing Management",
     icon: "LineChart",
+    submenu: [
+      {
+        id: "31",
+        url: "/admin/listingManagement",
+        name: "Listing Management",
+        icon: "LineChart",
+      },
+      {
+        id: "32",
+        url: "/admin/reservationCancellation",
+        name: "Reservation Cancellation",
+        icon: "Building",
+      },
+    ],
   },
   {
     id: "4",
