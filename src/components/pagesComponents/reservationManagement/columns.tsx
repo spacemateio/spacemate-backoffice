@@ -5,6 +5,8 @@ import * as Tooltip from "@radix-ui/react-tooltip";
 import {
   ReservationModel,
   ReservationStatus,
+  statusColors,
+  statusText,
 } from "../../../lib/features/models/ReservationM/ReservationModel.tsx";
 import { Badge } from "../../ui/badge.tsx";
 import { formatLocalDateTime } from "../../../lib/helpers/dateHelpers.ts";
@@ -82,37 +84,9 @@ export const createColumns = (
     cell: ({ row }) => {
       const status = row.original.status;
 
-      // Enum değerlerini anlaşılır bir metne dönüştür
-      const statusText = {
-        [ReservationStatus.Active]: "Active",
-        [ReservationStatus.CancelRequest]: "Cancel Request",
-        [ReservationStatus.Completed]: "Completed",
-        [ReservationStatus.Canceled]: "Canceled",
-      }[status];
-
-      // Duruma göre arka plan ve metin renklerini ayarlama
-      const statusColors = {
-        [ReservationStatus.Active]: {
-          bgColor: "#FEF3C7",
-          textColor: "#92400E",
-        }, // Sarı
-        [ReservationStatus.CancelRequest]: {
-          bgColor: "#FECACA",
-          textColor: "#B91C1C",
-        }, // Kırmızı
-        [ReservationStatus.Completed]: {
-          bgColor: "#DBEAFE",
-          textColor: "#1E3A8A",
-        }, // Mavi
-        [ReservationStatus.Canceled]: {
-          bgColor: "#D1FAE5",
-          textColor: "#065F46",
-        }, // Yeşil
-      };
-
       return (
         <Badge
-          text={statusText}
+          text={statusText[status]}
           bgColor={statusColors[status].bgColor}
           textColor={statusColors[status].textColor}
           className="truncate"

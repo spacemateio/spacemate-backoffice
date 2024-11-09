@@ -3,6 +3,8 @@ import { LabeledInput } from "../../labeledInput/LabeledInput";
 import {
   ReservationModel,
   ReservationStatus,
+  statusColors,
+  statusText,
 } from "../../../lib/features/models/ReservationM/ReservationModel";
 import { Badge } from "../../ui/badge";
 
@@ -29,25 +31,6 @@ export default function ReservationForm({
     cancelRequestDate: null,
   });
 
-  // Renklerin tanımlandığı nesne
-  const statusColors = {
-    [ReservationStatus.Active]: {
-      bgColor: "#FEF3C7", // Sarı
-      textColor: "#92400E", // Koyu sarı
-    },
-    [ReservationStatus.CancelRequest]: {
-      bgColor: "#FECACA", // Kırmızı
-      textColor: "#B91C1C", // Koyu kırmızı
-    },
-    [ReservationStatus.Completed]: {
-      bgColor: "#DBEAFE",
-      textColor: "#1E3A8A",
-    }, // Mavi
-    [ReservationStatus.Canceled]: {
-      bgColor: "#D1FAE5",
-      textColor: "#065F46",
-    }, // Yeşil
-  };
   const { bgColor, textColor } =
     statusColors[formData.status] || statusColors[ReservationStatus.Active];
 
@@ -132,7 +115,7 @@ export default function ReservationForm({
           <div className="flex gap-2 items-center">
             <span className="text-sm font-medium text-gray-700">Status</span>
             <Badge
-              text={formData.status}
+              text={statusText[formData.status]}
               bgColor={bgColor} // Dinamik bgColor
               textColor={textColor} // Dinamik textColor
             />
