@@ -20,53 +20,30 @@ export const createColumns = (
     header: "Reservation Id",
   },
   {
-    accessorKey: "hostId",
-    header: "hostId",
-  },
-  {
     accessorKey: "canceledByName",
-    header: "canceledByName",
+    header: "Canceled By Name",
   },
   {
-    accessorKey: "canceledById",
-    header: "canceledById",
-  },
-  {
-    accessorKey: "cancelRequestDate",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          CreatedDate
-          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
-        </Button>
-      );
-    },
+    accessorKey: "cancelStatus", // Yeni bir column adı
+    header: "Cancellation By",
     cell: ({ row }) => {
-      if (!row.original.cancelRequestDate) return "";
-      const date = new Date(row.original.cancelRequestDate);
-      const localDate = new Date(
-        date.getTime() - date.getTimezoneOffset() * 60000
-      );
-      return localDate.toLocaleString(undefined, {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        //timeZoneName: "short",
-      });
+      const hostId = row.original.hostId;
+      const canceledById = row.original.canceledById;
+      const renterId = row.original.renterId;
+
+      // Koşullara göre yazıyı döndürme
+      if (hostId === canceledById) {
+        return "Canceled by host";
+      } else if (renterId === canceledById) {
+        return "Canceled by renter";
+      } else {
+        return "Not canceled"; // İptal edilmemişse başka bir şey yazabilirsiniz
+      }
     },
-  },
-  {
-    accessorKey: "renterId",
-    header: "renterId",
   },
   {
     accessorKey: "renterEmail",
-    header: "renterEmail",
+    header: "Renter Email",
   },
   {
     accessorKey: "status",
@@ -92,6 +69,35 @@ export const createColumns = (
           className="truncate"
         />
       );
+    },
+  },
+  {
+    accessorKey: "cancelRequestDate",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Created Date
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      if (!row.original.cancelRequestDate) return "";
+      const date = new Date(row.original.cancelRequestDate);
+      const localDate = new Date(
+        date.getTime() - date.getTimezoneOffset() * 60000
+      );
+      return localDate.toLocaleString(undefined, {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        //timeZoneName: "short",
+      });
     },
   },
   {
