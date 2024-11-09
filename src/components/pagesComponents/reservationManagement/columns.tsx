@@ -13,7 +13,7 @@ export const createColumns = (
 ): ColumnDef<ReservationModel>[] => [
   {
     accessorKey: "id",
-    header: "id",
+    header: "Reservation Id",
   },
   {
     accessorKey: "hostId",
@@ -185,12 +185,13 @@ export const createColumns = (
             <IconDisplay iconName="Eye" addStyle="h-4 w-4" />
           </Button>
           <Button
+            className="bg-green-600"
             variant="outline"
             size="sxm"
             style={{ fontSize: "12px" }}
             onClick={() => handleCompleteCancallation(id)}
           >
-            <IconDisplay iconName="Check" addStyle="h-4 w-4" />
+            <span className="text-white">Approve Request</span>
           </Button>
         </div>
       );

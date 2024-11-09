@@ -70,7 +70,7 @@ const ReservationCancellation = () => {
   return (
     <div className="w-full">
       <div className="py-5">
-        <p>Contact Us</p>
+        <p>Reservation Cancellation</p>
       </div>
       <div className="py-1">
         <DataTable
