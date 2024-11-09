@@ -40,9 +40,13 @@ export default function ReservationForm({
       textColor: "#B91C1C", // Koyu kırmızı
     },
     [ReservationStatus.Completed]: {
-      bgColor: "#D1FAE5", // Yeşil
-      textColor: "#065F46", // Koyu yeşil
-    },
+      bgColor: "#DBEAFE",
+      textColor: "#1E3A8A",
+    }, // Mavi
+    [ReservationStatus.Canceled]: {
+      bgColor: "#D1FAE5",
+      textColor: "#065F46",
+    }, // Yeşil
   };
   const { bgColor, textColor } =
     statusColors[formData.status] || statusColors[ReservationStatus.Active];

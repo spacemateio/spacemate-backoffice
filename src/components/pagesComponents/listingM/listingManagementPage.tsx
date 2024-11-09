@@ -7,7 +7,7 @@ import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
 import { adApiHelper } from "../../../lib/features/apis/AdM/adApiHelper.tsx";
 import CustomModal from "../../customModals/CustomModal.tsx";
 import ListingManagementForm from "./listingManagementForm";
-import TabComponent from "../../ui/TabComponent.tsx";
+import TabComponent from "../../ui/TabComponent/TabComponent.tsx";
 
 const ListingManagementPage = () => {
   const { addToast } = useToast();

@@ -87,6 +87,7 @@ export const createColumns = (
         [ReservationStatus.Active]: "Active",
         [ReservationStatus.CancelRequest]: "Cancel Request",
         [ReservationStatus.Completed]: "Completed",
+        [ReservationStatus.Canceled]: "Canceled",
       }[status];
 
       // Duruma göre arka plan ve metin renklerini ayarlama
@@ -100,6 +101,10 @@ export const createColumns = (
           textColor: "#B91C1C",
         }, // Kırmızı
         [ReservationStatus.Completed]: {
+          bgColor: "#DBEAFE",
+          textColor: "#1E3A8A",
+        }, // Mavi
+        [ReservationStatus.Canceled]: {
           bgColor: "#D1FAE5",
           textColor: "#065F46",
         }, // Yeşil
@@ -182,15 +187,17 @@ export const createColumns = (
           >
             <IconDisplay iconName="Eye" addStyle="h-4 w-4" />
           </Button>
-          <Button
-            className="bg-green-600"
-            variant="outline"
-            size="sxm"
-            style={{ fontSize: "12px" }}
-            onClick={() => handleCompleteCancallation(id)}
-          >
-            <span className="text-white">Approve Request</span>
-          </Button>
+          {row.original.status === ReservationStatus.CancelRequest && (
+            <Button
+              className="bg-green-600"
+              variant="outline"
+              size="sxm"
+              style={{ fontSize: "12px" }}
+              onClick={() => handleCompleteCancallation(id)}
+            >
+              <span className="text-white">Approve Request</span>
+            </Button>
+          )}
         </div>
       );
     },

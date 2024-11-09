@@ -2,6 +2,7 @@ export enum ReservationStatus {
   CancelRequest = "CancelRequest",
   Active = "Active",
   Completed = "Completed",
+  Canceled = "Canceled",
 }
 
 export interface ReservationModel {

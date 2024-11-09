@@ -3,14 +3,18 @@ import axiosInstance from "../../axios/axiosInstance";
 import { responseType } from "../../models/ReservationM/ResponseType";
 
 export const reservationApiHelper = {
-  async getAllCancelRequest(state: PaginationState): Promise<responseType> {
+  async getAllCancelRequest(
+    status: number,
+    state: PaginationState
+  ): Promise<responseType> {
     try {
       const params = new URLSearchParams();
       params.append("limit", state.pageSize.toString());
       params.append("offset", (state.pageIndex + 1).toString());
+      params.append("status", status.toString());
 
       const response: any = await axiosInstance.get(
-        `/reservation/cancelRequest?${params.toString()}`
+        `/reservation/status?${params.toString()}`
       );
       return response.data;
     } catch (error) {

@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { PaginationState } from "@tanstack/react-table";
 import { createColumns } from "./columns.tsx";
 import { DataTable } from "../../customTable/data-table.tsx";
@@ -11,6 +11,7 @@ import {
   ReservationModel,
   ReservationStatus,
 } from "../../../lib/features/models/ReservationM/ReservationModel.tsx";
+import { TabComponent2 } from "../../ui/TabComponent/TabComponent2.tsx";
 
 const ReservationCancellation = () => {
   const { addToast } = useToast();
@@ -20,20 +21,38 @@ const ReservationCancellation = () => {
   const [isShow, setIsShow] = useState<boolean>(false);
   const [showRow, setShowRow] = useState<ReservationModel | undefined>();
   const [maxCount, setMaxCount] = useState<number>(1);
+  const [listType, setListType] = useState<string>("pending");
   const [isCancelltaionDialogOpen, setIsCancelltaionDialogOpen] =
     useState(false);
 
-  const changePagination = useCallback(async (state: PaginationState) => {
-    try {
-      const { maxCount, payload } =
-        await reservationApiHelper.getAllCancelRequest(state);
-      setMaxCount(maxCount);
-      setTableData(payload);
-      addToast("Fetched all Cancel Request entries successfully", "success");
-    } catch (error) {
-      addToast("Failed to fetch contact us entries", "error");
-    }
-  }, []);
+  const changePagination = useCallback(
+    async (state: PaginationState, currentListType: string) => {
+      console.log(currentListType);
+
+      try {
+        addToast("Fetching listings...", "info");
+        const { maxCount, payload } =
+          await reservationApiHelper.getAllCancelRequest(
+            currentListType === "pending" ? 6 : 5,
+            state
+          );
+        setMaxCount(maxCount);
+        setTableData(payload);
+        addToast("Fetched all Cancel Request entries successfully", "success");
+      } catch (error) {
+        addToast("Failed to fetch contact us entries", "error");
+      }
+    },
+    []
+  );
+
+  useEffect(() => {
+    const state = {
+      pageSize: 100,
+      pageIndex: 0,
+    };
+    changePagination(state, listType);
+  }, [listType]);
 
   const handleCompleteCancellation = async () => {
     console.log(showRow);
@@ -72,6 +91,9 @@ const ReservationCancellation = () => {
       <div className="py-5">
         <p>Reservation Cancellation</p>
       </div>
+      <div className="absolute z-10" style={{ marginTop: "10px" }}>
+        <TabComponent2 listType={listType} setListType={setListType} />
+      </div>
       <div className="py-1">
         <DataTable
           columns={columns}
@@ -81,9 +103,9 @@ const ReservationCancellation = () => {
           changePagination={changePagination}
           handleDelete={() => {}}
           maxCount={maxCount}
-          listType=""
+          listType={listType}
           textFilter={true}
-          countName="Cancellation Request"
+          countName={`Cancellation Request ${listType.charAt(0).toUpperCase() + listType.slice(1)}`}
         />
       </div>
       <ConfirmDialog

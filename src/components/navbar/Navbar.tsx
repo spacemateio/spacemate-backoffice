@@ -16,8 +16,8 @@ const Navbar = ({ children }: Props) => {
   const { userInfo } = useAuth();
 
   const toggleSubMenu = (id: string, event: React.MouseEvent) => {
-    event.preventDefault(); // Prevent page navigation
-    setExpandedMenu((prev) => (prev === id ? null : id)); // Toggle submenu open/close
+    event.preventDefault();
+    setExpandedMenu((prev) => (prev === id ? null : id));
   };
 
   return (
@@ -31,7 +31,7 @@ const Navbar = ({ children }: Props) => {
                 alt="SpaceMate.io"
                 className="h-6 w-6"
               />
-              <span className="">SpaceMate.io</span>
+              <span>SpaceMate.io</span>
             </Link>
           </div>
           <div className="flex-1">
@@ -44,7 +44,7 @@ const Navbar = ({ children }: Props) => {
                     ${selectedMenuItem === item.url ? "bg-muted text-blue-600" : "text-gray-500"}`}
                     onClick={(e) => {
                       setSelectedMenuItem(item.url);
-                      if (item.submenu) toggleSubMenu(item.id, e); // Toggle submenu when clicked, prevent page navigation
+                      if (item.submenu) toggleSubMenu(item.id, e);
                     }}
                   >
                     <IconDisplay iconName={item.icon} />
@@ -63,14 +63,14 @@ const Navbar = ({ children }: Props) => {
                   {item.submenu && expandedMenu === item.id && (
                     <div
                       className="ml-2 mt-2 space-y-1 pl-4"
-                      style={{ position: "relative", zIndex: 10 }} // Ensure submenu is above other content
+                      style={{ position: "relative", zIndex: 10 }}
                     >
                       {item.submenu.map((subItem) => (
                         <Link
                           key={subItem.id}
                           to={subItem.url}
                           className="flex items-center gap-3 rounded-lg py-2 text-sm text-gray-500 hover:text-blue-600"
-                          style={{ zIndex: 10 }} // Make submenu items clickable
+                          style={{ zIndex: 10 }}
                         >
                           <IconDisplay iconName={subItem.icon} addStyle="" />
                           {subItem.name}
@@ -108,7 +108,7 @@ const Navbar = ({ children }: Props) => {
                     alt="SpaceMate.io"
                     className="h-6 w-6"
                   />
-                  <span className="">SpaceMate.io</span>
+                  <span>SpaceMate.io</span>
                 </Link>
                 {menuItems.map((item) => (
                   <div key={item.id}>
@@ -118,7 +118,7 @@ const Navbar = ({ children }: Props) => {
                       ${selectedMenuItem === item.url ? "text-blue-600" : "text-gray-500"}`}
                       onClick={(e) => {
                         setSelectedMenuItem(item.url);
-                        if (item.submenu) toggleSubMenu(item.id, e); // Toggle submenu when clicked, prevent page navigation
+                        if (item.submenu) toggleSubMenu(item.id, e);
                       }}
                     >
                       <IconDisplay iconName={item.icon} />
@@ -137,14 +137,14 @@ const Navbar = ({ children }: Props) => {
                     {item.submenu && expandedMenu === item.id && (
                       <div
                         className="ml-2 mt-2 space-y-1 pl-4"
-                        style={{ position: "relative", zIndex: 10 }} // Ensure submenu is above other content
+                        style={{ position: "relative", zIndex: 10 }}
                       >
                         {item.submenu.map((subItem) => (
                           <Link
                             key={subItem.id}
                             to={subItem.url}
                             className="flex items-center gap-4 rounded-lg px-3 py-2 text-sm text-gray-500 hover:text-blue-600"
-                            style={{ zIndex: 10 }} // Make submenu items clickable
+                            style={{ zIndex: 10 }}
                           >
                             {subItem.name}
                           </Link>
