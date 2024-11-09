@@ -5,6 +5,7 @@ import * as Tooltip from "@radix-ui/react-tooltip";
 import { useNavigate } from "react-router-dom";
 import IconDisplay from "../../iconComponent/IconDisplay.tsx";
 import { Badge } from "../../ui/badge.tsx";
+import { formatLocalDateTime } from "../../../lib/helpers/dateHelpers.ts";
 
 export const useColumns = (
   handleShow: (id: number) => void,
@@ -73,7 +74,8 @@ export const useColumns = (
       accessorKey: "createdDate",
       header: "CreatedDate",
       cell: ({ row }) => {
-        const date = new Date(row.original.createdDate);
+        return <span>{formatLocalDateTime(row.original.createdDate)}</span>;
+        /*const date = new Date(row.original.createdDate);
         const localDate = new Date(
           date.getTime() - date.getTimezoneOffset() * 60000
         );
@@ -85,7 +87,7 @@ export const useColumns = (
           minute: "numeric",
           second: "numeric",
           timeZoneName: "short",
-        });
+        });*/
       },
     },
     {

@@ -1,11 +1,13 @@
 import { Button } from "../../ui/button.tsx";
 import { ColumnDef } from "@tanstack/react-table";
 import IconDisplay from "../../iconComponent/IconDisplay.tsx";
+import * as Tooltip from "@radix-ui/react-tooltip";
 import {
   ReservationModel,
   ReservationStatus,
 } from "../../../lib/features/models/ReservationM/ReservationModel.tsx";
 import { Badge } from "../../ui/badge.tsx";
+import { formatLocalDateTime } from "../../../lib/helpers/dateHelpers.ts";
 
 export const createColumns = (
   handleShow: (id: number) => void,
@@ -113,62 +115,58 @@ export const createColumns = (
       );
     },
   },
-  /*  {
-    accessorKey: "startDate",
+  {
+    accessorKey: "dateRange",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Start Date
+          Date Range
           <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
     },
     cell: ({ row }) => {
-      const date = new Date(row.original.startDate);
-      const localDate = new Date(
-        date.getTime() - date.getTimezoneOffset() * 60000
+      const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
+        const localDate = new Date(
+          date.getTime() - date.getTimezoneOffset() * 60000
+        );
+        return localDate.toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+        });
+      };
+
+      const startDate = formatDate(row.original.startDate);
+      const endDate = formatDate(row.original.endDate);
+
+      // 20 karakterle sınırlandırılan görüntüleme
+      const truncatedText = `${startDate} - ${endDate}`.slice(0, 20);
+
+      return (
+        <Tooltip.Provider>
+          <Tooltip.Root>
+            <Tooltip.Trigger asChild>
+              <span>
+                {truncatedText}
+                {truncatedText.length > 20 ? "..." : ""}
+              </span>
+            </Tooltip.Trigger>
+            <Tooltip.Content side="top" align="center">
+              <div className="bg-white p-2 border border-gray-300 rounded shadow-lg max-w-xs">
+                <p>Start Date: {formatLocalDateTime(row.original.startDate)}</p>
+                <p>End Date: {formatLocalDateTime(row.original.endDate)}</p>
+              </div>
+            </Tooltip.Content>
+          </Tooltip.Root>
+        </Tooltip.Provider>
       );
-      return localDate.toLocaleString(undefined, {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        //timeZoneName: "short",
-      });
     },
   },
-  {
-    accessorKey: "endDate",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          End Date
-          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => {
-      const date = new Date(row.original.endDate);
-      const localDate = new Date(
-        date.getTime() - date.getTimezoneOffset() * 60000
-      );
-      return localDate.toLocaleString(undefined, {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        //timeZoneName: "short",
-      });
-    },
-  },*/
   {
     id: "actions",
     header: "Actions",
