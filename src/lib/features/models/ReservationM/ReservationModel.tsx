@@ -8,15 +8,19 @@ export enum ReservationStatus {
 export interface ReservationModel {
   id: number;
   renterId: number;
-  hostId: number;
+  renterName: string;
   renterEmail: string;
+  hostId: number;
+  hostName: string;
+  hostEmail: string;
+  listingId: number;
   canceledByName: string;
   canceledById: number;
-  startDate: string; // Date tipinde kullanmayı düşünüyorsanız Date olarak güncelleyebilirsiniz
-  endDate: string; // Date tipinde kullanmayı düşünüyorsanız Date olarak güncelleyebilirsiniz
+  startDate: Date;
+  endDate: Date;
   status: ReservationStatus;
-  reservationDate: string | null; // Date tipinde kullanmayı düşünüyorsanız Date olarak güncelleyebilirsiniz
-  cancelRequestDate: string | null; // Date tipinde kullanmayı düşünüyorsanız Date olarak güncelleyebilirsiniz
+  reservationDate: Date | null;
+  cancelRequestDate: Date | null;
 }
 
 // Renklerin tanımlandığı nesne

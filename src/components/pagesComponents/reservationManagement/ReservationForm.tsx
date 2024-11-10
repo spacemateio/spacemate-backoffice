@@ -20,12 +20,16 @@ export default function ReservationForm({
   const [formData, setFormData] = useState<ReservationModel>({
     id: 0,
     renterId: 0,
-    hostId: 0,
+    renterName: "",
     renterEmail: "",
+    hostId: 0,
+    hostName: "",
+    hostEmail: "",
+    listingId: 0,
     canceledByName: "",
     canceledById: 0,
-    startDate: "",
-    endDate: "",
+    startDate: new Date(),
+    endDate: new Date(),
     status: ReservationStatus.Active,
     reservationDate: null,
     cancelRequestDate: null,
@@ -34,108 +38,163 @@ export default function ReservationForm({
   const { bgColor, textColor } =
     statusColors[formData.status] || statusColors[ReservationStatus.Active];
 
+  // İptal eden kişiyi belirleme
+  const getCancelStatus = () => {
+    const { hostId, canceledById, renterId } = formData;
+
+    if (hostId === canceledById) {
+      return "Canceled by host";
+    } else if (renterId === canceledById) {
+      return "Canceled by renter";
+    } else {
+      return "Not canceled"; // İptal edilmemişse başka bir şey yazabilirsiniz
+    }
+  };
+
   useEffect(() => {
     if (isShow && initialData) {
-      setFormData(initialData);
+      setFormData({
+        ...initialData,
+        startDate: new Date(initialData.startDate),
+        endDate: new Date(initialData.endDate),
+        reservationDate: initialData.reservationDate
+          ? new Date(initialData.reservationDate)
+          : null,
+        cancelRequestDate: initialData.cancelRequestDate
+          ? new Date(initialData.cancelRequestDate)
+          : null,
+      });
     }
   }, [isShow, initialData]);
 
   return (
-    <div className="space-y-4">
-      <div className="flex gap-4">
-        <div className="flex-1 flex flex-col gap-4">
-          <div className="flex gap-4">
-            <div className="w-1/2">
-              <LabeledInput
-                label="ID"
-                name="id"
-                value={formData.id.toString()}
-                onChange={() => {}}
-                disabled={isShow}
-              />
-            </div>
-            <div className="w-1/2">
-              <LabeledInput
-                label="Renter ID"
-                name="renterId"
-                value={formData.renterId.toString()}
-                onChange={() => {}}
-                disabled={isShow}
-              />
-            </div>
-          </div>
-          <div className="flex gap-4">
-            <div className="w-1/2">
-              <LabeledInput
-                label="Host ID"
-                name="hostId"
-                value={formData.hostId.toString()}
-                onChange={() => {}}
-                disabled={isShow}
-              />
-            </div>
-            <div className="w-1/2">
-              <LabeledInput
-                label="Canceled By ID"
-                name="canceledById"
-                value={formData.canceledById.toString()}
-                onChange={() => {}}
-                disabled={isShow}
-              />
-            </div>
-          </div>
-          <LabeledInput
-            label="Renter Email"
-            name="renterEmail"
-            value={formData.renterEmail ?? ""}
-            onChange={() => {}}
-            disabled={isShow}
+    <div className="space-y-6">
+      {/* Status ve Cancellation Status - Yan yana yerleştirme */}
+      <div className="flex gap-6 items-center mb-4">
+        <div className="flex items-center gap-2">
+          <span className="text-lg font-semibold">Status</span>
+          <Badge
+            text={statusText[formData.status]}
+            bgColor={bgColor}
+            textColor={textColor}
           />
-          <LabeledInput
-            label="Canceled By Name"
-            name="canceledByName"
-            value={formData.canceledByName ?? ""}
-            onChange={() => {}}
-            disabled={isShow}
-          />
-          <LabeledInput
-            label="Start Date"
-            name="startDate"
-            value={formData.startDate ?? ""}
-            onChange={() => {}}
-            disabled={isShow}
-          />
-          <LabeledInput
-            label="End Date"
-            name="endDate"
-            value={formData.endDate ?? ""}
-            onChange={() => {}}
-            disabled={isShow}
-          />
-          <div className="flex gap-2 items-center">
-            <span className="text-sm font-medium text-gray-700">Status</span>
-            <Badge
-              text={statusText[formData.status]}
-              bgColor={bgColor} // Dinamik bgColor
-              textColor={textColor} // Dinamik textColor
-            />
-          </div>
+        </div>
 
+        <div className="flex items-center gap-2">
+          <span className="text-lg font-semibold">Cancellation Status</span>
+          <p className="text-sm font-medium text-gray-700">
+            <span className="font-semibold">{getCancelStatus()}</span>
+          </p>
+        </div>
+      </div>
+
+      {/* Reservation and Listing IDs */}
+      <div className="flex gap-4">
+        <div className="w-1/2">
           <LabeledInput
-            label="Reservation Date"
-            name="reservationDate"
-            value={formData.reservationDate ?? ""}
-            onChange={() => {}}
-            disabled={isShow}
-          />
-          <LabeledInput
-            label="Cancel Request Date"
-            name="cancelRequestDate"
-            value={formData.cancelRequestDate ?? ""}
+            label="Reservation ID"
+            name="id"
+            value={formData.id.toString()}
             onChange={() => {}}
             disabled={isShow}
           />
         </div>
+        <div className="w-1/2">
+          <LabeledInput
+            label="Listing ID"
+            name="listingId"
+            value={formData.listingId.toString()}
+            onChange={() => {}}
+            disabled={isShow}
+          />
+        </div>
+      </div>
+
+      {/* User Information */}
+      <div className="grid grid-cols-2 gap-4">
+        <h3 className="text-lg font-semibold col-span-2">User Information</h3>
+        <LabeledInput
+          label="Renter Name"
+          name="renterName"
+          value={formData.renterName}
+          onChange={() => {}}
+          disabled={isShow}
+        />
+        <LabeledInput
+          label="Renter Email"
+          name="renterEmail"
+          value={formData.renterEmail}
+          onChange={() => {}}
+          disabled={isShow}
+        />
+        <LabeledInput
+          label="Host Name"
+          name="hostName"
+          value={formData.hostName}
+          onChange={() => {}}
+          disabled={isShow}
+        />
+        <LabeledInput
+          label="Host Email"
+          name="hostEmail"
+          value={formData.hostEmail}
+          onChange={() => {}}
+          disabled={isShow}
+        />
+      </div>
+
+      {/* Cancellation Information */}
+      <div className="grid grid-cols-2 gap-4">
+        <h3 className="text-lg font-semibold col-span-2">
+          Cancellation Details
+        </h3>
+        <LabeledInput
+          label="Canceled By Name"
+          name="canceledByName"
+          value={formData.canceledByName}
+          onChange={() => {}}
+          disabled={isShow}
+        />
+        <LabeledInput
+          label="Canceled By ID"
+          name="canceledById"
+          value={formData.canceledById.toString()}
+          onChange={() => {}}
+          disabled={isShow}
+        />
+      </div>
+
+      {/* Date Information */}
+      <div className="grid grid-cols-2 gap-4">
+        <h3 className="text-lg font-semibold col-span-2">Date Information</h3>
+        <LabeledInput
+          label="Start Date"
+          name="startDate"
+          value={formData.startDate.toDateString()}
+          onChange={() => {}}
+          disabled={isShow}
+        />
+        <LabeledInput
+          label="End Date"
+          name="endDate"
+          value={formData.endDate.toDateString()}
+          onChange={() => {}}
+          disabled={isShow}
+        />
+        <LabeledInput
+          label="Reservation Date"
+          name="reservationDate"
+          value={formData.reservationDate?.toDateString() || ""}
+          onChange={() => {}}
+          disabled={isShow}
+        />
+        <LabeledInput
+          label="Cancel Request Date"
+          name="cancelRequestDate"
+          value={formData.cancelRequestDate?.toDateString() || ""}
+          onChange={() => {}}
+          disabled={isShow}
+        />
       </div>
     </div>
   );

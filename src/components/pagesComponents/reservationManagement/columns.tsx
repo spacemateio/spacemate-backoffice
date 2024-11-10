@@ -20,6 +20,10 @@ export const createColumns = (
     header: "Reservation Id",
   },
   {
+    accessorKey: "listingId",
+    header: "Listing Id",
+  },
+  {
     accessorKey: "canceledByName",
     header: "Canceled By Name",
   },
@@ -42,8 +46,68 @@ export const createColumns = (
     },
   },
   {
-    accessorKey: "renterEmail",
-    header: "Renter Email",
+    accessorKey: "hostName",
+    header: "Host Name",
+  },
+  {
+    accessorKey: "renterName",
+    header: "Renter Name",
+  },
+  {
+    accessorKey: "dateRange",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Start Date-End Date
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const formatDate = (dateString: Date) => {
+        const date = new Date(dateString);
+        const localDate = new Date(
+          date.getTime() - date.getTimezoneOffset() * 60000
+        );
+        return localDate.toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+        });
+      };
+
+      const startDate = formatDate(row.original.startDate);
+      const endDate = formatDate(row.original.endDate);
+      const truncatedText = `${startDate} - ${endDate}`.slice(0, 20);
+
+      return (
+        <Tooltip.Provider>
+          <Tooltip.Root>
+            <Tooltip.Trigger asChild>
+              <span>
+                {truncatedText}
+                {truncatedText.length > 20 ? "..." : ""}
+              </span>
+            </Tooltip.Trigger>
+            <Tooltip.Content side="top" align="center">
+              <div className="bg-white p-2 border border-gray-300 rounded shadow-lg max-w-xs">
+                <p>
+                  Start Date:
+                  {formatLocalDateTime(row.original.startDate.toString())}
+                </p>
+                <p>
+                  End Date:
+                  {formatLocalDateTime(row.original.endDate.toString())}
+                </p>
+              </div>
+            </Tooltip.Content>
+          </Tooltip.Root>
+        </Tooltip.Provider>
+      );
+    },
   },
   {
     accessorKey: "status",
@@ -98,58 +162,6 @@ export const createColumns = (
         minute: "numeric",
         //timeZoneName: "short",
       });
-    },
-  },
-  {
-    accessorKey: "dateRange",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Date Range
-          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => {
-      const formatDate = (dateString: string) => {
-        const date = new Date(dateString);
-        const localDate = new Date(
-          date.getTime() - date.getTimezoneOffset() * 60000
-        );
-        return localDate.toLocaleDateString(undefined, {
-          year: "numeric",
-          month: "numeric",
-          day: "numeric",
-        });
-      };
-
-      const startDate = formatDate(row.original.startDate);
-      const endDate = formatDate(row.original.endDate);
-
-      // 20 karakterle sınırlandırılan görüntüleme
-      const truncatedText = `${startDate} - ${endDate}`.slice(0, 20);
-
-      return (
-        <Tooltip.Provider>
-          <Tooltip.Root>
-            <Tooltip.Trigger asChild>
-              <span>
-                {truncatedText}
-                {truncatedText.length > 20 ? "..." : ""}
-              </span>
-            </Tooltip.Trigger>
-            <Tooltip.Content side="top" align="center">
-              <div className="bg-white p-2 border border-gray-300 rounded shadow-lg max-w-xs">
-                <p>Start Date: {formatLocalDateTime(row.original.startDate)}</p>
-                <p>End Date: {formatLocalDateTime(row.original.endDate)}</p>
-              </div>
-            </Tooltip.Content>
-          </Tooltip.Root>
-        </Tooltip.Provider>
-      );
     },
   },
   {
