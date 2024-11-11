@@ -23,7 +23,7 @@ export const createColumns = (
     accessorKey: "listingId",
     header: "Listing Id",
   },
-  {
+  /*{
     accessorKey: "canceledByName",
     header: "Canceled By Name",
   },
@@ -44,14 +44,22 @@ export const createColumns = (
         return "Not canceled"; // İptal edilmemişse başka bir şey yazabilirsiniz
       }
     },
+  },*/
+  {
+    accessorKey: "renterName",
+    header: "Renter Name",
+  },
+  {
+    accessorKey: "renterEmail",
+    header: "Renter Email",
   },
   {
     accessorKey: "hostName",
     header: "Host Name",
   },
   {
-    accessorKey: "renterName",
-    header: "Renter Name",
+    accessorKey: "hostEmail",
+    header: "Host Email",
   },
   {
     accessorKey: "dateRange",
@@ -61,7 +69,7 @@ export const createColumns = (
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Start Date-End Date
+          Start - End Dates
           <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
@@ -109,7 +117,7 @@ export const createColumns = (
       );
     },
   },
-  {
+  /*{
     accessorKey: "status",
     header: ({ column }) => {
       return (
@@ -134,7 +142,7 @@ export const createColumns = (
         />
       );
     },
-  },
+  },*/
   {
     accessorKey: "cancelRequestDate",
     header: ({ column }) => {
@@ -143,7 +151,7 @@ export const createColumns = (
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Created Date
+          Cancel Request date
           <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
         </Button>
       );
