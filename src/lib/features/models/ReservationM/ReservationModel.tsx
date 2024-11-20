@@ -21,6 +21,7 @@ export interface ReservationModel {
   status: ReservationStatus;
   reservationDate: Date | null;
   cancelRequestDate: Date | null;
+  declineDateTime: Date | null;
 }
 
 // Renklerin tanımlandığı nesne

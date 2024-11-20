@@ -33,6 +33,7 @@ export default function ReservationForm({
     status: ReservationStatus.Active,
     reservationDate: null,
     cancelRequestDate: null,
+    declineDateTime: null,
   });
 
   const { bgColor, textColor } =
@@ -62,6 +63,9 @@ export default function ReservationForm({
           : null,
         cancelRequestDate: initialData.cancelRequestDate
           ? new Date(initialData.cancelRequestDate)
+          : null,
+        declineDateTime: initialData.declineDateTime
+          ? new Date(initialData.declineDateTime)
           : null,
       });
     }
@@ -178,6 +182,13 @@ export default function ReservationForm({
           label="End Date"
           name="endDate"
           value={formData.endDate.toDateString()}
+          onChange={() => {}}
+          disabled={isShow}
+        />
+        <LabeledInput
+          label="Decline Date"
+          name="declineDateTime"
+          value={formData.declineDateTime?.toDateString() || ""}
           onChange={() => {}}
           disabled={isShow}
         />

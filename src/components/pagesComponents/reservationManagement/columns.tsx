@@ -5,10 +5,7 @@ import * as Tooltip from "@radix-ui/react-tooltip";
 import {
   ReservationModel,
   ReservationStatus,
-  statusColors,
-  statusText,
 } from "../../../lib/features/models/ReservationM/ReservationModel.tsx";
-import { Badge } from "../../ui/badge.tsx";
 import { formatLocalDateTime } from "../../../lib/helpers/dateHelpers.ts";
 
 export const createColumns = (
@@ -159,6 +156,35 @@ export const createColumns = (
     cell: ({ row }) => {
       if (!row.original.cancelRequestDate) return "";
       const date = new Date(row.original.cancelRequestDate);
+      const localDate = new Date(
+        date.getTime() - date.getTimezoneOffset() * 60000
+      );
+      return localDate.toLocaleString(undefined, {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        //timeZoneName: "short",
+      });
+    },
+  },
+  {
+    accessorKey: "declineDateTime",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Decline Date
+          <IconDisplay iconName="ArrowUpDown" addStyle="h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      if (!row.original.declineDateTime) return "";
+      const date = new Date(row.original.declineDateTime);
       const localDate = new Date(
         date.getTime() - date.getTimezoneOffset() * 60000
       );
