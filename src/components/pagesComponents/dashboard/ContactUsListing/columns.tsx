@@ -3,6 +3,7 @@ import * as Tooltip from "@radix-ui/react-tooltip";
 import { ContactUsModel } from "../../../../lib/features/models/ContactUs/ContactUsModel";
 import IconDisplay from "../../../iconComponent/IconDisplay";
 import { Button } from "../../../ui/button";
+import { formatLocalDateTime } from "../../../../lib/helpers/dateHelpers";
 
 export const createColumns = (
   handleShow: (id: number) => void
@@ -93,7 +94,8 @@ export const createColumns = (
       );
     },
     cell: ({ row }) => {
-      const date = new Date(row.original.createdDate);
+      return <span>{formatLocalDateTime(row.original.createdDate)}</span>;
+      /* const date = new Date(row.original.createdDate);
       const localDate = new Date(
         date.getTime() - date.getTimezoneOffset() * 60000
       );
@@ -105,7 +107,7 @@ export const createColumns = (
         minute: "numeric",
         second: "numeric",
         timeZoneName: "short",
-      });
+      });*/
     },
   },
   {

@@ -2,6 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { AdModel } from "../../../lib/features/models/AdM/AdModel.tsx";
 import { Button } from "../../ui/button.tsx";
 import IconDisplay from "../../iconComponent/IconDisplay.tsx";
+import { formatLocalDateTime } from "../../../lib/helpers/dateHelpers.ts";
 
 export const createColumns = (
   handleShow: (id: number) => void,
@@ -105,24 +106,11 @@ export const createColumns = (
       );
     },
     cell: ({ row }) => {
-      const date = new Date(row.original.created);
+      return <span>{formatLocalDateTime(row.original.created)}</span>;
+      /*const date = new Date(row.original.created);
       const localDate = new Date(
         date.getTime() - date.getTimezoneOffset() * 60000
       );
-      /*console.log(
-        "beDate: ",
-        row.original.created,
-        "- locale: ",
-        localDate.toLocaleString(undefined, {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-          hour: "numeric",
-          minute: "numeric",
-          second: "numeric",
-          timeZoneName: "short",
-        })
-      );*/
       return localDate.toLocaleString(undefined, {
         year: "numeric",
         month: "long",
@@ -131,7 +119,7 @@ export const createColumns = (
         minute: "numeric",
         second: "numeric",
         timeZoneName: "short",
-      });
+      });*/
     },
   },
   {

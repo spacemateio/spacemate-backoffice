@@ -16,6 +16,7 @@ export const listingApiHelper = {
     try {
       const params = new URLSearchParams();
       params.append("filter", filter);
+      params.append("status", "1");
       params.append("isCity", isCity ? "true" : "false");
       params.append("limit", state.pageSize.toString());
       params.append("offset", (state.pageIndex + 1).toString());
@@ -36,6 +37,7 @@ export const listingApiHelper = {
     try {
       const params = new URLSearchParams();
       params.append("filter", filter);
+      //params.append("status", "1");
       params.append("isState", isState.toString());
       params.append("limit", state.pageSize.toString());
       params.append("offset", (state.pageIndex + 1).toString());
