@@ -4,6 +4,7 @@ import ChangePassword from "./ChangePassword";
 import CustomModal from "../customModals/CustomModal";
 import IconDisplay from "../iconComponent/IconDisplay";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import DarkModeSwitch from "../darkModeSwitch/DarkModeSwitch";
 
 const ProfileButton: React.FC = () => {
   const { userInfo, logout } = useAuth();
@@ -27,6 +28,8 @@ const ProfileButton: React.FC = () => {
     window.location.reload();
   };
 
+  const handleDarkModeClick = () => {};
+
   return (
     <>
       <DropdownMenu.Root onOpenChange={setIsOpen}>
@@ -49,6 +52,12 @@ const ProfileButton: React.FC = () => {
             className="bg-white shadow-2xl rounded-md p-2"
             sideOffset={5}
           >
+            <DropdownMenu.Item
+              className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-md flex flex-row gap-2 items-center"
+              onSelect={handleDarkModeClick}
+            >
+              <DarkModeSwitch />
+            </DropdownMenu.Item>
             <DropdownMenu.Item
               className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-md flex flex-row gap-2 items-center"
               onSelect={handleChangePasswordClick}
