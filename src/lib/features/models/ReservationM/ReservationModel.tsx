@@ -24,6 +24,23 @@ export interface ReservationModel {
   declineDateTime: Date | null;
 }
 
+// New interface for backoffice reservation list
+export interface BackOfficeReservationListItem {
+  reservationId: number;
+  reservationStatus: number;
+  createdDate: string;
+  startDate: string;
+  endDate: string;
+  listingId: number;
+  listingDescription: string;
+  renterId: number;
+  renterEmail: string;
+  renterFullName: string;
+  hostId: number;
+  hostEmail: string;
+  hostFullName: string;
+}
+
 // Renklerin tanımlandığı nesne
 export const statusColors = {
   [ReservationStatus.Active]: {

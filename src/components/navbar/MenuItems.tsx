@@ -10,7 +10,7 @@ export interface MenuItem {
   url: string;
   name: string;
   icon: string;
-  submenu?: SubMenuItem[]; // Submenu isteğe bağlı
+  submenu?: SubMenuItem[];
 }
 
 export const menuItems: MenuItem[] = [
@@ -37,6 +37,12 @@ export const menuItems: MenuItem[] = [
     url: "/admin/reservationCancellation",
     name: "Reservation Cancellation",
     icon: "FileX2",
+  },
+  {
+    id: "8",
+    url: "/admin/reservationManagement",
+    name: "Reservation Management",
+    icon: "Calendar",
   },
   {
     id: "5",
